@@ -39,7 +39,10 @@
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 5.5rem;
+    }
 
     body {
       font-family: var(--sans);
@@ -134,9 +137,20 @@
        HEADER
        ============================================================ */
     .site-header {
-      position: relative;
-      z-index: 10;
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      border-bottom: 1px solid transparent;
+      transition: background-color 400ms ease, border-color 400ms ease;
     }
+    .site-header.is-scrolled {
+      background: rgba(218, 215, 205, 0.88);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-color: var(--c-300);
+    }
+    /* Platz für den fixierten Header freihalten */
+    main { padding-top: 5.3rem; }
     .header-inner {
       display: flex;
       align-items: center;
@@ -724,6 +738,21 @@
       "use strict";
 
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* Fixierter Header: Hintergrund erst beim Scrollen einblenden */
+      var header = document.querySelector(".site-header");
+      var headerTicking = false;
+      function updateHeader() {
+        header.classList.toggle("is-scrolled", window.scrollY > 16);
+        headerTicking = false;
+      }
+      window.addEventListener("scroll", function () {
+        if (!headerTicking) {
+          window.requestAnimationFrame(updateHeader);
+          headerTicking = true;
+        }
+      }, { passive: true });
+      updateHeader();
 
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var revealEls = document.querySelectorAll(".reveal");
