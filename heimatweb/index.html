@@ -245,29 +245,111 @@
       margin-top: clamp(-8rem, -12vw, -6rem);
       display: flex;
       justify-content: center;
-      gap: clamp(0.75rem, 1.6vw, 1.5rem);
+      align-items: flex-start;
+      gap: clamp(0.9rem, 1.8vw, 1.75rem);
       padding-inline: clamp(1rem, 3vw, 2.5rem);
     }
+    /* Smartphone-Rahmen mit Mini-Websites */
     .photo-strip .frame {
       flex: 0 0 auto;
-      width: clamp(9.5rem, 16vw, 14rem);
-      aspect-ratio: 3 / 4;
-      background: var(--c-300);
-      border: 6px solid var(--c-100);
-      border-radius: 4px;
-      overflow: hidden;
+      width: clamp(8.75rem, 12.5vw, 10.75rem);
+      aspect-ratio: 9 / 17.5;
+      background: var(--c-900);
+      border: 1.5px solid rgba(218, 215, 205, 0.45);
+      border-radius: 24px;
+      padding: 6px;
       transition: transform 500ms var(--ease);
     }
-    .photo-strip .frame img {
-      width: 100%;
+    .photo-strip .frame .screen {
       height: 100%;
-      object-fit: cover;
+      border-radius: 17px;
+      background: var(--c-100);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
     .photo-strip .frame:nth-child(odd) { rotate: -1.6deg; }
     .photo-strip .frame:nth-child(even) { rotate: 1.4deg; translate: 0 0.9rem; }
     .photo-strip .frame:hover { transform: translateY(-8px) rotate(0.3deg); }
 
-    /* Mobil: zwei ganze Fotos statt angeschnittenem Streifen */
+    /* Mini-Website-Bausteine */
+    .m-top { display: flex; align-items: center; gap: 4px; padding: 8px 9px 6px; }
+    .m-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--c-500); flex-shrink: 0; }
+    .m-brand { font-family: var(--serif); font-size: 0.62rem; color: var(--c-900); white-space: nowrap; }
+    .m-hero {
+      margin: 0 7px;
+      border-radius: 9px;
+      background: var(--c-300);
+      min-height: 36%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 8px;
+    }
+    .m-hero .t { font-family: var(--serif); font-size: 0.82rem; line-height: 1.15; color: var(--c-900); }
+    .m-hero .t em { font-style: italic; }
+    .m-hero.dark { background: var(--c-700); }
+    .m-hero.dark .t { color: var(--c-100); }
+    .m-body { padding: 9px 8px; display: grid; gap: 5px; justify-items: start; }
+    .m-line { height: 4px; width: 100%; border-radius: 2px; background: var(--c-300); }
+    .m-line.w80 { width: 80%; }
+    .m-line.w60 { width: 60%; }
+    .m-btn {
+      margin-top: 3px;
+      font-size: 0.48rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--c-100);
+      background: var(--c-500);
+      padding: 3px 9px;
+      border-radius: 999px;
+    }
+    .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 7px 7px 0; }
+    .m-grid span { aspect-ratio: 1; border-radius: 7px; background: var(--c-300); }
+    .m-grid span:nth-child(3) { background: var(--c-500); }
+
+    /* WhatsApp-Handy */
+    .chat-top {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 8px 9px;
+      background: var(--c-900);
+      color: var(--c-100);
+      font-size: 0.6rem;
+      font-weight: 500;
+    }
+    .chat-top .m-dot { background: var(--c-300); }
+    .chat-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 9px 8px;
+      background: rgba(163, 177, 138, 0.25);
+    }
+    .bubble {
+      font-size: 0.56rem;
+      line-height: 1.35;
+      padding: 5px 8px;
+      border-radius: 10px;
+      max-width: 90%;
+    }
+    .bubble.in {
+      background: var(--c-100);
+      color: var(--c-900);
+      border-bottom-left-radius: 3px;
+      align-self: flex-start;
+    }
+    .bubble.out {
+      background: var(--c-500);
+      color: var(--c-100);
+      border-bottom-right-radius: 3px;
+      align-self: flex-end;
+    }
+
+    /* Mobil: zwei ganze Handys statt angeschnittenem Streifen */
     @media (max-width: 700px) {
       .photo-strip {
         margin-top: -4.5rem;
@@ -276,7 +358,7 @@
       }
       .photo-strip .frame {
         width: calc(50% - 0.5rem);
-        max-width: 11rem;
+        max-width: 10rem;
       }
       .photo-strip .frame:nth-child(n+3) { display: none; }
       .photo-strip .frame:nth-child(even) { translate: 0 0.6rem; }
@@ -306,6 +388,18 @@
           to { opacity: 1; translate: 0 0.6rem; }
         }
       }
+      /* Chat-Nachrichten erscheinen nacheinander */
+      .bubble {
+        opacity: 0;
+        transform: translateY(6px) scale(0.96);
+        animation: bubbleIn 500ms var(--ease) forwards;
+      }
+      .chat-body .bubble:nth-child(1) { animation-delay: 1.2s; }
+      .chat-body .bubble:nth-child(2) { animation-delay: 1.55s; }
+      .chat-body .bubble:nth-child(3) { animation-delay: 1.9s; }
+      @keyframes bubbleIn {
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
     }
 
     /* ============================================================
@@ -327,6 +421,9 @@
       display: block;
       margin-top: clamp(1.75rem, 3vw, 2.5rem);
       color: var(--c-700);
+    }
+    @media (max-width: 700px) {
+      .statement .kicker { font-size: 0.62rem; letter-spacing: 0.16em; }
     }
 
     /* ============================================================
@@ -593,22 +690,63 @@
         </div>
       </div>
 
-      <!-- Platzhalter: Kärnten-Motive – vor dem Livegang durch eigene Aufnahmen ersetzen -->
-      <div class="photo-strip" aria-label="Eindrücke aus Kärnten">
+      <!-- Beispiel-Websites auf Smartphones – rein mit HTML/CSS gezeichnet, fiktive Betriebe -->
+      <div class="photo-strip" aria-label="Beispiel-Websites und WhatsApp-Service auf Smartphones">
         <div class="frame">
-          <img src="https://images.unsplash.com/photo-1439066615861-d1af74d74000?auto=format&fit=crop&w=640&q=75" alt="See mit Steg (Platzhalterfoto)" width="480" height="640" loading="eager">
+          <div class="screen" aria-hidden="true">
+            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Café Anna</span></div>
+            <div class="m-hero"><span class="t">Zeit für <em>Kaffee.</em></span></div>
+            <div class="m-body">
+              <span class="m-line"></span>
+              <span class="m-line w80"></span>
+              <span class="m-line w60"></span>
+              <span class="m-btn">Reservieren</span>
+            </div>
+          </div>
         </div>
+
         <div class="frame">
-          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=640&q=75" alt="Bergpanorama (Platzhalterfoto)" width="480" height="640" loading="eager">
+          <div class="screen" aria-hidden="true">
+            <div class="chat-top"><span class="m-dot"></span>HeimatWeb</div>
+            <div class="chat-body">
+              <span class="bubble in">Hallo Johann! Könnten Sie unsere Öffnungszeiten auf der Website ändern?</span>
+              <span class="bubble out">Gerne – ist schon online!</span>
+              <span class="bubble in">Super, vielen Dank!</span>
+            </div>
+          </div>
         </div>
+
         <div class="frame">
-          <img src="https://images.unsplash.com/photo-1467269204594-9661b134dd2b?auto=format&fit=crop&w=640&q=75" alt="Ort am See (Platzhalterfoto)" width="480" height="640" loading="lazy">
+          <div class="screen" aria-hidden="true">
+            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Blumen Flora</span></div>
+            <div class="m-hero dark"><span class="t">Frisch <em>gebunden.</em></span></div>
+            <div class="m-grid"><span></span><span></span><span></span><span></span></div>
+          </div>
         </div>
+
         <div class="frame">
-          <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=640&q=75" alt="Waldweg im Morgenlicht (Platzhalterfoto)" width="480" height="640" loading="lazy">
+          <div class="screen" aria-hidden="true">
+            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Gasthaus zur Linde</span></div>
+            <div class="m-hero"><span class="t">Gut <em>essen.</em></span></div>
+            <div class="m-body">
+              <span class="m-line"></span>
+              <span class="m-line w80"></span>
+              <span class="m-line w60"></span>
+              <span class="m-btn">Speisekarte</span>
+            </div>
+          </div>
         </div>
+
         <div class="frame">
-          <img src="https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?auto=format&fit=crop&w=640&q=75" alt="Boot auf einem Bergsee (Platzhalterfoto)" width="480" height="640" loading="lazy">
+          <div class="screen" aria-hidden="true">
+            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Pension Seeblick</span></div>
+            <div class="m-hero dark"><span class="t">Urlaub am <em>See.</em></span></div>
+            <div class="m-body">
+              <span class="m-line"></span>
+              <span class="m-line w80"></span>
+              <span class="m-btn">Zimmer anfragen</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -617,7 +755,7 @@
     <section class="statement">
       <div class="container">
         <p class="big reveal">Für Betriebe, die sich lieber um ihre Gäste kümmern <em>als um Technik.</em></p>
-        <span class="kicker reveal" style="--d: 150ms">Gestaltung&nbsp;&nbsp;·&nbsp;&nbsp;Technik&nbsp;&nbsp;·&nbsp;&nbsp;Betrieb&nbsp;&nbsp;·&nbsp;&nbsp;Änderungen per WhatsApp</span>
+        <span class="kicker reveal" style="--d: 150ms">Gestaltung · Technik · Betrieb · Änderungen per WhatsApp</span>
       </div>
     </section>
 
