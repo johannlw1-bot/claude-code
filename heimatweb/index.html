@@ -239,167 +239,238 @@
     /* ============================================================
        FOTOSTREIFEN — überlappt die Panelkante
        ============================================================ */
-    .photo-strip {
+    /* Schaubild: großes Browserfenster + Handy mit derselben Beispielseite */
+    .device-stage {
       position: relative;
       z-index: 2;
-      margin-top: clamp(-8rem, -12vw, -6rem);
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: clamp(0.9rem, 1.8vw, 1.75rem);
-      padding-inline: clamp(1rem, 3vw, 2.5rem);
+      max-width: 64rem;
+      margin: clamp(-9rem, -13vw, -6.5rem) auto 0;
+      padding-inline: clamp(1.25rem, 4vw, 2.5rem);
     }
-    /* Smartphone-Rahmen mit Mini-Websites */
-    .photo-strip .frame {
-      flex: 0 0 auto;
-      width: clamp(8.75rem, 12.5vw, 10.75rem);
-      aspect-ratio: 9 / 17.5;
-      background: var(--c-900);
-      border: 1.5px solid rgba(218, 215, 205, 0.45);
-      border-radius: 24px;
-      padding: 6px;
-      transition: transform 500ms var(--ease);
-    }
-    .photo-strip .frame .screen {
-      height: 100%;
-      border-radius: 17px;
-      background: var(--c-100);
+
+    .browser {
+      border-radius: 14px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      border: 1px solid var(--c-300);
+      background: #F0EEE6;
     }
-    .photo-strip .frame:nth-child(odd) { rotate: -1.6deg; }
-    .photo-strip .frame:nth-child(even) { rotate: 1.4deg; translate: 0 0.9rem; }
-    .photo-strip .frame:hover { transform: translateY(-8px) rotate(0.3deg); }
-
-    /* Mini-Website-Bausteine */
-    .m-top { display: flex; align-items: center; gap: 4px; padding: 8px 9px 6px; }
-    .m-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--c-500); flex-shrink: 0; }
-    .m-brand { font-family: var(--serif); font-size: 0.62rem; color: var(--c-900); white-space: nowrap; }
-    .m-hero {
-      margin: 0 7px;
-      border-radius: 9px;
-      background: var(--c-300);
-      min-height: 36%;
-      display: grid;
-      place-items: center;
-      text-align: center;
-      padding: 8px;
-    }
-    .m-hero .t { font-family: var(--serif); font-size: 0.82rem; line-height: 1.15; color: var(--c-900); }
-    .m-hero .t em { font-style: italic; }
-    .m-hero.dark { background: var(--c-700); }
-    .m-hero.dark .t { color: var(--c-100); }
-    .m-body { padding: 9px 8px; display: grid; gap: 5px; justify-items: start; }
-    .m-line { height: 4px; width: 100%; border-radius: 2px; background: var(--c-300); }
-    .m-line.w80 { width: 80%; }
-    .m-line.w60 { width: 60%; }
-    .m-btn {
-      margin-top: 3px;
-      font-size: 0.48rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--c-100);
-      background: var(--c-500);
-      padding: 3px 9px;
-      border-radius: 999px;
-    }
-    .m-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 7px 7px 0; }
-    .m-grid span { aspect-ratio: 1; border-radius: 7px; background: var(--c-300); }
-    .m-grid span:nth-child(3) { background: var(--c-500); }
-
-    /* WhatsApp-Handy */
-    .chat-top {
+    .browser-bar {
       display: flex;
       align-items: center;
-      gap: 5px;
-      padding: 8px 9px;
       background: var(--c-900);
-      color: var(--c-100);
-      font-size: 0.6rem;
-      font-weight: 500;
+      padding: 0.65rem 1rem;
     }
-    .chat-top .m-dot { background: var(--c-300); }
-    .chat-body {
+    .browser-bar .dots { display: flex; gap: 5px; }
+    .browser-bar .dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--c-300); opacity: 0.5; }
+    .browser-bar .dots span:nth-child(2) { opacity: 0.7; }
+    .browser-bar .dots span:nth-child(3) { opacity: 0.95; }
+    .browser-bar .url {
       flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      padding: 9px 8px;
-      background: rgba(163, 177, 138, 0.25);
-    }
-    .bubble {
-      font-size: 0.56rem;
-      line-height: 1.35;
-      padding: 5px 8px;
-      border-radius: 10px;
-      max-width: 90%;
-    }
-    .bubble.in {
-      background: var(--c-100);
-      color: var(--c-900);
-      border-bottom-left-radius: 3px;
-      align-self: flex-start;
-    }
-    .bubble.out {
-      background: var(--c-500);
+      max-width: 16rem;
+      margin-inline: auto;
+      font-size: 0.7rem;
       color: var(--c-100);
-      border-bottom-right-radius: 3px;
-      align-self: flex-end;
+      text-align: center;
+      background: rgba(218, 215, 205, 0.14);
+      border-radius: 6px;
+      padding: 0.25rem 0.9rem;
     }
 
-    /* Mobil: zwei ganze Handys statt angeschnittenem Streifen */
+    /* Die Beispielseite im Browser */
+    .demo-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.1rem 2rem;
+    }
+    .demo-brand { font-family: var(--serif); font-size: 1.15rem; color: var(--c-900); white-space: nowrap; }
+    .demo-links { display: flex; gap: 1.4rem; font-size: 0.72rem; font-weight: 500; color: var(--c-700); }
+    .demo-btn {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--c-500);
+      color: #F0EEE6;
+      padding: 0.45rem 1rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .demo-btn.big { font-size: 0.7rem; padding: 0.6rem 1.3rem; background: var(--c-900); }
+    .demo-hero {
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 2rem;
+      align-items: center;
+      padding: 1.25rem 2rem 2.25rem;
+    }
+    .demo-hero h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+      line-height: 1.12;
+      color: var(--c-900);
+    }
+    .demo-hero h3 em { font-style: italic; }
+    .demo-hero p {
+      font-size: 0.8rem;
+      line-height: 1.6;
+      color: var(--c-700);
+      margin: 0.7rem 0 1.1rem;
+      max-width: 34ch;
+    }
+    .demo-hero .demo-img {
+      aspect-ratio: 4 / 3;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--c-300);
+    }
+    .demo-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* Handy rechts unten – dieselbe Seite, mobil */
+    .stage-phone {
+      position: absolute;
+      right: clamp(0.5rem, 3vw, 2rem);
+      bottom: -3.5rem;
+      width: clamp(9.5rem, 13vw, 11.25rem);
+      background: var(--c-900);
+      border: 1.5px solid rgba(218, 215, 205, 0.5);
+      border-radius: 26px;
+      padding: 7px;
+    }
+    .stage-phone .screen { background: #F0EEE6; border-radius: 19px; overflow: hidden; }
+    .phone-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+    }
+    .phone-nav .demo-brand { font-size: 0.72rem; }
+    .phone-nav .burger { display: grid; gap: 3px; }
+    .phone-nav .burger span { display: block; width: 12px; height: 1.5px; background: var(--c-900); }
+    .phone-img {
+      aspect-ratio: 5 / 3;
+      overflow: hidden;
+      background: var(--c-300);
+      margin: 0 8px;
+      border-radius: 7px;
+    }
+    .phone-img img { width: 100%; height: 100%; object-fit: cover; }
+    .phone-copy { padding: 9px 10px 12px; }
+    .phone-copy h4 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 0.85rem;
+      line-height: 1.15;
+      color: var(--c-900);
+    }
+    .phone-copy h4 em { font-style: italic; }
+    .phone-copy .demo-btn { display: inline-block; margin-top: 7px; }
+
+    .stage-caption {
+      text-align: center;
+      margin-top: 5.25rem;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--c-700);
+    }
+
+    /* Mobil: nur das Handy zeigen – passend zum Gerät des Besuchers */
     @media (max-width: 700px) {
-      .photo-strip {
-        margin-top: -4.5rem;
-        gap: 1rem;
-        padding-inline: 1.5rem;
+      .device-stage { margin-top: -4.5rem; }
+      .browser { display: none; }
+      .stage-phone {
+        position: static;
+        margin-inline: auto;
+        width: min(62vw, 13rem);
       }
-      .photo-strip .frame {
-        width: calc(50% - 0.5rem);
-        max-width: 10rem;
-      }
-      .photo-strip .frame:nth-child(n+3) { display: none; }
-      .photo-strip .frame:nth-child(even) { translate: 0 0.6rem; }
+      .stage-caption { margin-top: 1.5rem; }
     }
 
     @media (prefers-reduced-motion: no-preference) {
-      .photo-strip .frame {
+      .browser, .stage-phone {
         opacity: 0;
         translate: 0 40px;
-        animation: frameIn 900ms var(--ease) forwards;
+        animation: stageIn 900ms var(--ease) forwards;
       }
-      .photo-strip .frame:nth-child(1) { animation-delay: 0.55s; }
-      .photo-strip .frame:nth-child(2) { animation-delay: 0.65s; }
-      .photo-strip .frame:nth-child(3) { animation-delay: 0.75s; }
-      .photo-strip .frame:nth-child(4) { animation-delay: 0.85s; }
-      .photo-strip .frame:nth-child(5) { animation-delay: 0.95s; }
-      @keyframes frameIn {
+      .browser { animation-delay: 0.5s; }
+      .stage-phone { animation-delay: 0.7s; }
+      @keyframes stageIn {
         to { opacity: 1; translate: 0 0; }
       }
-      .photo-strip .frame:nth-child(even) { animation-name: frameInEven; }
-      @keyframes frameInEven {
-        to { opacity: 1; translate: 0 0.9rem; }
-      }
-      @media (max-width: 700px) {
-        .photo-strip .frame:nth-child(even) { animation-name: frameInEvenMobile; }
-        @keyframes frameInEvenMobile {
-          to { opacity: 1; translate: 0 0.6rem; }
-        }
-      }
-      /* Chat-Nachrichten erscheinen nacheinander */
-      .bubble {
-        opacity: 0;
-        transform: translateY(6px) scale(0.96);
-        animation: bubbleIn 500ms var(--ease) forwards;
-      }
-      .chat-body .bubble:nth-child(1) { animation-delay: 1.2s; }
-      .chat-body .bubble:nth-child(2) { animation-delay: 1.55s; }
-      .chat-body .bubble:nth-child(3) { animation-delay: 1.9s; }
-      @keyframes bubbleIn {
-        to { opacity: 1; transform: translateY(0) scale(1); }
-      }
+    }
+
+    /* ============================================================
+       WHATSAPP — So einfach geht's
+       ============================================================ */
+    .whatsapp { padding-bottom: clamp(6rem, 12vw, 10rem); }
+    .wa-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 5vw, 5rem);
+      align-items: center;
+      max-width: 58rem;
+      margin-inline: auto;
+    }
+    @media (max-width: 700px) {
+      .wa-grid { grid-template-columns: 1fr; max-width: 24rem; }
+    }
+    .wa-copy h2 {
+      font-size: clamp(1.9rem, 4vw, 2.8rem);
+      color: var(--c-900);
+      margin: 1rem 0 1.25rem;
+    }
+    .wa-copy h2 em { color: var(--c-500); }
+    .wa-copy p { color: var(--c-700); max-width: 44ch; }
+    .wa-card {
+      width: 100%;
+      max-width: 24rem;
+      justify-self: center;
+      border: 1px solid var(--c-300);
+      border-radius: 20px;
+      overflow: hidden;
+      background: rgba(163, 177, 138, 0.22);
+    }
+    .wa-head {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      background: var(--c-900);
+      color: var(--c-100);
+      padding: 0.85rem 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .wa-head .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c-300); flex-shrink: 0; }
+    .wa-head small { display: block; font-size: 0.68rem; font-weight: 400; color: var(--c-300); }
+    .wa-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding: 1.25rem 1rem 1.5rem;
+    }
+    .wa-bubble {
+      font-size: 0.9rem;
+      line-height: 1.45;
+      padding: 0.6rem 0.9rem;
+      border-radius: 14px;
+      max-width: 88%;
+    }
+    .wa-bubble.in {
+      background: var(--c-100);
+      color: var(--c-900);
+      border-bottom-left-radius: 4px;
+      align-self: flex-start;
+    }
+    .wa-bubble.out {
+      background: var(--c-500);
+      color: var(--c-100);
+      border-bottom-right-radius: 4px;
+      align-self: flex-end;
     }
 
     /* ============================================================
@@ -443,12 +514,20 @@
     }
 
     .portrait {
+      position: relative;
       aspect-ratio: 4 / 5;
       border-radius: var(--radius-img);
       background: var(--c-300);
       display: grid;
       place-items: center;
       overflow: hidden;
+    }
+    .portrait img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     /* Platzhalter-Monogramm – durch echtes Porträtfoto von Johann ersetzen */
     .portrait .monogram {
@@ -690,64 +769,47 @@
         </div>
       </div>
 
-      <!-- Beispiel-Websites auf Smartphones – rein mit HTML/CSS gezeichnet, fiktive Betriebe -->
-      <div class="photo-strip" aria-label="Beispiel-Websites und WhatsApp-Service auf Smartphones">
-        <div class="frame">
-          <div class="screen" aria-hidden="true">
-            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Café Anna</span></div>
-            <div class="m-hero"><span class="t">Zeit für <em>Kaffee.</em></span></div>
-            <div class="m-body">
-              <span class="m-line"></span>
-              <span class="m-line w80"></span>
-              <span class="m-line w60"></span>
-              <span class="m-btn">Reservieren</span>
+      <!-- Schaubild: fiktive Beispielseite im Browser + am Handy. Foto ist Platzhalter. -->
+      <div class="device-stage">
+        <div class="browser" aria-hidden="true">
+          <div class="browser-bar">
+            <span class="dots"><span></span><span></span><span></span></span>
+            <span class="url">www.cafe-anna.at</span>
+          </div>
+          <div class="demo-nav">
+            <span class="demo-brand">Café Anna</span>
+            <span class="demo-links"><span>Speisekarte</span><span>Über uns</span><span>Kontakt</span></span>
+            <span class="demo-btn">Tisch reservieren</span>
+          </div>
+          <div class="demo-hero">
+            <div>
+              <h3>Kaffee, Kuchen &amp; <em>gute Gespräche.</em></h3>
+              <p>Hausgemachte Mehlspeisen und fair gerösteter Kaffee – mitten in Klagenfurt. Wir freuen uns auf Ihren Besuch.</p>
+              <span class="demo-btn big">Tisch reservieren</span>
+            </div>
+            <div class="demo-img">
+              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=75" alt="" width="1000" height="750" loading="eager">
             </div>
           </div>
         </div>
 
-        <div class="frame">
-          <div class="screen" aria-hidden="true">
-            <div class="chat-top"><span class="m-dot"></span>HeimatWeb</div>
-            <div class="chat-body">
-              <span class="bubble in">Hallo Johann! Könnten Sie unsere Öffnungszeiten auf der Website ändern?</span>
-              <span class="bubble out">Gerne – ist schon online!</span>
-              <span class="bubble in">Super, vielen Dank!</span>
+        <div class="stage-phone" aria-hidden="true">
+          <div class="screen">
+            <div class="phone-nav">
+              <span class="demo-brand">Café Anna</span>
+              <span class="burger"><span></span><span></span><span></span></span>
+            </div>
+            <div class="phone-img">
+              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=480&q=75" alt="" width="480" height="288" loading="eager">
+            </div>
+            <div class="phone-copy">
+              <h4>Kaffee, Kuchen &amp; <em>gute Gespräche.</em></h4>
+              <span class="demo-btn">Reservieren</span>
             </div>
           </div>
         </div>
 
-        <div class="frame">
-          <div class="screen" aria-hidden="true">
-            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Blumen Flora</span></div>
-            <div class="m-hero dark"><span class="t">Frisch <em>gebunden.</em></span></div>
-            <div class="m-grid"><span></span><span></span><span></span><span></span></div>
-          </div>
-        </div>
-
-        <div class="frame">
-          <div class="screen" aria-hidden="true">
-            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Gasthaus zur Linde</span></div>
-            <div class="m-hero"><span class="t">Gut <em>essen.</em></span></div>
-            <div class="m-body">
-              <span class="m-line"></span>
-              <span class="m-line w80"></span>
-              <span class="m-line w60"></span>
-              <span class="m-btn">Speisekarte</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="frame">
-          <div class="screen" aria-hidden="true">
-            <div class="m-top"><span class="m-dot"></span><span class="m-brand">Pension Seeblick</span></div>
-            <div class="m-hero dark"><span class="t">Urlaub am <em>See.</em></span></div>
-            <div class="m-body">
-              <span class="m-line"></span>
-              <span class="m-line w80"></span>
-              <span class="m-btn">Zimmer anfragen</span>
-            </div>
-          </div>
-        </div>
+        <p class="stage-caption">Fiktives Beispielprojekt · So könnte Ihre Website aussehen</p>
       </div>
     </section>
 
@@ -763,9 +825,10 @@
     <section class="about" id="ueber-mich">
       <div class="container">
         <div class="about-grid">
-          <!-- Porträt-Platzhalter: Monogramm durch echtes Foto von Johann ersetzen -->
-          <div class="portrait reveal" role="img" aria-label="Porträt von Johann (Foto folgt)">
-            <span class="monogram">J.</span>
+          <!-- Porträt: Foto unter heimatweb/assets/johann.jpg ablegen; bis dahin zeigt das Monogramm -->
+          <div class="portrait reveal">
+            <span class="monogram" aria-hidden="true">J.</span>
+            <img src="assets/johann.jpg" alt="Porträt von Johann, Gründer von HeimatWeb" width="800" height="1000" loading="lazy" onerror="this.remove()">
           </div>
           <div class="about-copy reveal" style="--d: 150ms">
             <span class="kicker">Über mich</span>
@@ -815,6 +878,35 @@
               <span>Blumenladen</span>
             </div>
           </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ WHATSAPP / SO EINFACH GEHT'S ============ -->
+    <section class="whatsapp" id="so-gehts">
+      <div class="container">
+        <div class="wa-grid">
+          <div class="wa-copy reveal">
+            <span class="kicker">So einfach geht's</span>
+            <h2>Änderung nötig? <em>Eine Nachricht genügt.</em></h2>
+            <p>
+              Neue Öffnungszeiten, andere Preise, aktuelle Fotos – Sie schreiben
+              mir kurz auf WhatsApp, ich erledige den Rest. Drei Änderungen pro
+              Monat sind in Ihrem Abo inklusive.
+            </p>
+          </div>
+          <div class="wa-card reveal" style="--d: 120ms" role="img" aria-label="Beispielhafter WhatsApp-Verlauf: Ein Kunde bittet um eine Änderung, HeimatWeb erledigt sie noch am selben Tag.">
+            <div class="wa-head">
+              <span class="status-dot"></span>
+              <span>Johann · HeimatWeb<small>erreichbar für Sie</small></span>
+            </div>
+            <div class="wa-body" aria-hidden="true">
+              <span class="wa-bubble in reveal">Hallo Johann! Könnten Sie auf der Website unsere neuen Öffnungszeiten eintragen?</span>
+              <span class="wa-bubble out reveal" style="--d: 250ms">Gerne, mache ich sofort.</span>
+              <span class="wa-bubble out reveal" style="--d: 500ms">Erledigt – die Änderung ist online!</span>
+              <span class="wa-bubble in reveal" style="--d: 750ms">Perfekt, vielen Dank!</span>
+            </div>
+          </div>
         </div>
       </div>
     </section>
