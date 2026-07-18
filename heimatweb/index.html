@@ -3,47 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>heimatweb — Ihre Website. Rundum betreut. Ohne Aufwand für Sie.</title>
-  <meta name="description" content="heimatweb erstellt, betreibt und betreut die Website Ihres Betriebs – im Abo für 89 € im Monat. Änderungswünsche schicken Sie einfach per WhatsApp. Persönlich, regional, aus Österreich.">
-  <meta property="og:title" content="heimatweb — Ihre Website. Rundum betreut.">
-  <meta property="og:description" content="Website-Erstellung, Betrieb und Betreuung im Abo. Änderungen einfach per WhatsApp. Aus Österreich.">
+  <title>HeimatWeb — Ihre Website. Rundum betreut.</title>
+  <meta name="description" content="HeimatWeb gestaltet, betreibt und pflegt die Website Ihres Betriebs – für 89 € im Monat. Änderungen einfach per WhatsApp. Aus Österreich.">
+  <meta property="og:title" content="HeimatWeb — Ihre Website. Rundum betreut.">
+  <meta property="og:description" content="Website im Abo: Gestaltung, Technik und Betreuung für 89 € im Monat. Aus Österreich.">
   <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
   <style>
     /* ============================================================
-       DESIGN TOKENS — laut Brand Brief Heimatweb
+       PALETTE  ·  DAD7CD / A3B18A / 588157 / 3A5A40 / 344E41
        ============================================================ */
     :root {
-      --color-green:       #2C4A3B;  /* Tannengrün – Vertrauen, Struktur */
-      --color-green-deep:  #233B2F;
-      --color-green-soft:  #E3EAE2;
-      --color-brown:       #8B5E3C;  /* Holzbraun – Wärme, Sekundäres */
-      --color-brown-soft:  #EFE3D4;
-      --color-cream:       #F7F3EA;  /* Cremeweiß – Basis */
-      --color-cream-deep:  #EFE9DB;
-      --color-orange:      #C1592D;  /* Rostorange – nur für CTAs/Links */
-      --color-orange-deep: #A84A23;
-      --color-ink:         #2A2620;  /* Warmes Fast-Schwarz */
-      --color-ink-soft:    #5B5347;
-      --color-ink-muted:   #82786A;
-      --color-border:      #E2DAC8;
+      --c-100: #DAD7CD;   /* Timberwolf  – Seitenhintergrund, helle Schrift  */
+      --c-300: #A3B18A;   /* Sage        – Linien, Nebentexte, Rahmen        */
+      --c-500: #588157;   /* Fern        – Akzente, Links                    */
+      --c-700: #3A5A40;   /* Hunter      – Sekundärtext, Hover               */
+      --c-900: #344E41;   /* Brunswick   – Paneele, Headlines, Buttons       */
 
-      --font-display: "Fraunces", Georgia, serif;
-      --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 
-      --radius-sm: 8px;
-      --radius: 14px;
-      --radius-lg: 22px;
-      --container: 72rem;
+      --radius-panel: clamp(20px, 3vw, 36px);
+      --radius-img: 16px;
+      --container: 74rem;
 
-      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
-      --dur-fast: 200ms;
-      --dur-med: 400ms;
-      --dur-slow: 800ms;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     /* ============================================================
@@ -51,30 +39,27 @@
        ============================================================ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-      scroll-padding-top: 5.5rem;
-    }
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: var(--font-body);
+      font-family: var(--sans);
       font-size: 1rem;
-      line-height: 1.65;
-      color: var(--color-ink);
-      background: var(--color-cream);
+      line-height: 1.6;
+      color: var(--c-900);
+      background: var(--c-100);
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
     }
 
-    img, svg { max-width: 100%; display: block; }
+    img { max-width: 100%; display: block; }
     a { color: inherit; text-decoration: none; cursor: pointer; }
-    button { cursor: pointer; font: inherit; }
 
-    ::selection { background: var(--color-green); color: var(--color-cream); }
+    ::selection { background: var(--c-900); color: var(--c-100); }
 
     :focus-visible {
-      outline: 2px solid var(--color-orange);
+      outline: 2px solid var(--c-500);
       outline-offset: 3px;
+      border-radius: 2px;
     }
 
     .skip-link {
@@ -83,9 +68,9 @@
       left: 1rem;
       z-index: 200;
       padding: 0.75rem 1.25rem;
-      background: var(--color-green);
-      color: var(--color-cream);
-      border-radius: var(--radius-sm);
+      background: var(--c-900);
+      color: var(--c-100);
+      border-radius: 8px;
     }
     .skip-link:focus { top: 1rem; }
 
@@ -99,752 +84,417 @@
     /* ============================================================
        TYPOGRAFIE
        ============================================================ */
-    h1, h2, h3 {
-      font-family: var(--font-display);
-      font-weight: 500;
-      line-height: 1.14;
-      letter-spacing: -0.01em;
-      color: var(--color-green);
+    h1, h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.005em;
     }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.65rem;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--color-brown);
-      margin-bottom: 1.25rem;
-    }
-    .eyebrow::before {
-      content: "";
-      width: 2.25rem;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--color-brown);
-    }
-
-    .section-title {
-      font-size: clamp(2rem, 4.5vw, 3.1rem);
-      max-width: 24ch;
-      margin-bottom: 1.25rem;
-    }
-
-    .section-lead {
-      font-size: clamp(1.02rem, 1.6vw, 1.15rem);
-      color: var(--color-ink-soft);
-      max-width: 58ch;
-    }
-
-    .accent-italic {
+    h1 em, h2 em {
       font-style: italic;
-      color: var(--color-orange);
+      font-weight: 400;
+    }
+
+    .kicker {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-500);
     }
 
     /* ============================================================
-       BUTTONS — Rostorange nur für Handlungsaufforderungen
+       BUTTONS
        ============================================================ */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 0.6rem;
-      min-height: 3.25rem;
-      padding: 0.85rem 1.9rem;
-      font-size: 0.95rem;
+      min-height: 3.1rem;
+      padding: 0.8rem 1.9rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      border-radius: 999px;
-      border: 1.5px solid transparent;
-      transition: background-color var(--dur-fast) ease,
-                  color var(--dur-fast) ease,
-                  border-color var(--dur-fast) ease,
-                  transform var(--dur-fast) var(--ease-out);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      border-radius: 12px;
+      transition: background-color 250ms ease, color 250ms ease, transform 250ms var(--ease);
     }
-    .btn:active { transform: scale(0.97); }
-    .btn svg { width: 1.15rem; height: 1.15rem; flex-shrink: 0; }
+    .btn:active { transform: scale(0.98); }
+    .btn .arrow { transition: transform 300ms var(--ease); }
+    .btn:hover .arrow { transform: translateX(4px); }
 
-    .btn-cta {
-      background: var(--color-orange);
-      color: #FFF6EE;
-    }
-    .btn-cta:hover { background: var(--color-orange-deep); }
+    .btn-dark { background: var(--c-900); color: var(--c-100); }
+    .btn-dark:hover { background: var(--c-700); }
 
-    .btn-outline {
-      background: transparent;
-      color: var(--color-green);
-      border-color: var(--color-green);
-    }
-    .btn-outline:hover {
-      background: var(--color-green);
-      color: var(--color-cream);
-    }
+    .btn-light { background: var(--c-100); color: var(--c-900); }
+    .btn-light:hover { background: var(--c-300); }
 
-    .btn-outline-light {
-      background: transparent;
-      color: var(--color-cream);
-      border-color: rgba(247, 243, 234, 0.6);
+    .text-link {
+      color: var(--c-700);
+      border-bottom: 1px solid var(--c-300);
+      padding-bottom: 2px;
+      transition: color 200ms ease, border-color 200ms ease;
     }
-    .btn-outline-light:hover {
-      background: var(--color-cream);
-      color: var(--color-green);
-      border-color: var(--color-cream);
-    }
+    .text-link:hover { color: var(--c-500); border-color: var(--c-500); }
 
     /* ============================================================
-       HEADER / NAVIGATION
+       HEADER
        ============================================================ */
     .site-header {
-      position: fixed;
-      inset: 0 0 auto 0;
-      z-index: 100;
-      transition: transform var(--dur-med) var(--ease-out),
-                  background-color var(--dur-med) ease,
-                  border-color var(--dur-med) ease;
-      border-bottom: 1px solid transparent;
+      position: relative;
+      z-index: 10;
     }
-    .site-header.is-scrolled {
-      background: rgba(247, 243, 234, 0.92);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border-color: var(--color-border);
-    }
-    .site-header.is-hidden { transform: translateY(-100%); }
-
-    .nav-inner {
+    .header-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      padding-block: 1rem;
+      padding-block: 1.4rem 1.1rem;
     }
-
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.6rem;
-      font-family: var(--font-display);
-      font-size: 1.4rem;
-      font-weight: 600;
-      color: var(--color-green);
-      letter-spacing: -0.02em;
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 1.45rem;
+      color: var(--c-900);
+      letter-spacing: 0.01em;
     }
-    .logo svg { width: 1.65rem; height: 1.65rem; flex-shrink: 0; }
-
-    .nav-links {
+    .header-nav {
       display: flex;
       align-items: center;
-      gap: clamp(1.25rem, 2.5vw, 2.25rem);
-      list-style: none;
+      gap: 2rem;
     }
-    .nav-links a:not(.btn) {
-      position: relative;
-      font-size: 0.92rem;
+    .header-nav a:not(.btn) {
+      font-size: 0.86rem;
       font-weight: 500;
-      color: var(--color-ink-soft);
-      padding-block: 0.5rem;
-      transition: color var(--dur-fast) ease;
+      color: var(--c-700);
+      transition: color 200ms ease;
     }
-    .nav-links a:not(.btn):hover { color: var(--color-green); }
-    .nav-links a:not(.btn)::after {
-      content: "";
-      position: absolute;
-      left: 0; bottom: 0;
-      width: 100%;
-      height: 2px;
-      border-radius: 2px;
-      background: var(--color-orange);
-      transform: scaleX(0);
-      transform-origin: right;
-      transition: transform var(--dur-med) var(--ease-out);
-    }
-    .nav-links a:not(.btn):hover::after {
-      transform: scaleX(1);
-      transform-origin: left;
-    }
-    .nav-links .btn { min-height: 2.75rem; padding: 0.6rem 1.4rem; }
+    .header-nav a:not(.btn):hover { color: var(--c-500); }
+    .header-nav .btn { min-height: 2.6rem; padding: 0.55rem 1.35rem; }
 
-    .nav-toggle {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      gap: 6px;
-      width: 3rem;
-      height: 3rem;
-      background: none;
-      border: none;
-    }
-    .nav-toggle span {
-      display: block;
-      width: 1.6rem;
-      height: 2px;
-      margin-inline: auto;
-      border-radius: 2px;
-      background: var(--color-green);
-      transition: transform var(--dur-med) var(--ease-out), opacity var(--dur-fast) ease;
-    }
-
-    @media (max-width: 860px) {
-      .nav-toggle { display: flex; }
-      .nav-links {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        flex-direction: column;
-        justify-content: center;
-        gap: 2rem;
-        background: var(--color-cream);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity var(--dur-med) ease, visibility var(--dur-med) ease;
-      }
-      .nav-links a:not(.btn) { font-size: 1.35rem; }
-      body.nav-open .nav-links { opacity: 1; visibility: visible; }
-      body.nav-open { overflow: hidden; }
-      body.nav-open .nav-toggle span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
-      body.nav-open .nav-toggle span:nth-child(2) { opacity: 0; }
-      body.nav-open .nav-toggle span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+    @media (max-width: 700px) {
+      .header-nav a:not(.btn) { display: none; }
     }
 
     /* ============================================================
-       HERO — mit flacher Bergkulisse (Parallax)
+       HERO — dunkles Panel
        ============================================================ */
-    .hero {
+    .hero { padding-inline: clamp(0.75rem, 1.5vw, 1.25rem); }
+
+    .hero-panel {
       position: relative;
-      min-height: 100svh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding-block: 8.5rem 16rem;
-      overflow: hidden;
+      background: var(--c-900);
+      border-radius: var(--radius-panel);
       text-align: center;
+      padding: clamp(5rem, 11vw, 9rem) clamp(1.5rem, 4vw, 3rem) clamp(10rem, 18vw, 14rem);
+      overflow: hidden;
     }
 
-    .hero .eyebrow { justify-content: center; }
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--c-300);
+      margin-bottom: clamp(1.75rem, 3vw, 2.5rem);
+    }
 
     .hero h1 {
-      font-size: clamp(2.7rem, 6.5vw, 5rem);
-      max-width: 16ch;
+      font-size: clamp(3rem, 8.5vw, 6.5rem);
+      color: var(--c-100);
+      max-width: 14ch;
       margin-inline: auto;
-      margin-bottom: 1.5rem;
     }
 
-    .hero-lead {
-      font-size: clamp(1.08rem, 1.8vw, 1.28rem);
-      color: var(--color-ink-soft);
-      max-width: 46ch;
-      margin-inline: auto;
-      margin-bottom: 2.25rem;
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      line-height: 1.7;
+      color: var(--c-300);
+      max-width: 42ch;
+      margin: clamp(1.5rem, 3vw, 2.25rem) auto clamp(2rem, 4vw, 2.75rem);
     }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 3rem;
-    }
-
-    .hero-facts {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: clamp(1.5rem, 4vw, 3.5rem);
-    }
-    .hero-facts .fact strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 1.55rem;
-      font-weight: 600;
-      color: var(--color-green);
-    }
-    .hero-facts .fact span {
-      font-size: 0.85rem;
-      color: var(--color-ink-muted);
-    }
-
-    /* Flache Bergkulisse: zwei Ebenen, keine Verläufe, keine Schatten */
-    .hero-mountains {
-      position: absolute;
-      inset: auto 0 0 0;
-      pointer-events: none;
-      line-height: 0;
-    }
-    .hero-mountains svg {
-      width: 100%;
-      height: clamp(9rem, 22vw, 16rem);
-      display: block;
-    }
-    .hero-mountains .ridge-back { position: absolute; inset: auto 0 0 0; }
-    .hero-mountains .ridge-front { position: relative; }
+    /* Zeilenweises Aufdecken der Headline */
+    .line-mask { display: block; overflow: hidden; }
+    .line-mask > span { display: block; }
 
     @media (prefers-reduced-motion: no-preference) {
-      .hero [data-hero] {
+      .line-mask > span {
+        transform: translateY(110%);
+        animation: lineUp 1s var(--ease) forwards;
+      }
+      .line-mask:nth-child(2) > span { animation-delay: 0.12s; }
+      @keyframes lineUp { to { transform: translateY(0); } }
+
+      .hero-fade {
         opacity: 0;
-        transform: translateY(26px);
-        animation: heroIn var(--dur-slow) var(--ease-out) forwards;
+        transform: translateY(14px);
+        animation: fadeUp 900ms var(--ease) forwards;
       }
-      .hero [data-hero="1"] { animation-delay: 0.05s; }
-      .hero [data-hero="2"] { animation-delay: 0.18s; }
-      .hero [data-hero="3"] { animation-delay: 0.31s; }
-      .hero [data-hero="4"] { animation-delay: 0.44s; }
-      .hero [data-hero="5"] { animation-delay: 0.58s; }
-      @keyframes heroIn {
-        to { opacity: 1; transform: translateY(0); }
-      }
-      .hero-mountains svg {
+      .hero-badge.hero-fade { animation-delay: 0.1s; }
+      .hero-sub.hero-fade { animation-delay: 0.45s; }
+      .hero-cta.hero-fade { animation-delay: 0.6s; }
+      @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+
+      .hero-panel {
         opacity: 0;
-        transform: translateY(30px);
-        animation: ridgeIn 1.2s var(--ease-out) forwards;
+        transform: scale(0.985);
+        animation: panelIn 900ms var(--ease) forwards;
       }
-      .hero-mountains .ridge-back svg { animation-delay: 0.35s; }
-      .hero-mountains .ridge-front svg { animation-delay: 0.5s; }
-      @keyframes ridgeIn {
-        to { opacity: 1; transform: translateY(0); }
-      }
+      @keyframes panelIn { to { opacity: 1; transform: scale(1); } }
     }
 
     /* ============================================================
-       LAUFBAND
+       FOTOSTREIFEN — überlappt die Panelkante
        ============================================================ */
-    .marquee {
-      background: var(--color-green);
-      color: var(--color-cream);
-      padding-block: 1rem;
-      overflow: hidden;
-    }
-    .marquee-track {
-      display: flex;
-      gap: 3rem;
-      width: max-content;
-      animation: marquee 34s linear infinite;
-    }
-    .marquee-track span {
-      display: inline-flex;
-      align-items: center;
-      gap: 3rem;
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 1.05rem;
-      white-space: nowrap;
-    }
-    .marquee-track span::after {
-      content: "";
-      width: 6px;
-      height: 6px;
-      rotate: 45deg;
-      background: var(--color-orange);
-    }
-    @keyframes marquee {
-      to { transform: translateX(-50%); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .marquee-track { animation: none; }
-    }
-
-    /* ============================================================
-       SEKTIONEN (allgemein)
-       ============================================================ */
-    .section { padding-block: clamp(4.5rem, 9vw, 7.5rem); }
-    .section-head { margin-bottom: clamp(2.5rem, 5vw, 4rem); }
-
-    /* ============================================================
-       ÜBER UNS
-       ============================================================ */
-    .about-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 5fr) minmax(0, 4fr);
-      gap: clamp(2.5rem, 6vw, 6rem);
-      align-items: center;
-    }
-    @media (max-width: 820px) {
-      .about-layout { grid-template-columns: 1fr; }
-    }
-    .about-copy p { color: var(--color-ink-soft); max-width: 58ch; }
-    .about-copy p + p { margin-top: 1rem; }
-    .about-copy .about-signature {
-      margin-top: 1.75rem;
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 1.15rem;
-      color: var(--color-brown);
-    }
-
-    .about-visual {
-      background: var(--color-green-soft);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.5rem, 3vw, 2.5rem);
-    }
-    .about-visual svg { width: 100%; height: auto; }
-
-    .about-points {
-      list-style: none;
-      display: grid;
-      gap: 0.85rem;
-      margin-top: 1.75rem;
-    }
-    .about-points li {
-      display: flex;
-      align-items: flex-start;
-      gap: 0.75rem;
-      font-size: 0.98rem;
-      color: var(--color-ink);
-    }
-    .about-points svg {
-      width: 1.2rem;
-      height: 1.2rem;
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-      color: var(--color-orange);
-    }
-
-    /* ============================================================
-       LEISTUNGEN
-       ============================================================ */
-    .services { background: var(--color-cream-deep); }
-
-    .services-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15.5rem, 1fr));
-      gap: clamp(1.25rem, 2.5vw, 2rem);
-    }
-    .service-card {
-      background: var(--color-cream);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.5rem, 3vw, 2.25rem);
-      transition: transform var(--dur-med) var(--ease-out), border-color var(--dur-fast) ease;
-    }
-    .service-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--color-brown);
-    }
-
-    .service-card .icon {
-      width: 3rem;
-      height: 3rem;
-      display: grid;
-      place-items: center;
-      margin-bottom: 1.25rem;
-      background: var(--color-green-soft);
-      border-radius: var(--radius);
-      color: var(--color-green);
-      transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease;
-    }
-    .service-card:hover .icon {
-      background: var(--color-green);
-      color: var(--color-cream);
-    }
-    .service-card .icon svg { width: 1.35rem; height: 1.35rem; }
-
-    .service-card h3 { font-size: 1.3rem; margin-bottom: 0.6rem; }
-    .service-card p { font-size: 0.95rem; color: var(--color-ink-soft); }
-
-    /* ============================================================
-       ABLAUF — 3 einfache Schritte
-       ============================================================ */
-    .steps {
-      counter-reset: step;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-      gap: clamp(1.5rem, 3vw, 2.5rem);
-    }
-    .step {
-      counter-increment: step;
-      padding-top: 1.5rem;
-      border-top: 2px solid var(--color-green-soft);
+    .photo-strip {
       position: relative;
+      z-index: 2;
+      margin-top: clamp(-8rem, -12vw, -6rem);
+      display: flex;
+      justify-content: center;
+      gap: clamp(0.75rem, 1.6vw, 1.5rem);
+      padding-inline: clamp(1rem, 3vw, 2.5rem);
     }
-    .step::before {
-      content: "0" counter(step);
-      display: block;
-      font-family: var(--font-display);
-      font-style: italic;
-      font-size: 2.2rem;
-      color: var(--color-orange);
-      margin-bottom: 0.85rem;
+    .photo-strip .frame {
+      flex: 0 0 auto;
+      width: clamp(9.5rem, 16vw, 14rem);
+      aspect-ratio: 3 / 4;
+      background: var(--c-300);
+      border: 6px solid var(--c-100);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: transform 500ms var(--ease);
     }
-    .step h3 { font-size: 1.3rem; margin-bottom: 0.5rem; }
-    .step p { font-size: 0.95rem; color: var(--color-ink-soft); }
+    .photo-strip .frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .photo-strip .frame:nth-child(odd) { rotate: -1.6deg; }
+    .photo-strip .frame:nth-child(even) { rotate: 1.4deg; translate: 0 0.9rem; }
+    .photo-strip .frame:hover { transform: translateY(-8px) rotate(0.3deg); }
+
+    @media (max-width: 900px) {
+      .photo-strip {
+        justify-content: flex-start;
+        overflow-x: auto;
+        scroll-snap-type: x proximity;
+        padding-bottom: 1.5rem;
+        scrollbar-width: none;
+      }
+      .photo-strip::-webkit-scrollbar { display: none; }
+      .photo-strip .frame { scroll-snap-align: center; width: 11rem; }
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+      .photo-strip .frame {
+        opacity: 0;
+        translate: 0 40px;
+        animation: frameIn 900ms var(--ease) forwards;
+      }
+      .photo-strip .frame:nth-child(1) { animation-delay: 0.55s; }
+      .photo-strip .frame:nth-child(2) { animation-delay: 0.65s; }
+      .photo-strip .frame:nth-child(3) { animation-delay: 0.75s; }
+      .photo-strip .frame:nth-child(4) { animation-delay: 0.85s; }
+      .photo-strip .frame:nth-child(5) { animation-delay: 0.95s; }
+      @keyframes frameIn {
+        to { opacity: 1; translate: 0 0; }
+      }
+      .photo-strip .frame:nth-child(even) {
+        animation-name: frameInEven;
+      }
+      @keyframes frameInEven {
+        to { opacity: 1; translate: 0 0.9rem; }
+      }
+    }
 
     /* ============================================================
-       PREIS — Tannengrün, ein Paket
+       LEITSATZ
        ============================================================ */
-    .pricing {
-      background: var(--color-green);
-      color: var(--color-cream);
+    .statement {
+      padding-block: clamp(6rem, 12vw, 10rem);
+      text-align: center;
     }
-    .pricing .section-title, .pricing h3 { color: var(--color-cream); }
-    .pricing .section-lead { color: rgba(247, 243, 234, 0.75); }
-    .pricing .eyebrow { color: var(--color-brown-soft); }
-    .pricing .eyebrow::before { background: var(--color-brown-soft); }
+    .statement p.big {
+      font-family: var(--serif);
+      font-size: clamp(1.7rem, 3.6vw, 2.9rem);
+      line-height: 1.25;
+      max-width: 26ch;
+      margin-inline: auto;
+    }
+    .statement p.big em { font-style: italic; color: var(--c-500); }
+    .statement .kicker {
+      display: block;
+      margin-top: clamp(1.75rem, 3vw, 2.5rem);
+      color: var(--c-700);
+    }
 
-    .pricing-layout {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: clamp(2rem, 6vw, 6rem);
-      align-items: center;
-    }
-    @media (max-width: 860px) {
-      .pricing-layout { grid-template-columns: 1fr; }
-    }
+    /* ============================================================
+       PROJEKTE
+       ============================================================ */
+    .projects { padding-bottom: clamp(6rem, 12vw, 10rem); }
 
-    .price-card {
-      background: var(--color-green-deep);
-      border: 1px solid rgba(247, 243, 234, 0.16);
-      border-radius: var(--radius-lg);
-      padding: clamp(1.75rem, 4vw, 3rem);
-    }
-    .price-card .price-label {
-      font-size: 0.8rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--color-brown-soft);
-      margin-bottom: 1.25rem;
-    }
-    .price-line {
+    .projects-head {
       display: flex;
       align-items: baseline;
-      gap: 0.5rem;
-      margin-bottom: 0.35rem;
-    }
-    .price-line .amount {
-      font-family: var(--font-display);
-      font-size: clamp(3.4rem, 7vw, 4.8rem);
-      font-weight: 600;
-      line-height: 1;
-      color: var(--color-cream);
-    }
-    .price-line .period {
-      font-size: 1rem;
-      color: rgba(247, 243, 234, 0.7);
-    }
-    .price-sub {
-      font-size: 0.9rem;
-      color: rgba(247, 243, 234, 0.7);
-      margin-bottom: 1.75rem;
-    }
-
-    .price-features {
-      list-style: none;
-      display: grid;
-      gap: 0.9rem;
-      margin-bottom: 1.75rem;
-    }
-    .price-features li {
-      display: flex;
-      gap: 0.85rem;
-      align-items: flex-start;
-      font-size: 0.98rem;
-    }
-    .price-features svg {
-      width: 1.15rem;
-      height: 1.15rem;
-      flex-shrink: 0;
-      margin-top: 0.2rem;
-      color: var(--color-orange);
-    }
-
-    .price-note {
-      font-size: 0.8rem;
-      color: rgba(247, 243, 234, 0.6);
-      margin-top: 1rem;
-    }
-
-    .pricing-points {
-      list-style: none;
-      margin-top: 2rem;
-      display: grid;
-      gap: 1.4rem;
-    }
-    .pricing-points li {
-      padding-left: 1.5rem;
-      position: relative;
-      color: rgba(247, 243, 234, 0.75);
-      font-size: 0.98rem;
-    }
-    .pricing-points li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.55em;
-      width: 0.65rem;
-      height: 2px;
-      background: var(--color-orange);
-    }
-    .pricing-points strong {
-      display: block;
-      color: var(--color-cream);
-      font-weight: 600;
-      margin-bottom: 0.15rem;
-    }
-
-    /* ============================================================
-       SHOWCASE — flache Illustrationen, keine Fotos
-       ============================================================ */
-    .projects .section-head {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
       justify-content: space-between;
       gap: 1.5rem;
+      margin-bottom: clamp(2rem, 4vw, 3rem);
     }
-    .projects-note { font-size: 0.85rem; color: var(--color-ink-muted); }
+    .projects-head h2 {
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      color: var(--c-900);
+    }
+    .projects-head .note {
+      font-size: 0.8rem;
+      color: var(--c-700);
+      white-space: nowrap;
+    }
 
     .projects-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: clamp(1.25rem, 3vw, 2rem);
+      gap: clamp(1.25rem, 2.5vw, 2rem);
     }
-    @media (max-width: 900px) {
-      .projects-grid { grid-template-columns: 1fr; max-width: 30rem; margin-inline: auto; }
+    @media (max-width: 820px) {
+      .projects-grid { grid-template-columns: 1fr; max-width: 26rem; margin-inline: auto; }
+      .projects-head { flex-direction: column; gap: 0.5rem; }
     }
 
-    .project-card { display: block; }
-    .project-visual {
-      position: relative;
-      aspect-ratio: 4 / 3;
+    .project { display: block; }
+    .project .img-wrap {
+      aspect-ratio: 4 / 5;
+      border-radius: var(--radius-img);
       overflow: hidden;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--color-border);
-      margin-bottom: 1rem;
+      background: var(--c-300);
+      margin-bottom: 1.1rem;
     }
-    .project-visual svg {
-      position: absolute;
-      inset: 0;
+    .project img {
       width: 100%;
       height: 100%;
-      transition: transform 900ms var(--ease-out);
+      object-fit: cover;
+      transition: transform 1200ms var(--ease);
     }
-    .project-card:hover .project-visual svg { transform: scale(1.05); }
+    .project:hover img { transform: scale(1.05); }
 
-    .project-tag {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      z-index: 1;
-      padding: 0.3rem 0.8rem;
-      font-size: 0.68rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--color-cream);
-      background: var(--color-green);
-      border-radius: 999px;
-    }
-
-    .project-meta {
+    .project .meta {
       display: flex;
       align-items: baseline;
       justify-content: space-between;
       gap: 1rem;
     }
-    .project-meta h3 { font-size: 1.2rem; }
-    .project-meta span {
-      font-size: 0.85rem;
-      color: var(--color-brown);
+    .project .meta h3 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: var(--c-900);
+    }
+    .project .meta span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--c-500);
       white-space: nowrap;
     }
 
     /* ============================================================
-       HÄUFIGE FRAGEN
+       PREIS — dunkles Panel als Gegenstück zum Hero
        ============================================================ */
-    .faq { background: var(--color-cream-deep); }
-    .faq-list {
-      max-width: 46rem;
-      border-top: 1px solid var(--color-border);
+    .pricing { padding-inline: clamp(0.75rem, 1.5vw, 1.25rem); }
+
+    .pricing-panel {
+      background: var(--c-900);
+      border-radius: var(--radius-panel);
+      text-align: center;
+      padding: clamp(4.5rem, 9vw, 7.5rem) clamp(1.5rem, 4vw, 3rem);
     }
-    .faq-item { border-bottom: 1px solid var(--color-border); }
-    .faq-item summary {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1.5rem;
-      padding-block: 1.4rem;
-      font-weight: 500;
-      font-size: 1.05rem;
+    .pricing-panel .kicker { color: var(--c-300); }
+    .pricing-panel h2 {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      color: var(--c-100);
+      margin-top: 1.25rem;
+    }
+    .pricing-panel h2 em { color: var(--c-300); }
+
+    .price-figure {
+      font-family: var(--serif);
+      font-size: clamp(4.5rem, 11vw, 8rem);
+      line-height: 1;
+      color: var(--c-100);
+      margin-top: clamp(2rem, 4vw, 3rem);
+    }
+    .price-figure .per {
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      font-family: var(--sans);
+      color: var(--c-300);
+      margin-left: 0.4rem;
+    }
+
+    .price-includes {
       list-style: none;
-      cursor: pointer;
-      transition: color var(--dur-fast) ease;
+      max-width: 26rem;
+      margin: clamp(2rem, 4vw, 3rem) auto;
     }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary:hover { color: var(--color-orange); }
-    .faq-item summary .faq-icon {
-      position: relative;
-      width: 1rem;
-      height: 1rem;
-      flex-shrink: 0;
-    }
-    .faq-item summary .faq-icon::before,
-    .faq-item summary .faq-icon::after {
-      content: "";
-      position: absolute;
-      inset: 50% auto auto 0;
-      width: 100%;
-      height: 2px;
-      border-radius: 2px;
-      background: currentColor;
-      transition: transform var(--dur-med) var(--ease-out);
-    }
-    .faq-item summary .faq-icon::after { transform: rotate(90deg); }
-    .faq-item[open] summary .faq-icon::after { transform: rotate(0deg); }
-    .faq-answer {
-      padding-bottom: 1.4rem;
-      color: var(--color-ink-soft);
-      max-width: 60ch;
+    .price-includes li {
+      padding-block: 0.95rem;
       font-size: 0.98rem;
+      color: var(--c-100);
+      border-top: 1px solid rgba(218, 215, 205, 0.18);
+    }
+    .price-includes li:last-child { border-bottom: 1px solid rgba(218, 215, 205, 0.18); }
+
+    .price-note {
+      font-size: 0.78rem;
+      color: var(--c-300);
+      margin-top: 1.5rem;
     }
 
     /* ============================================================
-       KONTAKT — WhatsApp im Fokus
+       KONTAKT
        ============================================================ */
-    .contact { text-align: center; }
-    .contact .eyebrow { justify-content: center; }
-    .contact .section-title { margin-inline: auto; max-width: 18ch; }
-    .contact .section-lead {
+    .contact {
+      text-align: center;
+      padding-block: clamp(6rem, 12vw, 10rem);
+    }
+    .contact h2 {
+      font-size: clamp(2.4rem, 6vw, 4.5rem);
+      max-width: 16ch;
       margin-inline: auto;
-      margin-bottom: 2.5rem;
+      color: var(--c-900);
     }
-    .contact-actions {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
+    .contact h2 em { color: var(--c-500); }
+    .contact .sub {
+      color: var(--c-700);
+      max-width: 40ch;
+      margin: 1.5rem auto 2.5rem;
     }
-    .contact-actions .btn-cta {
-      min-height: 3.6rem;
-      padding: 1rem 2.4rem;
-      font-size: 1.05rem;
+    .contact .mail {
+      display: block;
+      margin-top: 1.75rem;
+      font-size: 0.9rem;
+      color: var(--c-700);
     }
-    .contact-hint { font-size: 0.85rem; color: var(--color-ink-muted); }
 
     /* ============================================================
        FOOTER
        ============================================================ */
     .site-footer {
-      background: var(--color-green);
-      color: rgba(247, 243, 234, 0.75);
-      padding-block: 2.5rem;
+      border-top: 1px solid var(--c-300);
+      padding-block: 1.75rem;
     }
     .footer-inner {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
-      gap: 1.5rem;
-      font-size: 0.85rem;
+      gap: 1rem;
+      font-size: 0.8rem;
+      color: var(--c-700);
     }
-    .site-footer .logo { color: var(--color-cream); font-size: 1.15rem; }
-    .footer-links {
-      display: flex;
-      gap: 1.5rem;
-      list-style: none;
-    }
-    .footer-links a { transition: color var(--dur-fast) ease; }
-    .footer-links a:hover { color: var(--color-orange); }
+    .footer-inner nav { display: flex; gap: 1.5rem; }
+    .footer-inner nav a:hover { color: var(--c-500); }
 
     /* ============================================================
        SCROLL-REVEAL
@@ -852,15 +502,11 @@
     @media (prefers-reduced-motion: no-preference) {
       .reveal {
         opacity: 0;
-        transform: translateY(32px);
-        transition: opacity var(--dur-slow) var(--ease-out),
-                    transform var(--dur-slow) var(--ease-out);
-        transition-delay: var(--reveal-delay, 0ms);
+        transform: translateY(24px);
+        transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+        transition-delay: var(--d, 0ms);
       }
-      .reveal.is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
@@ -869,31 +515,14 @@
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
   <!-- ============ HEADER ============ -->
-  <header class="site-header" id="siteHeader">
-    <div class="container nav-inner">
-      <a class="logo" href="#top" aria-label="heimatweb – zur Startseite">
-        <!-- Logo-Platzhalter: Dreieck als Berg und Hausdach zugleich -->
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16 4 L30 27 H2 Z" fill="#2C4A3B"/>
-          <path d="M16 12 L23.5 27 H8.5 Z" fill="#C1592D"/>
-        </svg>
-        heimatweb
-      </a>
-
-      <nav aria-label="Hauptnavigation">
-        <ul class="nav-links" id="navLinks">
-          <li><a href="#ueber-uns">Über uns</a></li>
-          <li><a href="#leistungen">Leistungen</a></li>
-          <li><a href="#ablauf">Ablauf</a></li>
-          <li><a href="#preis">Preis</a></li>
-          <li><a href="#projekte">Projekte</a></li>
-          <li><a class="btn btn-cta" href="#kontakt">Jetzt anfragen</a></li>
-        </ul>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="#top">HeimatWeb</a>
+      <nav class="header-nav" aria-label="Hauptnavigation">
+        <a href="#projekte">Projekte</a>
+        <a href="#preis">Preis</a>
+        <a class="btn btn-dark" href="#kontakt">Anfragen</a>
       </nav>
-
-      <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Menü öffnen">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </header>
 
@@ -901,393 +530,115 @@
 
     <!-- ============ HERO ============ -->
     <section class="hero" id="top">
-      <div class="container">
-        <p class="eyebrow" data-hero="1">Webagentur aus Österreich</p>
-        <h1 data-hero="2">Ihre Website. <span class="accent-italic">Rundum betreut.</span> Ohne Aufwand für Sie.</h1>
-        <p class="hero-lead" data-hero="3">
-          heimatweb gestaltet, betreibt und pflegt die Website Ihres Betriebs – im Abo.
-          Änderungswünsche? Sie schreiben uns, wir kümmern uns.
+      <div class="hero-panel">
+        <p class="hero-badge hero-fade">Webagentur aus Österreich</p>
+        <h1>
+          <span class="line-mask"><span>Ihre Website.</span></span>
+          <span class="line-mask"><span>Rundum <em>betreut.</em></span></span>
+        </h1>
+        <p class="hero-sub hero-fade">
+          HeimatWeb gestaltet, betreibt und pflegt den Auftritt Ihres
+          Betriebs. Änderungen schicken Sie einfach per WhatsApp.
         </p>
-        <div class="hero-actions" data-hero="4">
-          <a class="btn btn-cta" href="#kontakt">Jetzt unverbindlich anfragen</a>
-          <a class="btn btn-outline" href="#preis">Preis ansehen</a>
-        </div>
-        <div class="hero-facts" data-hero="5">
-          <div class="fact">
-            <strong>89&nbsp;€</strong>
-            <span>pro Monat, alles inklusive</span>
-          </div>
-          <div class="fact">
-            <strong>Rundum-Service</strong>
-            <span>Technik, Betrieb &amp; Pflege</span>
-          </div>
-          <div class="fact">
-            <strong>WhatsApp</strong>
-            <span>Änderungen per Nachricht</span>
-          </div>
+        <div class="hero-cta hero-fade">
+          <a class="btn btn-light" href="#kontakt">Unverbindlich anfragen <span class="arrow">→</span></a>
         </div>
       </div>
 
-      <!-- Flache Bergkulisse: Berg & Dach in einem, wie im Logo -->
-      <div class="hero-mountains" aria-hidden="true">
-        <div class="ridge-back" data-parallax="0.18">
-          <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
-            <path d="M0 220 L0 150 L180 80 L340 160 L520 60 L700 170 L880 90 L1060 175 L1250 70 L1440 150 L1440 220 Z" fill="#E3EAE2"/>
-          </svg>
+      <!-- Platzhalter-Fotos: vor dem Livegang durch eigene Aufnahmen ersetzen -->
+      <div class="photo-strip" aria-label="Eindrücke österreichischer Betriebe">
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=640&q=75" alt="Berglandschaft in den Alpen" width="480" height="640" loading="eager">
         </div>
-        <div class="ridge-front" data-parallax="0.08">
-          <svg viewBox="0 0 1440 220" preserveAspectRatio="none">
-            <path d="M0 220 L0 180 L240 100 L430 190 L640 70 L840 195 L1040 110 L1240 200 L1440 130 L1440 220 Z" fill="#2C4A3B"/>
-            <path d="M598 132 L640 70 L682 132 Z" fill="#C1592D"/>
-          </svg>
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=640&q=75" alt="Gemütliches Café" width="480" height="640" loading="eager">
+        </div>
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=640&q=75" alt="Frisches Brot einer Bäckerei" width="480" height="640" loading="eager">
+        </div>
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=640&q=75" alt="Innenraum eines Wirtshauses" width="480" height="640" loading="lazy">
+        </div>
+        <div class="frame">
+          <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=640&q=75" alt="Blumen eines Blumenladens" width="480" height="640" loading="lazy">
         </div>
       </div>
     </section>
 
-    <!-- ============ LAUFBAND ============ -->
-    <div class="marquee" aria-hidden="true">
-      <div class="marquee-track">
-        <span>Gestaltung</span><span>Technik</span><span>Betrieb</span><span>Pflege</span><span>Änderungen per WhatsApp</span><span>Aus Österreich</span>
-        <span>Gestaltung</span><span>Technik</span><span>Betrieb</span><span>Pflege</span><span>Änderungen per WhatsApp</span><span>Aus Österreich</span>
-      </div>
-    </div>
-
-    <!-- ============ ÜBER UNS ============ -->
-    <section class="section" id="ueber-uns">
+    <!-- ============ LEITSATZ ============ -->
+    <section class="statement">
       <div class="container">
-        <div class="about-layout">
-          <div class="about-copy reveal">
-            <p class="eyebrow">Über uns</p>
-            <h2 class="section-title">Persönlich. Regional. Verlässlich.</h2>
-            <p>
-              Hinter heimatweb steht kein anonymer Baukasten und keine teure Großagentur –
-              sondern ein persönlicher Ansprechpartner aus Ihrer Region.
-              Wir bauen Websites für Betriebe, die sich lieber um ihre Gäste, Kundinnen
-              und Kunden kümmern als um Technik.
-            </p>
-            <p>
-              Sie brauchen keine Vorkenntnisse und müssen sich um nichts kümmern.
-              Wenn sich etwas ändert – neue Öffnungszeiten, neue Speisekarte, neue Fotos –
-              genügt eine Nachricht auf WhatsApp. Den Rest erledigen wir.
-            </p>
-            <ul class="about-points">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Ein fester Ansprechpartner – kein Callcenter
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Klare Sprache statt Fachchinesisch
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Verwurzelt in Österreich, erreichbar auf kurzem Weg
-              </li>
-            </ul>
-            <p class="about-signature">„Sie schreiben uns, wir kümmern uns."</p>
-          </div>
-
-          <!-- Flache Illustration: Dorf mit Bergen, Motive aus der Markenwelt -->
-          <div class="about-visual reveal" style="--reveal-delay: 150ms" role="img" aria-label="Flache Illustration eines kleinen Ortes mit Häusern vor Bergen">
-            <svg viewBox="0 0 400 300">
-              <rect width="400" height="300" rx="16" fill="#E3EAE2"/>
-              <path d="M0 210 L90 90 L180 210 Z" fill="#2C4A3B" opacity="0.35"/>
-              <path d="M120 210 L230 60 L340 210 Z" fill="#2C4A3B" opacity="0.55"/>
-              <path d="M230 60 L258 98 L202 98 Z" fill="#F7F3EA"/>
-              <rect x="0" y="208" width="400" height="92" fill="#2C4A3B"/>
-              <!-- Häuser -->
-              <rect x="70" y="176" width="52" height="34" fill="#F7F3EA"/>
-              <path d="M64 178 L96 150 L128 178 Z" fill="#C1592D"/>
-              <rect x="88" y="188" width="14" height="22" fill="#8B5E3C"/>
-              <rect x="170" y="168" width="62" height="42" fill="#F7F3EA"/>
-              <path d="M163 170 L201 138 L239 170 Z" fill="#8B5E3C"/>
-              <rect x="182" y="180" width="14" height="14" fill="#2C4A3B"/>
-              <rect x="206" y="180" width="14" height="14" fill="#2C4A3B"/>
-              <rect x="278" y="176" width="52" height="34" fill="#F7F3EA"/>
-              <path d="M272 178 L304 150 L336 178 Z" fill="#C1592D"/>
-              <rect x="296" y="188" width="14" height="22" fill="#8B5E3C"/>
-              <!-- Blatt-Motiv -->
-              <path d="M40 250 q18 -28 36 0 q-18 28 -36 0 Z" fill="#8B5E3C"/>
-              <path d="M330 250 q18 -28 36 0 q-18 28 -36 0 Z" fill="#8B5E3C"/>
-              <circle cx="336" cy="52" r="24" fill="#C1592D"/>
-            </svg>
-          </div>
-        </div>
+        <p class="big reveal">Für Betriebe, die sich lieber um ihre Gäste kümmern <em>als um Technik.</em></p>
+        <span class="kicker reveal" style="--d: 150ms">Gestaltung&nbsp;&nbsp;·&nbsp;&nbsp;Technik&nbsp;&nbsp;·&nbsp;&nbsp;Betrieb&nbsp;&nbsp;·&nbsp;&nbsp;Änderungen per WhatsApp</span>
       </div>
     </section>
 
-    <!-- ============ LEISTUNGEN ============ -->
-    <section class="section services" id="leistungen">
+    <!-- ============ PROJEKTE ============ -->
+    <section class="projects" id="projekte">
       <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Leistungen</p>
-          <h2 class="section-title">Alles drin. Ein Paket, ein Preis.</h2>
-          <p class="section-lead">
-            Keine hohen Einmalkosten und keine versteckten Aufwände:
-            Sie bekommen Gestaltung, Technik und laufende Betreuung aus einer Hand –
-            zu einem planbaren monatlichen Betrag.
-          </p>
+        <div class="projects-head reveal">
+          <h2>Ausgewählte <em>Projekte</em></h2>
+          <span class="note">Beispielprojekte – Ihre Website könnte die nächste sein</span>
         </div>
 
-        <div class="services-grid">
-          <article class="service-card reveal" style="--reveal-delay: 0ms">
-            <div class="icon" aria-hidden="true">
-              <!-- Lucide: pen-tool -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M15.707 21.293a1 1 0 0 1-1.414 0l-1.586-1.586a1 1 0 0 1 0-1.414l5.586-5.586a1 1 0 0 1 1.414 0l1.586 1.586a1 1 0 0 1 0 1.414z"/><path d="m18 13-1.375-6.874a1 1 0 0 0-.746-.776L3.235 2.028a1 1 0 0 0-1.207 1.207L5.35 15.879a1 1 0 0 0 .776.746L13 18"/><path d="m2.3 2.3 7.286 7.286"/><circle cx="11" cy="11" r="2"/></svg>
+        <div class="projects-grid">
+          <article class="project reveal" style="--d: 0ms">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=75" alt="Beispielprojekt: Website für ein Café" width="720" height="900" loading="lazy">
             </div>
-            <h3>Gestaltung</h3>
-            <p>Ein eigenes Erscheinungsbild, das zu Ihrem Betrieb passt – warm, hochwertig und unverwechselbar. Keine Vorlage von der Stange.</p>
+            <div class="meta">
+              <h3>Café Anna</h3>
+              <span>Café</span>
+            </div>
           </article>
 
-          <article class="service-card reveal" style="--reveal-delay: 90ms">
-            <div class="icon" aria-hidden="true">
-              <!-- Lucide: monitor-smartphone -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h8"/><path d="M10 19v-3.96 3.15"/><path d="M7 19h5"/><rect width="6" height="10" x="16" y="12" rx="2"/></svg>
+          <article class="project reveal" style="--d: 120ms">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=75" alt="Beispielprojekt: Website für ein Wirtshaus" width="720" height="900" loading="lazy">
             </div>
-            <h3>Umsetzung</h3>
-            <p>Ihre Website lädt schnell und funktioniert auf jedem Gerät – am Handy genauso gut wie am großen Bildschirm.</p>
+            <div class="meta">
+              <h3>Gasthaus zur Linde</h3>
+              <span>Wirtshaus</span>
+            </div>
           </article>
 
-          <article class="service-card reveal" style="--reveal-delay: 180ms">
-            <div class="icon" aria-hidden="true">
-              <!-- Lucide: shield-check -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg>
+          <article class="project reveal" style="--d: 240ms">
+            <div class="img-wrap">
+              <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=75" alt="Beispielprojekt: Website für einen Blumenladen" width="720" height="900" loading="lazy">
             </div>
-            <h3>Betrieb &amp; Sicherheit</h3>
-            <p>Ihre Website läuft auf unserer Technik – verschlüsselt, gewartet und immer auf dem neuesten Stand. Sie müssen nichts tun.</p>
-          </article>
-
-          <article class="service-card reveal" style="--reveal-delay: 270ms">
-            <div class="icon" aria-hidden="true">
-              <!-- Lucide: message-circle -->
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+            <div class="meta">
+              <h3>Blumen Flora</h3>
+              <span>Blumenladen</span>
             </div>
-            <h3>Änderungen per WhatsApp</h3>
-            <p>Neue Öffnungszeiten oder Preise? Eine Nachricht genügt. Eine bestimmte Anzahl an Änderungen ist jeden Monat inklusive.</p>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ ABLAUF ============ -->
-    <section class="section" id="ablauf">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Ablauf</p>
-          <h2 class="section-title">In drei einfachen Schritten online.</h2>
-        </div>
-
-        <div class="steps">
-          <div class="step reveal" style="--reveal-delay: 0ms">
-            <h3>Kennenlernen</h3>
-            <p>Wir besprechen Ihr Vorhaben – per Telefon, WhatsApp oder bei einem Kaffee. Unverbindlich und ohne Fachchinesisch.</p>
-          </div>
-          <div class="step reveal" style="--reveal-delay: 120ms">
-            <h3>Wir bauen Ihre Website</h3>
-            <p>Sie liefern uns Texte, Fotos und Wünsche – wir gestalten und setzen um. Sie schauen drüber, wir verfeinern, bis alles passt.</p>
-          </div>
-          <div class="step reveal" style="--reveal-delay: 240ms">
-            <h3>Online &amp; rundum betreut</h3>
-            <p>Ihre Website geht online und bleibt in guten Händen: Wir betreiben sie, halten sie aktuell und setzen Ihre Änderungswünsche um.</p>
-          </div>
         </div>
       </div>
     </section>
 
     <!-- ============ PREIS ============ -->
-    <section class="section pricing" id="preis">
-      <div class="container">
-        <div class="pricing-layout">
-          <div class="pricing-copy reveal">
-            <p class="eyebrow">Preis</p>
-            <h2 class="section-title">Ein Preis. Keine Überraschungen.</h2>
-            <p class="section-lead">
-              Statt tausende Euro auf einmal zu zahlen, investieren Sie einen fairen
-              monatlichen Betrag – und Ihre Website bleibt dauerhaft betreut und aktuell.
-            </p>
-            <ul class="pricing-points">
-              <li>
-                <strong>Planbare Kosten</strong>
-                Ein fixer Monatsbetrag statt hoher Einmalrechnung.
-              </li>
-              <li>
-                <strong>Immer aktuell</strong>
-                Änderungswünsche schicken Sie uns einfach per WhatsApp.
-              </li>
-              <li>
-                <strong>Ein Ansprechpartner</strong>
-                Gestaltung, Technik und Betrieb – alles aus einer Hand.
-              </li>
-            </ul>
-          </div>
-
-          <div class="price-card reveal" style="--reveal-delay: 150ms">
-            <p class="price-label">Website-Abo</p>
-            <div class="price-line">
-              <span class="amount">89&nbsp;€</span>
-              <span class="period">/ Monat</span>
-            </div>
-            <p class="price-sub">Erstellung, Betrieb &amp; Betreuung inklusive</p>
-            <ul class="price-features">
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Eigene Gestaltung &amp; komplette Umsetzung
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Betrieb auf unserer Technik, inkl. Verschlüsselung
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Laufende Wartung &amp; Aktualisierungen
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Änderungswünsche pro Monat inklusive*
-              </li>
-              <li>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-                Persönliche Betreuung direkt per WhatsApp
-              </li>
-            </ul>
-            <a class="btn btn-cta" href="#kontakt" style="width: 100%;">Jetzt unverbindlich anfragen</a>
-            <p class="price-note">* Eine bestimmte Anzahl an Änderungen ist monatlich inklusive – die Details klären wir gemeinsam im Erstgespräch.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ SHOWCASE ============ -->
-    <section class="section projects" id="projekte">
-      <div class="container">
-        <div class="section-head reveal">
-          <div>
-            <p class="eyebrow">Projekte</p>
-            <h2 class="section-title">So kann Ihr Auftritt aussehen.</h2>
-          </div>
-          <p class="projects-note">Beispielprojekte zur Veranschaulichung</p>
-        </div>
-
-        <div class="projects-grid">
-          <!-- Beispiel 1: Restaurant/Café (laut Brief das erste Showcase) -->
-          <article class="project-card reveal" style="--reveal-delay: 0ms">
-            <div class="project-visual">
-              <span class="project-tag">Beispielprojekt</span>
-              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Flache Illustration eines Cafés mit Tasse und Bergen">
-                <rect width="400" height="300" fill="#2C4A3B"/>
-                <path d="M0 210 L110 110 L220 210 Z" fill="#F7F3EA" opacity="0.14"/>
-                <path d="M160 210 L280 90 L400 210 Z" fill="#F7F3EA" opacity="0.2"/>
-                <rect x="0" y="208" width="400" height="92" fill="#233B2F"/>
-                <rect x="150" y="140" width="100" height="70" rx="8" fill="#F7F3EA"/>
-                <path d="M250 155 h18 a14 14 0 0 1 0 28 h-18" fill="none" stroke="#F7F3EA" stroke-width="10"/>
-                <path d="M175 118 q6 -12 0 -22 M200 118 q6 -12 0 -22 M225 118 q6 -12 0 -22" fill="none" stroke="#C1592D" stroke-width="6" stroke-linecap="round"/>
-                <rect x="130" y="216" width="140" height="12" rx="6" fill="#8B5E3C"/>
-              </svg>
-            </div>
-            <div class="project-meta">
-              <h3>Café Bergstüberl</h3>
-              <span>Restaurant &amp; Café</span>
-            </div>
-          </article>
-
-          <!-- Beispiel 2: Handwerk -->
-          <article class="project-card reveal" style="--reveal-delay: 120ms">
-            <div class="project-visual">
-              <span class="project-tag">Beispielprojekt</span>
-              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Flache Illustration einer Tischlerei mit Haus und Werkzeug">
-                <rect width="400" height="300" fill="#EFE3D4"/>
-                <path d="M40 220 L140 130 L240 220 Z" fill="#8B5E3C"/>
-                <rect x="85" y="196" width="110" height="60" fill="#F7F3EA"/>
-                <path d="M75 198 L140 140 L205 198 Z" fill="#C1592D"/>
-                <rect x="125" y="216" width="26" height="40" fill="#2C4A3B"/>
-                <g transform="rotate(38 300 190)">
-                  <rect x="292" y="168" width="15" height="74" rx="7" fill="#2C4A3B"/>
-                  <rect x="268" y="146" width="64" height="24" rx="8" fill="#2C4A3B"/>
-                </g>
-                <rect x="0" y="252" width="400" height="48" fill="#8B5E3C"/>
-              </svg>
-            </div>
-            <div class="project-meta">
-              <h3>Tischlerei Moser</h3>
-              <span>Handwerk</span>
-            </div>
-          </article>
-
-          <!-- Beispiel 3: Kleine Praxis -->
-          <article class="project-card reveal" style="--reveal-delay: 240ms">
-            <div class="project-visual">
-              <span class="project-tag">Beispielprojekt</span>
-              <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" role="img" aria-label="Flache Illustration einer Praxis mit Blatt-Motiv">
-                <rect width="400" height="300" fill="#E3EAE2"/>
-                <circle cx="200" cy="140" r="78" fill="#2C4A3B"/>
-                <path d="M200 96 q44 20 0 88 q-44 -68 0 -88 Z" fill="#F7F3EA"/>
-                <path d="M200 108 l0 64" stroke="#8B5E3C" stroke-width="5" stroke-linecap="round"/>
-                <rect x="120" y="240" width="160" height="12" rx="6" fill="#8B5E3C"/>
-                <circle cx="86" cy="70" r="14" fill="#C1592D"/>
-              </svg>
-            </div>
-            <div class="project-meta">
-              <h3>Praxis Dr. Berger</h3>
-              <span>Gesundheit</span>
-            </div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============ HÄUFIGE FRAGEN ============ -->
-    <section class="section faq" id="fragen">
-      <div class="container">
-        <div class="section-head reveal">
-          <p class="eyebrow">Häufige Fragen</p>
-          <h2 class="section-title">Gut zu wissen.</h2>
-        </div>
-
-        <div class="faq-list reveal">
-          <details class="faq-item">
-            <summary>Was ist im Abo um 89&nbsp;€ pro Monat enthalten?<span class="faq-icon" aria-hidden="true"></span></summary>
-            <p class="faq-answer">Alles, was Ihre Website braucht: Gestaltung, Umsetzung, Betrieb auf unserer Technik, laufende Wartung – und eine bestimmte Anzahl an Änderungen pro Monat, die Sie uns bequem per WhatsApp schicken.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Ich kenne mich mit Technik nicht aus. Ist das ein Problem?<span class="faq-icon" aria-hidden="true"></span></summary>
-            <p class="faq-answer">Überhaupt nicht – genau dafür gibt es heimatweb. Sie müssen nichts installieren, nichts verwalten und nichts lernen. Alles Technische übernehmen wir.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Wie funktionieren Änderungswünsche?<span class="faq-icon" aria-hidden="true"></span></summary>
-            <p class="faq-answer">Sie schreiben uns einfach auf WhatsApp – zum Beispiel neue Öffnungszeiten, eine neue Speisekarte oder aktuelle Fotos. Wir setzen die Änderung zeitnah um. Eine bestimmte Anzahl an Anpassungen ist jeden Monat inklusive.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Funktioniert die Website auch am Handy?<span class="faq-icon" aria-hidden="true"></span></summary>
-            <p class="faq-answer">Selbstverständlich. Jede Website von heimatweb wird von Anfang an für Handy, Tablet und Computer gestaltet und geprüft.</p>
-          </details>
-          <details class="faq-item">
-            <summary>Was passiert, wenn ich das Abo beenden möchte?<span class="faq-icon" aria-hidden="true"></span></summary>
-            <p class="faq-answer">Sprechen Sie uns einfach an – wir finden gemeinsam eine faire Lösung. Die Details zu Laufzeit und Kündigung klären wir offen und verständlich im Erstgespräch.</p>
-          </details>
-        </div>
+    <section class="pricing" id="preis">
+      <div class="pricing-panel reveal">
+        <span class="kicker">Preis</span>
+        <h2>Ein Paket. <em>Alles drin.</em></h2>
+        <p class="price-figure">89&nbsp;€<span class="per">/ Monat</span></p>
+        <ul class="price-includes">
+          <li>Gestaltung &amp; komplette Umsetzung</li>
+          <li>Betrieb, Wartung &amp; Sicherheit</li>
+          <li>Änderungen einfach per WhatsApp*</li>
+        </ul>
+        <a class="btn btn-light" href="#kontakt">Unverbindlich anfragen <span class="arrow">→</span></a>
+        <p class="price-note">* Eine bestimmte Anzahl an Änderungen pro Monat ist inklusive.</p>
       </div>
     </section>
 
     <!-- ============ KONTAKT ============ -->
-    <section class="contact section" id="kontakt">
+    <section class="contact" id="kontakt">
       <div class="container reveal">
-        <p class="eyebrow">Kontakt</p>
-        <h2 class="section-title">Reden wir über <span class="accent-italic">Ihre Website</span>.</h2>
-        <p class="section-lead">
-          Erzählen Sie uns von Ihrem Betrieb – unverbindlich und unkompliziert.
-          Am schnellsten geht es per WhatsApp. Wir melden uns in der Regel noch am selben Tag.
-        </p>
-        <div class="contact-actions">
-          <a class="btn btn-cta" href="https://wa.me/43000000000" target="_blank" rel="noopener">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
-            Auf WhatsApp schreiben
-          </a>
-          <a class="btn btn-outline" href="mailto:hallo@heimatweb.at">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            E-Mail senden
-          </a>
-        </div>
-        <p class="contact-hint">WhatsApp-Nummer und E-Mail-Adresse sind Platzhalter – bitte vor dem Livegang ersetzen.</p>
+        <h2>Reden wir über <em>Ihre Website.</em></h2>
+        <p class="sub">Unverbindlich und unkompliziert – wir melden uns in der Regel noch am selben Tag.</p>
+        <!-- WhatsApp-Nummer und E-Mail-Adresse vor dem Livegang ersetzen -->
+        <a class="btn btn-dark" href="https://wa.me/43000000000" target="_blank" rel="noopener">Auf WhatsApp schreiben <span class="arrow">→</span></a>
+        <a class="mail" href="mailto:hallo@heimatweb.at">oder per E-Mail: <span class="text-link">hallo@heimatweb.at</span></a>
       </div>
     </section>
 
@@ -1296,18 +647,11 @@
   <!-- ============ FOOTER ============ -->
   <footer class="site-footer">
     <div class="container footer-inner">
-      <a class="logo" href="#top">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16 4 L30 27 H2 Z" fill="#F7F3EA"/>
-          <path d="M16 12 L23.5 27 H8.5 Z" fill="#C1592D"/>
-        </svg>
-        heimatweb
-      </a>
-      <ul class="footer-links">
-        <li><a href="#">Impressum</a></li>
-        <li><a href="#">Datenschutz</a></li>
-      </ul>
-      <p>© <span id="year">2026</span> heimatweb · Digital zuhause in Ihrer Region</p>
+      <span>© <span id="year">2026</span> HeimatWeb · Aus Österreich</span>
+      <nav aria-label="Rechtliches">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </nav>
     </div>
   </footer>
 
@@ -1315,94 +659,26 @@
     (function () {
       "use strict";
 
-      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      /* ---------- Aktuelles Jahr im Footer ---------- */
       document.getElementById("year").textContent = new Date().getFullYear();
 
-      /* ---------- Header: Hintergrund + Auto-Ausblenden beim Scrollen ---------- */
-      var header = document.getElementById("siteHeader");
-      var lastY = window.scrollY;
-      var ticking = false;
-
-      function onScroll() {
-        var y = window.scrollY;
-        header.classList.toggle("is-scrolled", y > 24);
-        // Erst ab deutlicher Scrolltiefe ausblenden, beim Hochscrollen sofort zeigen
-        if (y > 400 && y > lastY + 4 && !document.body.classList.contains("nav-open")) {
-          header.classList.add("is-hidden");
-        } else if (y < lastY - 4 || y < 400) {
-          header.classList.remove("is-hidden");
-        }
-        lastY = y;
-        ticking = false;
-      }
-
-      window.addEventListener("scroll", function () {
-        if (!ticking) {
-          window.requestAnimationFrame(onScroll);
-          ticking = true;
-        }
-      }, { passive: true });
-      onScroll();
-
-      /* ---------- Mobile Navigation ---------- */
-      var toggle = document.getElementById("navToggle");
-      var navLinks = document.getElementById("navLinks");
-
-      function closeNav() {
-        document.body.classList.remove("nav-open");
-        toggle.setAttribute("aria-expanded", "false");
-        toggle.setAttribute("aria-label", "Menü öffnen");
-      }
-
-      toggle.addEventListener("click", function () {
-        var open = document.body.classList.toggle("nav-open");
-        toggle.setAttribute("aria-expanded", String(open));
-        toggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
-      });
-
-      navLinks.addEventListener("click", function (e) {
-        if (e.target.closest("a")) closeNav();
-      });
-
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") closeNav();
-      });
-
-      /* ---------- Scroll-Reveal per IntersectionObserver ---------- */
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var revealEls = document.querySelectorAll(".reveal");
+
       if (reduceMotion || !("IntersectionObserver" in window)) {
         revealEls.forEach(function (el) { el.classList.add("is-visible"); });
-      } else {
-        var observer = new IntersectionObserver(function (entries) {
-          entries.forEach(function (entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add("is-visible");
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
-        revealEls.forEach(function (el) { observer.observe(el); });
+        return;
       }
 
-      /* ---------- Dezenter Parallax für die Bergkulisse ---------- */
-      var parallaxEls = document.querySelectorAll("[data-parallax]");
-      if (parallaxEls.length && !reduceMotion) {
-        var parallaxTicking = false;
-        window.addEventListener("scroll", function () {
-          if (parallaxTicking) return;
-          parallaxTicking = true;
-          window.requestAnimationFrame(function () {
-            var y = Math.min(window.scrollY, window.innerHeight);
-            parallaxEls.forEach(function (el) {
-              var factor = parseFloat(el.getAttribute("data-parallax")) || 0.1;
-              el.style.transform = "translateY(" + y * factor + "px)";
-            });
-            parallaxTicking = false;
-          });
-        }, { passive: true });
-      }
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+
+      revealEls.forEach(function (el) { observer.observe(el); });
     })();
   </script>
 </body>
