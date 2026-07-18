@@ -177,7 +177,7 @@
       background: var(--c-900);
       border-radius: var(--radius-panel);
       text-align: center;
-      padding: clamp(4.5rem, 11vw, 9rem) clamp(1.5rem, 4vw, 3rem) clamp(9rem, 18vw, 14rem);
+      padding: clamp(4.5rem, 11vw, 8.5rem) clamp(1.5rem, 4vw, 3rem);
       overflow: hidden;
     }
 
@@ -239,170 +239,6 @@
     /* ============================================================
        FOTOSTREIFEN — überlappt die Panelkante
        ============================================================ */
-    /* Schaubild: großes Browserfenster + Handy mit derselben Beispielseite */
-    .device-stage {
-      position: relative;
-      z-index: 2;
-      max-width: 64rem;
-      margin: clamp(-9rem, -13vw, -6.5rem) auto 0;
-      padding-inline: clamp(1.25rem, 4vw, 2.5rem);
-    }
-
-    .browser {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--c-300);
-      background: #F0EEE6;
-    }
-    .browser-bar {
-      display: flex;
-      align-items: center;
-      background: var(--c-900);
-      padding: 0.65rem 1rem;
-    }
-    .browser-bar .dots { display: flex; gap: 5px; }
-    .browser-bar .dots span { width: 9px; height: 9px; border-radius: 50%; background: var(--c-300); opacity: 0.5; }
-    .browser-bar .dots span:nth-child(2) { opacity: 0.7; }
-    .browser-bar .dots span:nth-child(3) { opacity: 0.95; }
-    .browser-bar .url {
-      flex: 1;
-      max-width: 16rem;
-      margin-inline: auto;
-      font-size: 0.7rem;
-      color: var(--c-100);
-      text-align: center;
-      background: rgba(218, 215, 205, 0.14);
-      border-radius: 6px;
-      padding: 0.25rem 0.9rem;
-    }
-
-    /* Die Beispielseite im Browser */
-    .demo-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.1rem 2rem;
-    }
-    .demo-brand { font-family: var(--serif); font-size: 1.15rem; color: var(--c-900); white-space: nowrap; }
-    .demo-links { display: flex; gap: 1.4rem; font-size: 0.72rem; font-weight: 500; color: var(--c-700); }
-    .demo-btn {
-      font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      background: var(--c-500);
-      color: #F0EEE6;
-      padding: 0.45rem 1rem;
-      border-radius: 999px;
-      white-space: nowrap;
-    }
-    .demo-btn.big { font-size: 0.7rem; padding: 0.6rem 1.3rem; background: var(--c-900); }
-    .demo-hero {
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      gap: 2rem;
-      align-items: center;
-      padding: 1.25rem 2rem 2.25rem;
-    }
-    .demo-hero h3 {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(1.4rem, 2.6vw, 2.1rem);
-      line-height: 1.12;
-      color: var(--c-900);
-    }
-    .demo-hero h3 em { font-style: italic; }
-    .demo-hero p {
-      font-size: 0.8rem;
-      line-height: 1.6;
-      color: var(--c-700);
-      margin: 0.7rem 0 1.1rem;
-      max-width: 34ch;
-    }
-    .demo-hero .demo-img {
-      aspect-ratio: 4 / 3;
-      border-radius: 10px;
-      overflow: hidden;
-      background: var(--c-300);
-    }
-    .demo-img img { width: 100%; height: 100%; object-fit: cover; }
-
-    /* Handy rechts unten – dieselbe Seite, mobil */
-    .stage-phone {
-      position: absolute;
-      right: clamp(0.5rem, 3vw, 2rem);
-      bottom: -3.5rem;
-      width: clamp(9.5rem, 13vw, 11.25rem);
-      background: var(--c-900);
-      border: 1.5px solid rgba(218, 215, 205, 0.5);
-      border-radius: 26px;
-      padding: 7px;
-    }
-    .stage-phone .screen { background: #F0EEE6; border-radius: 19px; overflow: hidden; }
-    .phone-nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 10px;
-    }
-    .phone-nav .demo-brand { font-size: 0.72rem; }
-    .phone-nav .burger { display: grid; gap: 3px; }
-    .phone-nav .burger span { display: block; width: 12px; height: 1.5px; background: var(--c-900); }
-    .phone-img {
-      aspect-ratio: 5 / 3;
-      overflow: hidden;
-      background: var(--c-300);
-      margin: 0 8px;
-      border-radius: 7px;
-    }
-    .phone-img img { width: 100%; height: 100%; object-fit: cover; }
-    .phone-copy { padding: 9px 10px 12px; }
-    .phone-copy h4 {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 0.85rem;
-      line-height: 1.15;
-      color: var(--c-900);
-    }
-    .phone-copy h4 em { font-style: italic; }
-    .phone-copy .demo-btn { display: inline-block; margin-top: 7px; }
-
-    .stage-caption {
-      text-align: center;
-      margin-top: 5.25rem;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--c-700);
-    }
-
-    /* Mobil: nur das Handy zeigen – passend zum Gerät des Besuchers */
-    @media (max-width: 700px) {
-      .device-stage { margin-top: -4.5rem; }
-      .browser { display: none; }
-      .stage-phone {
-        position: static;
-        margin-inline: auto;
-        width: min(62vw, 13rem);
-      }
-      .stage-caption { margin-top: 1.5rem; }
-    }
-
-    @media (prefers-reduced-motion: no-preference) {
-      .browser, .stage-phone {
-        opacity: 0;
-        translate: 0 40px;
-        animation: stageIn 900ms var(--ease) forwards;
-      }
-      .browser { animation-delay: 0.5s; }
-      .stage-phone { animation-delay: 0.7s; }
-      @keyframes stageIn {
-        to { opacity: 1; translate: 0 0; }
-      }
-    }
-
     /* ============================================================
        WHATSAPP — So einfach geht's
        ============================================================ */
@@ -769,48 +605,6 @@
         </div>
       </div>
 
-      <!-- Schaubild: fiktive Beispielseite im Browser + am Handy. Foto ist Platzhalter. -->
-      <div class="device-stage">
-        <div class="browser" aria-hidden="true">
-          <div class="browser-bar">
-            <span class="dots"><span></span><span></span><span></span></span>
-            <span class="url">www.cafe-anna.at</span>
-          </div>
-          <div class="demo-nav">
-            <span class="demo-brand">Café Anna</span>
-            <span class="demo-links"><span>Speisekarte</span><span>Über uns</span><span>Kontakt</span></span>
-            <span class="demo-btn">Tisch reservieren</span>
-          </div>
-          <div class="demo-hero">
-            <div>
-              <h3>Kaffee, Kuchen &amp; <em>gute Gespräche.</em></h3>
-              <p>Hausgemachte Mehlspeisen und fair gerösteter Kaffee – mitten in Klagenfurt. Wir freuen uns auf Ihren Besuch.</p>
-              <span class="demo-btn big">Tisch reservieren</span>
-            </div>
-            <div class="demo-img">
-              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=75" alt="" width="1000" height="750" loading="eager">
-            </div>
-          </div>
-        </div>
-
-        <div class="stage-phone" aria-hidden="true">
-          <div class="screen">
-            <div class="phone-nav">
-              <span class="demo-brand">Café Anna</span>
-              <span class="burger"><span></span><span></span><span></span></span>
-            </div>
-            <div class="phone-img">
-              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=480&q=75" alt="" width="480" height="288" loading="eager">
-            </div>
-            <div class="phone-copy">
-              <h4>Kaffee, Kuchen &amp; <em>gute Gespräche.</em></h4>
-              <span class="demo-btn">Reservieren</span>
-            </div>
-          </div>
-        </div>
-
-        <p class="stage-caption">Fiktives Beispielprojekt · So könnte Ihre Website aussehen</p>
-      </div>
     </section>
 
     <!-- ============ LEITSATZ ============ -->
@@ -891,20 +685,20 @@
             <h2>Änderung nötig? <em>Eine Nachricht genügt.</em></h2>
             <p>
               Neue Öffnungszeiten, andere Preise, aktuelle Fotos – Sie schreiben
-              mir kurz auf WhatsApp, ich erledige den Rest. Drei Änderungen pro
-              Monat sind in Ihrem Abo inklusive.
+              mir kurz auf WhatsApp, ich erledige den Rest.
             </p>
           </div>
-          <div class="wa-card reveal" style="--d: 120ms" role="img" aria-label="Beispielhafter WhatsApp-Verlauf: Ein Kunde bittet um eine Änderung, HeimatWeb erledigt sie noch am selben Tag.">
+          <!-- Chat aus Kundensicht: eigene Nachrichten rechts, Johanns Antworten links -->
+          <div class="wa-card reveal" style="--d: 120ms" role="img" aria-label="Beispielhafter WhatsApp-Verlauf aus Kundensicht: Sie bitten um eine Änderung, HeimatWeb erledigt sie noch am selben Tag.">
             <div class="wa-head">
               <span class="status-dot"></span>
               <span>Johann · HeimatWeb<small>erreichbar für Sie</small></span>
             </div>
             <div class="wa-body" aria-hidden="true">
-              <span class="wa-bubble in reveal">Hallo Johann! Könnten Sie auf der Website unsere neuen Öffnungszeiten eintragen?</span>
-              <span class="wa-bubble out reveal" style="--d: 250ms">Gerne, mache ich sofort.</span>
-              <span class="wa-bubble out reveal" style="--d: 500ms">Erledigt – die Änderung ist online!</span>
-              <span class="wa-bubble in reveal" style="--d: 750ms">Perfekt, vielen Dank!</span>
+              <span class="wa-bubble out reveal">Hallo Johann! Könnten Sie auf der Website unsere neuen Öffnungszeiten eintragen?</span>
+              <span class="wa-bubble in reveal" style="--d: 250ms">Gerne, mache ich sofort.</span>
+              <span class="wa-bubble in reveal" style="--d: 500ms">Erledigt – die Änderung ist online!</span>
+              <span class="wa-bubble out reveal" style="--d: 750ms">Perfekt, vielen Dank!</span>
             </div>
           </div>
         </div>
