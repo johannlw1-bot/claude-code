@@ -131,62 +131,6 @@
     .btn-light:hover { background: var(--c-300); }
 
     /* ============================================================
-       SCHWEBENDE NAVIGATION — erscheint beim Hochscrollen
-       ============================================================ */
-    .float-nav {
-      position: fixed;
-      top: 1.25rem;
-      left: 0;
-      right: 0;
-      margin-inline: auto;
-      width: max-content;
-      max-width: calc(100vw - 2rem);
-      z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: clamp(1rem, 2.5vw, 1.6rem);
-      padding: 0.45rem 0.55rem 0.45rem 1.5rem;
-      background: rgba(240, 238, 230, 0.92);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--c-300);
-      border-radius: 999px;
-      opacity: 0;
-      visibility: hidden;
-      transform: translateY(-120%);
-      pointer-events: none;
-      transition: transform 350ms var(--ease), opacity 300ms ease, visibility 0s 350ms;
-    }
-    .float-nav.is-visible {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      pointer-events: auto;
-      transition: transform 350ms var(--ease), opacity 300ms ease, visibility 0s 0s;
-    }
-    .float-nav a:not(.btn) {
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--c-700);
-      white-space: nowrap;
-      transition: color 200ms ease;
-    }
-    .float-nav a:not(.btn):hover { color: var(--c-500); }
-    .float-nav .btn {
-      min-height: 2.4rem;
-      padding: 0.45rem 1.2rem;
-      font-size: 0.72rem;
-    }
-    @media (max-width: 420px) {
-      .float-nav { gap: 0.85rem; padding-left: 1.1rem; }
-      .float-nav a:not(.btn) { font-size: 0.78rem; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .float-nav { transition: opacity 200ms ease, visibility 0s 200ms; transform: none; }
-      .float-nav.is-visible { transition: opacity 200ms ease, visibility 0s 0s; transform: none; }
-    }
-
-    /* ============================================================
        HEADER
        ============================================================ */
     .site-header {
@@ -629,14 +573,6 @@
 
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
-  <!-- Schwebende Navigation: erscheint nur beim Hochscrollen -->
-  <nav class="float-nav" id="floatNav" aria-label="Schnellnavigation">
-    <a href="#ueber-mich">Über mich</a>
-    <a href="#projekte">Projekte</a>
-    <a href="#preis">Preis</a>
-    <a class="btn btn-dark" href="#kontakt">Anfragen</a>
-  </nav>
-
   <!-- ============ HEADER ============ -->
   <header class="site-header">
     <div class="container header-inner">
@@ -813,38 +749,6 @@
       "use strict";
 
       document.getElementById("year").textContent = new Date().getFullYear();
-
-      /* Schwebende Navigation: beim Hochscrollen zeigen,
-         beim Runterscrollen und nahe dem Seitenanfang verstecken */
-      var floatNav = document.getElementById("floatNav");
-      var lastScrollY = window.scrollY;
-      var navTicking = false;
-
-      function updateFloatNav() {
-        var y = window.scrollY;
-        var goingUp = y < lastScrollY - 2;
-        var goingDown = y > lastScrollY + 2;
-        if (y < 400) {
-          floatNav.classList.remove("is-visible");
-        } else if (goingUp) {
-          floatNav.classList.add("is-visible");
-        } else if (goingDown) {
-          floatNav.classList.remove("is-visible");
-        }
-        lastScrollY = y;
-        navTicking = false;
-      }
-
-      window.addEventListener("scroll", function () {
-        if (!navTicking) {
-          window.requestAnimationFrame(updateFloatNav);
-          navTicking = true;
-        }
-      }, { passive: true });
-
-      floatNav.addEventListener("click", function (e) {
-        if (e.target.closest("a")) floatNav.classList.remove("is-visible");
-      });
 
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var revealEls = document.querySelectorAll(".reveal");
