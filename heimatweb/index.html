@@ -209,44 +209,69 @@
       -webkit-backdrop-filter: blur(6px);
       backdrop-filter: blur(6px);
     }
-    .chip-chat {
-      left: clamp(1.5rem, 7vw, 6.5rem);
-      top: 34%;
-      rotate: -4deg;
-      max-width: 14.5rem;
-    }
-    .chip-price {
-      right: clamp(1.5rem, 7vw, 6.5rem);
-      top: 50%;
-      rotate: 3deg;
-      align-items: center;
-      padding: 1.1rem 1.6rem;
-    }
-    .hc-bubble {
-      font-size: 0.72rem;
-      line-height: 1.4;
-      padding: 0.45rem 0.7rem;
-      border-radius: 10px;
-    }
-    .hc-bubble.in {
-      background: rgba(218, 215, 205, 0.92);
-      color: var(--c-900);
-      border-bottom-left-radius: 3px;
-      align-self: flex-start;
-    }
-    .hc-bubble.out {
-      background: var(--c-500);
-      color: var(--c-100);
-      border-bottom-right-radius: 3px;
-      align-self: flex-end;
-    }
-    .hc-price {
+    /* Aa – Typografie-Plättchen */
+    .chip-aa {
+      left: clamp(2rem, 9vw, 9rem);
+      top: 32%;
+      rotate: -6deg;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 3px;
+      padding: 0.8rem 1.1rem;
       font-family: var(--serif);
-      font-size: 2.1rem;
-      line-height: 1;
-      color: var(--c-100);
+      color: rgba(218, 215, 205, 0.85);
     }
-    .hc-label { font-size: 0.68rem; color: var(--c-300); }
+    .chip-aa .aa-big { font-size: 1.7rem; line-height: 1; }
+    .chip-aa .aa-small { font-size: 1.05rem; font-style: italic; }
+
+    /* Mini-Farbpalette */
+    .chip-palette {
+      right: clamp(2rem, 9vw, 9rem);
+      top: 36%;
+      rotate: 5deg;
+      flex-direction: row;
+      align-items: center;
+      gap: 7px;
+      padding: 0.85rem 1.05rem;
+    }
+    .chip-palette .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .chip-palette .dot:nth-child(1) { background: rgba(218, 215, 205, 0.9); }
+    .chip-palette .dot:nth-child(2) { background: rgba(163, 177, 138, 0.9); }
+    .chip-palette .dot:nth-child(3) { background: rgba(88, 129, 87, 0.9); }
+
+    /* Design-Tool-Mauszeiger mit Namensschild */
+    .chip-cursor {
+      right: clamp(3rem, 11vw, 11rem);
+      bottom: 22%;
+      rotate: -3deg;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 5px;
+      background: none;
+      border: none;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+      padding: 0;
+    }
+    .chip-cursor svg {
+      width: 15px;
+      height: 15px;
+      fill: rgba(218, 215, 205, 0.85);
+    }
+    .chip-cursor .cursor-tag {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--c-900);
+      background: rgba(163, 177, 138, 0.85);
+      padding: 0.2rem 0.55rem;
+      border-radius: 999px;
+      translate: 0 8px;
+    }
 
     @media (max-width: 980px) {
       .hero-chip { display: none; }
@@ -254,11 +279,15 @@
     @media (prefers-reduced-motion: no-preference) {
       .hero-chip {
         animation: chipIn 900ms var(--ease) 0.75s both,
-                   chipFloat 7s ease-in-out 1.7s infinite;
+                   chipFloat 8s ease-in-out 1.7s infinite;
       }
-      .chip-price {
+      .chip-palette {
         animation: chipIn 900ms var(--ease) 0.95s both,
-                   chipFloat 8s ease-in-out 2.4s infinite;
+                   chipFloat 9s ease-in-out 2.6s infinite;
+      }
+      .chip-cursor {
+        animation: chipIn 900ms var(--ease) 1.15s both,
+                   chipFloat 7s ease-in-out 3.1s infinite;
       }
       @keyframes chipIn {
         from { opacity: 0; translate: 0 22px; }
@@ -266,7 +295,7 @@
       }
       @keyframes chipFloat {
         0%, 100% { translate: 0 0; }
-        50% { translate: 0 -12px; }
+        50% { translate: 0 -10px; }
       }
     }
 
@@ -854,14 +883,16 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="top">
       <div class="hero-panel">
-        <!-- Schwebende Karten: WhatsApp-Service und Preis auf einen Blick -->
-        <div class="hero-chip chip-chat" aria-hidden="true">
-          <span class="hc-bubble out">Neue Speisekarte online stellen?</span>
-          <span class="hc-bubble in">Schon erledigt!</span>
+        <!-- Dezente schwebende Webdesign-Bausteine -->
+        <div class="hero-chip chip-aa" aria-hidden="true">
+          <span class="aa-big">A</span><span class="aa-small">a</span>
         </div>
-        <div class="hero-chip chip-price" aria-hidden="true">
-          <span class="hc-price">89&nbsp;€</span>
-          <span class="hc-label">pro Monat · alles drin</span>
+        <div class="hero-chip chip-palette" aria-hidden="true">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+        <div class="hero-chip chip-cursor" aria-hidden="true">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 2l16 9.2-7.4 1.6L9.2 20z"/></svg>
+          <span class="cursor-tag">Johann</span>
         </div>
 
         <p class="hero-badge hero-fade">Webagentur aus Kärnten</p>
