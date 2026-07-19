@@ -181,6 +181,95 @@
       overflow: hidden;
     }
 
+    /* Sanfter Lichtschein hinter der Headline */
+    .hero-panel::before {
+      content: "";
+      position: absolute;
+      top: 6%;
+      left: 50%;
+      translate: -50% 0;
+      width: min(58rem, 95%);
+      aspect-ratio: 1.7;
+      background: radial-gradient(closest-side, rgba(163, 177, 138, 0.17), transparent 72%);
+      pointer-events: none;
+    }
+    .hero-panel > * { position: relative; }
+
+    /* Schwebende Karten links und rechts */
+    .hero-chip {
+      position: absolute;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      padding: 1rem;
+      background: rgba(218, 215, 205, 0.07);
+      border: 1px solid rgba(218, 215, 205, 0.22);
+      border-radius: 16px;
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+    }
+    .chip-chat {
+      left: clamp(1.5rem, 7vw, 6.5rem);
+      top: 34%;
+      rotate: -4deg;
+      max-width: 14.5rem;
+    }
+    .chip-price {
+      right: clamp(1.5rem, 7vw, 6.5rem);
+      top: 50%;
+      rotate: 3deg;
+      align-items: center;
+      padding: 1.1rem 1.6rem;
+    }
+    .hc-bubble {
+      font-size: 0.72rem;
+      line-height: 1.4;
+      padding: 0.45rem 0.7rem;
+      border-radius: 10px;
+    }
+    .hc-bubble.in {
+      background: rgba(218, 215, 205, 0.92);
+      color: var(--c-900);
+      border-bottom-left-radius: 3px;
+      align-self: flex-start;
+    }
+    .hc-bubble.out {
+      background: var(--c-500);
+      color: var(--c-100);
+      border-bottom-right-radius: 3px;
+      align-self: flex-end;
+    }
+    .hc-price {
+      font-family: var(--serif);
+      font-size: 2.1rem;
+      line-height: 1;
+      color: var(--c-100);
+    }
+    .hc-label { font-size: 0.68rem; color: var(--c-300); }
+
+    @media (max-width: 980px) {
+      .hero-chip { display: none; }
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-chip {
+        animation: chipIn 900ms var(--ease) 0.75s both,
+                   chipFloat 7s ease-in-out 1.7s infinite;
+      }
+      .chip-price {
+        animation: chipIn 900ms var(--ease) 0.95s both,
+                   chipFloat 8s ease-in-out 2.4s infinite;
+      }
+      @keyframes chipIn {
+        from { opacity: 0; translate: 0 22px; }
+        to { opacity: 1; translate: 0 0; }
+      }
+      @keyframes chipFloat {
+        0%, 100% { translate: 0 0; }
+        50% { translate: 0 -12px; }
+      }
+    }
+
     .hero-badge {
       display: inline-block;
       font-size: 0.7rem;
@@ -410,33 +499,131 @@
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: clamp(1.25rem, 2.5vw, 2rem);
-      max-width: 52rem;
+      max-width: 64rem;
       margin-inline: auto;
     }
     @media (max-width: 700px) {
-      .projects-grid { grid-template-columns: 1fr; max-width: 24rem; }
+      .projects-grid { grid-template-columns: 1fr; max-width: 26rem; }
     }
 
     .project { display: block; }
     .project .img-wrap {
       position: relative;
-      aspect-ratio: 4 / 5;
+      aspect-ratio: 16 / 11;
       border-radius: var(--radius-img);
       overflow: hidden;
       background: var(--c-300);
       margin-bottom: 1.1rem;
+      border: 1px solid var(--c-300);
+      container-type: inline-size;
+      transition: transform 500ms var(--ease);
     }
-    .project img {
+    .project:hover .img-wrap { transform: translateY(-6px); }
+
+    /* ---- Beispiel-Startseiten, komplett in HTML/CSS gestaltet ---- */
+    .site {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    .s-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3cqw;
+      padding: 3.6cqw 5cqw;
+      position: relative;
+      z-index: 1;
+    }
+    .s-brand { font-family: var(--serif); font-size: 3.4cqw; white-space: nowrap; }
+    .s-links { display: flex; gap: 3.2cqw; font-size: 2.1cqw; font-weight: 500; opacity: 0.75; }
+    .s-pill {
+      font-size: 2cqw;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 1.3cqw 3.2cqw;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+    .s-center {
+      position: relative;
+      z-index: 1;
+      flex: 1;
+      text-align: center;
+      padding: 2cqw 8cqw 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.2cqw;
+    }
+    .s-eyebrow {
+      font-size: 1.9cqw;
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+    .s-title { font-family: var(--serif); font-size: 8cqw; line-height: 1.05; }
+    .s-title em { font-style: italic; }
+    .s-sub { font-size: 2.5cqw; opacity: 0.75; max-width: 60cqw; }
+    .s-actions { display: flex; gap: 2.4cqw; margin-top: 1cqw; }
+    .s-visual {
+      position: absolute;
+      left: 50%;
+      bottom: -10cqw;
+      transform: translateX(-50%);
+      width: 46cqw;
+      height: 34cqw;
+      border-radius: 23cqw 23cqw 0 0;
+      overflow: hidden;
+      z-index: 0;
+      background: rgba(163, 177, 138, 0.35);
+    }
+    .s-visual img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       transition: transform 1200ms var(--ease);
     }
-    .project:hover img { transform: scale(1.05); }
+    .project:hover .s-visual img { transform: scale(1.06); }
+
+    /* Beispiel A: Café Anna – dunkel, stimmungsvoll */
+    .site-a { background: #1E2A23; color: #EFEDE6; }
+    .site-a::before {
+      content: "";
+      position: absolute;
+      top: 12%;
+      left: 50%;
+      translate: -50% 0;
+      width: 80cqw;
+      aspect-ratio: 1.6;
+      background: radial-gradient(closest-side, rgba(196, 156, 96, 0.22), transparent 70%);
+    }
+    .site-a .s-eyebrow { color: #C49C60; }
+    .site-a .s-pill { background: #EFEDE6; color: #1E2A23; }
+    .site-a .s-pill.ghost { background: transparent; color: #EFEDE6; border: 1px solid rgba(239, 237, 230, 0.45); }
+
+    /* Beispiel B: Blumen Flora – hell, elegant */
+    .site-b { background: #F4EFE6; color: #3A4038; }
+    .site-b::before {
+      content: "";
+      position: absolute;
+      top: 14%;
+      left: 50%;
+      translate: -50% 0;
+      width: 80cqw;
+      aspect-ratio: 1.6;
+      background: radial-gradient(closest-side, rgba(163, 177, 138, 0.35), transparent 70%);
+    }
+    .site-b .s-eyebrow { color: var(--c-500); }
+    .site-b .s-pill { background: var(--c-700); color: #F4EFE6; }
+    .site-b .s-pill.ghost { background: transparent; color: #3A4038; border: 1px solid rgba(58, 64, 56, 0.35); }
 
     .project .tag {
       position: absolute;
-      top: 0.9rem;
+      bottom: 0.9rem;
       left: 0.9rem;
       z-index: 1;
       padding: 0.35rem 0.85rem;
@@ -667,6 +854,16 @@
     <!-- ============ HERO ============ -->
     <section class="hero" id="top">
       <div class="hero-panel">
+        <!-- Schwebende Karten: WhatsApp-Service und Preis auf einen Blick -->
+        <div class="hero-chip chip-chat" aria-hidden="true">
+          <span class="hc-bubble out">Neue Speisekarte online stellen?</span>
+          <span class="hc-bubble in">Schon erledigt!</span>
+        </div>
+        <div class="hero-chip chip-price" aria-hidden="true">
+          <span class="hc-price">89&nbsp;€</span>
+          <span class="hc-label">pro Monat · alles drin</span>
+        </div>
+
         <p class="hero-badge hero-fade">Webagentur aus Kärnten</p>
         <h1>
           <span class="line-mask"><span>Ihre Website.</span></span>
@@ -729,9 +926,27 @@
 
         <div class="projects-grid">
           <article class="project reveal" style="--d: 0ms">
-            <div class="img-wrap">
+            <div class="img-wrap" role="img" aria-label="Fiktives Beispielprojekt: dunkle, stimmungsvolle Startseite für das Café Anna">
               <span class="tag">Fiktives Beispiel</span>
-              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=75" alt="Fiktives Beispielprojekt: Website für ein Café" width="720" height="900" loading="lazy">
+              <div class="site site-a" aria-hidden="true">
+                <div class="s-nav">
+                  <span class="s-brand">Café Anna</span>
+                  <span class="s-links"><span>Speisekarte</span><span>Über uns</span><span>Kontakt</span></span>
+                  <span class="s-pill">Reservieren</span>
+                </div>
+                <div class="s-center">
+                  <span class="s-eyebrow">Kaffeehaus in Klagenfurt</span>
+                  <span class="s-title">Kaffee, wie er <em>sein soll.</em></span>
+                  <span class="s-sub">Hausgemachte Mehlspeisen und fair gerösteter Kaffee – seit 1987.</span>
+                  <span class="s-actions">
+                    <span class="s-pill">Tisch reservieren</span>
+                    <span class="s-pill ghost">Speisekarte</span>
+                  </span>
+                </div>
+                <div class="s-visual">
+                  <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=640&q=75" alt="" width="640" height="480" loading="lazy">
+                </div>
+              </div>
             </div>
             <div class="meta">
               <h3>Café Anna</h3>
@@ -740,9 +955,27 @@
           </article>
 
           <article class="project reveal" style="--d: 120ms">
-            <div class="img-wrap">
+            <div class="img-wrap" role="img" aria-label="Fiktives Beispielprojekt: helle, elegante Startseite für den Blumenladen Flora">
               <span class="tag">Fiktives Beispiel</span>
-              <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=900&q=75" alt="Fiktives Beispielprojekt: Website für einen Blumenladen" width="720" height="900" loading="lazy">
+              <div class="site site-b" aria-hidden="true">
+                <div class="s-nav">
+                  <span class="s-brand">Blumen Flora</span>
+                  <span class="s-links"><span>Sträuße</span><span>Hochzeiten</span><span>Kontakt</span></span>
+                  <span class="s-pill">Bestellen</span>
+                </div>
+                <div class="s-center">
+                  <span class="s-eyebrow">Blumenladen in Villach</span>
+                  <span class="s-title">Blumen, die <em>erzählen.</em></span>
+                  <span class="s-sub">Handgebundene Sträuße aus saisonalen Blumen – jeden Tag frisch.</span>
+                  <span class="s-actions">
+                    <span class="s-pill">Strauß bestellen</span>
+                    <span class="s-pill ghost">Zum Sortiment</span>
+                  </span>
+                </div>
+                <div class="s-visual">
+                  <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=640&q=75" alt="" width="640" height="480" loading="lazy">
+                </div>
+              </div>
             </div>
             <div class="meta">
               <h3>Blumen Flora</h3>
