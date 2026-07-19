@@ -587,11 +587,15 @@
     .legal-body {
       padding: 0 2rem 2rem;
       overflow-y: auto;
+      /* Scrollen endet im Dialog und läuft nicht auf die Seite dahinter über */
+      overscroll-behavior: contain;
       max-height: calc(84dvh - 6.5rem);
       font-size: 0.92rem;
       line-height: 1.65;
       color: var(--c-700);
     }
+    /* Seite hinter einem offenen Dialog fixieren */
+    body.dialog-open { overflow: hidden; }
     .legal-body h3 {
       font-family: var(--serif);
       font-weight: 400;
@@ -968,6 +972,7 @@
         trigger.addEventListener("click", function (e) {
           e.preventDefault();
           document.getElementById(trigger.getAttribute("data-dialog")).showModal();
+          document.body.classList.add("dialog-open");
         });
       });
       document.querySelectorAll("dialog.legal").forEach(function (dlg) {
@@ -976,6 +981,10 @@
         });
         dlg.addEventListener("click", function (e) {
           if (e.target === dlg) dlg.close();
+        });
+        // Feuert auch bei ESC – Seite dahinter wieder freigeben
+        dlg.addEventListener("close", function () {
+          document.body.classList.remove("dialog-open");
         });
       });
 
