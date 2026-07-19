@@ -537,6 +537,78 @@
     }
 
     /* ============================================================
+       RECHTLICHES — Impressum & Datenschutz als Dialoge
+       ============================================================ */
+    dialog.legal {
+      width: min(92vw, 44rem);
+      max-height: 84dvh;
+      border: 1px solid var(--c-300);
+      border-radius: 20px;
+      background: var(--c-100);
+      color: var(--c-900);
+      padding: 0;
+      margin: auto;
+    }
+    dialog.legal::backdrop {
+      background: rgba(52, 78, 65, 0.55);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      dialog.legal[open] { animation: dialogIn 300ms var(--ease); }
+      @keyframes dialogIn {
+        from { opacity: 0; transform: translateY(16px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+    }
+    .legal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 1.6rem 2rem 0.75rem;
+    }
+    .legal-head h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); }
+    .legal-close {
+      width: 2.5rem;
+      height: 2.5rem;
+      flex-shrink: 0;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      line-height: 1;
+      color: var(--c-700);
+      background: none;
+      border: 1px solid var(--c-300);
+      border-radius: 50%;
+      transition: background-color 200ms ease, color 200ms ease;
+    }
+    .legal-close:hover { background: var(--c-900); color: var(--c-100); border-color: var(--c-900); }
+    .legal-body {
+      padding: 0 2rem 2rem;
+      overflow-y: auto;
+      max-height: calc(84dvh - 6.5rem);
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: var(--c-700);
+    }
+    .legal-body h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.2rem;
+      color: var(--c-900);
+      margin: 1.6rem 0 0.4rem;
+    }
+    .legal-body p { margin: 0.45rem 0; }
+    .legal-body ul { margin: 0.45rem 0 0.45rem 1.2rem; }
+    .legal-body a { color: var(--c-500); text-decoration: underline; text-underline-offset: 2px; }
+    .legal-body .address { font-style: normal; }
+    @media (max-width: 700px) {
+      .legal-head { padding: 1.25rem 1.25rem 0.5rem; }
+      .legal-body { padding: 0 1.25rem 1.5rem; }
+    }
+
+    /* ============================================================
        FOOTER
        ============================================================ */
     .site-footer {
@@ -738,17 +810,174 @@
     <div class="container footer-inner">
       <span>© <span id="year">2026</span> HeimatWeb · Kärnten, Österreich</span>
       <nav aria-label="Rechtliches">
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
+        <a href="#impressum" data-dialog="impressum">Impressum</a>
+        <a href="#datenschutz" data-dialog="datenschutz">Datenschutz</a>
       </nav>
     </div>
   </footer>
+
+  <!-- ============ IMPRESSUM ============ -->
+  <!-- Platzhalter in [eckigen Klammern] vor dem Livegang mit echten Daten befüllen -->
+  <dialog class="legal" id="impressum" aria-labelledby="impressum-title">
+    <div class="legal-head">
+      <h2 id="impressum-title">Impressum</h2>
+      <button class="legal-close" data-close aria-label="Impressum schließen">✕</button>
+    </div>
+    <div class="legal-body">
+      <p>Informationspflicht laut § 5 E-Commerce-Gesetz, § 14 Unternehmensgesetzbuch bzw. § 63 Gewerbeordnung und Offenlegungspflicht laut § 25 Mediengesetz.</p>
+
+      <h3>Medieninhaber &amp; Herausgeber</h3>
+      <p class="address">
+        <strong>[Vor- und Nachname]</strong><br>
+        Einzelunternehmer<br>
+        Unternehmensgegenstand: Webdesign – Gestaltung, Erstellung und laufende Betreuung von Websites<br>
+        [Straße und Hausnummer]<br>
+        [PLZ] [Ort], Kärnten<br>
+        Österreich
+      </p>
+      <p>
+        Telefon/WhatsApp: <a href="tel:+436764062518">+43 676 406 25 18</a><br>
+        E-Mail: [E-Mail-Adresse]
+      </p>
+
+      <h3>Gewerbliche Angaben</h3>
+      <p>
+        Mitglied der Wirtschaftskammer Kärnten<br>
+        Berufsrecht: Gewerbeordnung, abrufbar unter <a href="https://www.ris.bka.gv.at" target="_blank" rel="noopener">www.ris.bka.gv.at</a><br>
+        Gewerbebehörde: [Bezirkshauptmannschaft bzw. Magistrat des Wohnorts]<br>
+        [UID-Nummer: ATU… – nur falls vorhanden, sonst Zeile löschen]
+      </p>
+
+      <h3>Streitbeilegung</h3>
+      <p>
+        Verbraucher haben die Möglichkeit, Beschwerden an die Online-Streitbeilegungsplattform
+        der EU zu richten: <a href="https://ec.europa.eu/odr" target="_blank" rel="noopener">ec.europa.eu/odr</a>.
+        Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle teilzunehmen.
+      </p>
+
+      <h3>Haftung für Inhalte und Links</h3>
+      <p>
+        Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die
+        Richtigkeit, Vollständigkeit und Aktualität wird keine Gewähr übernommen.
+        Für Inhalte externer Links wird keine Haftung übernommen; für den Inhalt der
+        verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+      </p>
+
+      <h3>Urheberrecht &amp; Bildnachweis</h3>
+      <p>
+        Alle Inhalte dieser Website (Texte, Gestaltung, Grafiken) unterliegen dem
+        Urheberrecht. Die abgebildeten Fotos stammen aus eigener Aufnahme bzw. von
+        <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>.
+      </p>
+    </div>
+  </dialog>
+
+  <!-- ============ DATENSCHUTZ ============ -->
+  <dialog class="legal" id="datenschutz" aria-labelledby="datenschutz-title">
+    <div class="legal-head">
+      <h2 id="datenschutz-title">Datenschutzerklärung</h2>
+      <button class="legal-close" data-close aria-label="Datenschutzerklärung schließen">✕</button>
+    </div>
+    <div class="legal-body">
+      <p>
+        Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. Wir verarbeiten
+        Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen
+        (DSGVO, TKG 2021). In dieser Erklärung informieren wir Sie über die wichtigsten
+        Aspekte der Datenverarbeitung auf dieser Website.
+      </p>
+
+      <h3>Verantwortlicher</h3>
+      <p class="address">
+        [Vor- und Nachname]<br>
+        [Straße und Hausnummer], [PLZ] [Ort], Österreich<br>
+        Telefon/WhatsApp: +43 676 406 25 18<br>
+        E-Mail: [E-Mail-Adresse]
+      </p>
+
+      <h3>Keine Cookies, kein Tracking</h3>
+      <p>
+        Diese Website verwendet keine Cookies, keine Analyse-Tools und keine
+        Werbe- oder Tracking-Dienste.
+      </p>
+
+      <h3>Server-Logfiles</h3>
+      <p>
+        Beim Aufruf dieser Website erhebt der Hosting-Anbieter automatisch technische
+        Zugriffsdaten (z. B. IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp).
+        Diese Daten sind für den sicheren Betrieb der Website technisch erforderlich
+        (Art. 6 Abs. 1 lit. f DSGVO) und werden nach kurzer Zeit automatisch gelöscht.
+      </p>
+
+      <h3>Kontaktaufnahme per WhatsApp, Telefon oder E-Mail</h3>
+      <p>
+        Wenn Sie uns kontaktieren, verarbeiten wir die von Ihnen übermittelten Daten
+        (Name, Telefonnummer, Nachrichteninhalt) zur Bearbeitung Ihrer Anfrage und für
+        den Fall von Anschlussfragen (Art. 6 Abs. 1 lit. b DSGVO). Diese Daten geben
+        wir nicht ohne Ihre Einwilligung weiter.
+      </p>
+      <p>
+        Bei Kontaktaufnahme über WhatsApp werden Ihre Daten auch von WhatsApp Ireland Ltd.
+        bzw. dem Meta-Konzern verarbeitet; dabei kann es zu einer Datenübermittlung in
+        Drittländer (insbesondere USA) kommen. Näheres entnehmen Sie der
+        <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener">Datenschutzrichtlinie von WhatsApp</a>.
+        Wenn Sie das nicht möchten, kontaktieren Sie uns bitte telefonisch.
+      </p>
+
+      <h3>Webschriften (Google Fonts)</h3>
+      <p>
+        Diese Website nutzt Schriftarten von Google Fonts (Google Ireland Limited).
+        Beim Aufruf der Seite lädt Ihr Browser die Schriften von Google-Servern; dabei
+        wird Ihre IP-Adresse an Google übermittelt (Art. 6 Abs. 1 lit. f DSGVO –
+        einheitliche, ansprechende Darstellung). Weitere Informationen finden Sie in der
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
+      </p>
+
+      <h3>Speicherdauer</h3>
+      <p>
+        Wir speichern personenbezogene Daten nur so lange, wie es für die Erfüllung des
+        jeweiligen Zwecks erforderlich ist oder gesetzliche Aufbewahrungspflichten bestehen.
+      </p>
+
+      <h3>Ihre Rechte</h3>
+      <p>
+        Ihnen stehen grundsätzlich die Rechte auf Auskunft, Berichtigung, Löschung,
+        Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch zu.
+        Wenn Sie glauben, dass die Verarbeitung Ihrer Daten gegen das Datenschutzrecht
+        verstößt, können Sie sich bei uns ([E-Mail-Adresse]) oder bei der österreichischen
+        Datenschutzbehörde beschweren:
+      </p>
+      <p class="address">
+        Österreichische Datenschutzbehörde<br>
+        Barichgasse 40–42, 1030 Wien<br>
+        <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">www.dsb.gv.at</a>
+      </p>
+
+      <p>Stand: Juli 2026</p>
+    </div>
+  </dialog>
 
   <script>
     (function () {
       "use strict";
 
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* Rechtliche Dialoge öffnen/schließen */
+      document.querySelectorAll("[data-dialog]").forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById(trigger.getAttribute("data-dialog")).showModal();
+        });
+      });
+      document.querySelectorAll("dialog.legal").forEach(function (dlg) {
+        dlg.querySelector("[data-close]").addEventListener("click", function () {
+          dlg.close();
+        });
+        dlg.addEventListener("click", function (e) {
+          if (e.target === dlg) dlg.close();
+        });
+      });
 
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       var revealEls = document.querySelectorAll(".reveal");
