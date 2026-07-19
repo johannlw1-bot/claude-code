@@ -1,0 +1,1206 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HeimatWeb — Ihre Website. Rundum betreut.</title>
+  <meta name="description" content="HeimatWeb gestaltet, betreibt und pflegt die Website Ihres Betriebs – für 89 € im Monat. Änderungen einfach per WhatsApp. Aus Kärnten, für ganz Österreich.">
+  <meta property="og:title" content="HeimatWeb — Ihre Website. Rundum betreut.">
+  <meta property="og:description" content="Website im Abo: Gestaltung, Technik und Betreuung für 89 € im Monat. Änderungen per WhatsApp.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       DESIGN-TOKENS — "Dark Editorial Luxury" für HeimatWeb
+       ============================================================ */
+    :root {
+      --bg:        #0B1F16;   /* sehr dunkles, entsättigtes Grün       */
+      --bg-deep:   #081710;   /* dunkelste Fläche (Footer)             */
+      --surface:   #12291E;   /* Karten & Inputs: Grün, ~6 % heller    */
+      --ink:       #F2EAD8;   /* warmes Creme, nie reines Weiß         */
+      --ink-70:    rgba(242, 234, 216, 0.72);
+      --ink-50:    rgba(242, 234, 216, 0.5);
+      --line:      rgba(242, 234, 216, 0.1);
+      --line-soft: rgba(242, 234, 216, 0.08);
+      --border:    rgba(242, 234, 216, 0.13);
+      --gold:      #C9A961;   /* gedämpftes Gold – nur CTAs & Details  */
+      --gold-soft: #D4AF6A;
+
+      --serif: "Instrument Serif", Georgia, serif;
+      --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      --space-section: clamp(7.5rem, 14vw, 12rem);
+      --container: 75rem;
+      --narrow: 56rem;
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ============================================================
+       BASIS
+       ============================================================ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+
+    body {
+      font-family: var(--sans);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--ink-70);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img, svg { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; cursor: pointer; }
+    button { cursor: pointer; font: inherit; }
+
+    ::selection { background: var(--gold); color: var(--bg); }
+
+    :focus-visible {
+      outline: 2px solid var(--gold);
+      outline-offset: 3px;
+      border-radius: 2px;
+    }
+
+    .skip-link {
+      position: absolute;
+      top: -100%;
+      left: 1rem;
+      z-index: 300;
+      padding: 0.75rem 1.25rem;
+      background: var(--gold);
+      color: var(--bg);
+      border-radius: 8px;
+    }
+    .skip-link:focus { top: 1rem; }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin-inline: auto;
+      padding-inline: clamp(1.25rem, 4vw, 2.5rem);
+    }
+    .narrow { max-width: var(--narrow); margin-inline: auto; }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 400;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+    em { font-style: italic; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+      letter-spacing: 0.01em;
+    }
+
+    .section-line {
+      border: none;
+      border-top: 1px solid var(--line-soft);
+    }
+
+    /* ============================================================
+       BUTTONS
+       ============================================================ */
+    .btn-gold {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      min-height: 3.3rem;
+      padding: 0.9rem 2.2rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--bg);
+      background: var(--gold);
+      border: none;
+      border-radius: 4px;
+      transition: background-color 250ms ease, transform 250ms var(--ease);
+    }
+    .btn-gold:hover { background: var(--gold-soft); transform: translateY(-2px); }
+    .btn-gold:active { transform: translateY(0); }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      min-height: 2.6rem;
+      padding: 0.5rem 1.4rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      transition: border-color 200ms ease, color 200ms ease;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ============================================================
+       S0 — NAVIGATION (fixiert, minimal)
+       ============================================================ */
+    .site-nav {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      border-bottom: 1px solid transparent;
+      transition: background-color 400ms ease, border-color 400ms ease;
+    }
+    .site-nav.is-scrolled {
+      background: rgba(11, 31, 22, 0.8);
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-color: var(--line-soft);
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-block: 1.1rem;
+    }
+    .wordmark {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--ink);
+    }
+
+    /* ============================================================
+       S1 — HERO (100vh, zentriert)
+       ============================================================ */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 7rem 1.5rem 5rem;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 12%;
+      left: 50%;
+      translate: -50% 0;
+      width: min(64rem, 100%);
+      aspect-ratio: 1.7;
+      background: radial-gradient(closest-side, rgba(201, 169, 97, 0.05), transparent 70%);
+      pointer-events: none;
+    }
+    .hero > * { position: relative; }
+
+    .hero h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      max-width: 13ch;
+      margin: 1.5rem auto 0;
+    }
+    .hero h1 em { color: var(--gold); }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.5vw, 1.15rem);
+      max-width: 46ch;
+      margin: 1.75rem auto 2.5rem;
+      color: var(--ink-70);
+    }
+
+    .hero-trust {
+      margin-top: 1.4rem;
+      font-size: 0.78rem;
+      color: var(--ink-50);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      translate: -50% 0;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .scroll-hint { animation: hintPulse 3.2s ease-in-out infinite; }
+      @keyframes hintPulse {
+        0%, 100% { opacity: 0.45; translate: -50% 0; }
+        50% { opacity: 0.9; translate: -50% 6px; }
+      }
+      .hero [data-hero] {
+        opacity: 0;
+        transform: translateY(26px);
+        animation: heroIn 900ms var(--ease) forwards;
+      }
+      .hero [data-hero="1"] { animation-delay: 0.05s; }
+      .hero [data-hero="2"] { animation-delay: 0.16s; }
+      .hero [data-hero="3"] { animation-delay: 0.32s; }
+      .hero [data-hero="4"] { animation-delay: 0.46s; }
+      .hero [data-hero="5"] { animation-delay: 0.58s; }
+      @keyframes heroIn { to { opacity: 1; transform: translateY(0); } }
+    }
+
+    /* ============================================================
+       S2 — TICKER (Branchen-Laufband)
+       ============================================================ */
+    .ticker {
+      border-block: 1px solid var(--line-soft);
+      padding-block: 1.15rem;
+      overflow: hidden;
+    }
+    .ticker-track {
+      display: flex;
+      align-items: center;
+      gap: 2.75rem;
+      width: max-content;
+    }
+    .ticker-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 2.75rem;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink-70);
+      white-space: nowrap;
+    }
+    .ticker-item::after {
+      content: "";
+      width: 5px;
+      height: 5px;
+      rotate: 45deg;
+      background: var(--gold);
+      opacity: 0.7;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .ticker-track { animation: tickerMove 50s linear infinite; }
+      .ticker:hover .ticker-track { animation-play-state: paused; }
+      @keyframes tickerMove { to { transform: translateX(-50%); } }
+    }
+
+    /* ============================================================
+       SEKTIONEN (allgemein)
+       ============================================================ */
+    .section { padding-block: var(--space-section); }
+
+    /* ============================================================
+       S3 — WERTVERSPRECHEN
+       ============================================================ */
+    .statement {
+      text-align: center;
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.18;
+      color: var(--ink);
+      max-width: 26ch;
+      margin-inline: auto;
+    }
+    .statement em { color: var(--gold); }
+
+    .pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(2rem, 4vw, 4rem);
+      margin-top: clamp(3.5rem, 7vw, 6rem);
+    }
+    @media (max-width: 820px) {
+      .pillars { grid-template-columns: 1fr; max-width: 26rem; margin-inline: auto; }
+    }
+    .pillar {
+      padding-top: 1.6rem;
+      border-top: 1px solid var(--gold);
+    }
+    .pillar .no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--gold);
+    }
+    .pillar h3 { font-size: 1.5rem; margin: 0.7rem 0 0.6rem; }
+    .pillar p { font-size: 0.95rem; }
+
+    /* ============================================================
+       S4 — SHOWCASE (Text + WhatsApp-Mockup)
+       ============================================================ */
+    .showcase-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: clamp(2.5rem, 6vw, 6rem);
+      align-items: center;
+    }
+    @media (max-width: 900px) {
+      .showcase-grid { grid-template-columns: 1fr; }
+    }
+    .showcase-copy h2 {
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      margin: 1rem 0 1.25rem;
+    }
+    .showcase-copy h2 em { color: var(--gold); }
+    .showcase-copy > p { max-width: 48ch; }
+    .checklist {
+      list-style: none;
+      margin-top: 1.75rem;
+      display: grid;
+      gap: 0.8rem;
+    }
+    .checklist li {
+      display: flex;
+      gap: 0.8rem;
+      align-items: baseline;
+      color: var(--ink);
+      font-size: 0.98rem;
+    }
+    .checklist li::before {
+      content: "✓";
+      color: var(--gold);
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .chat-card {
+      justify-self: center;
+      width: min(100%, 24rem);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .chat-card { animation: cardFloat 6s ease-in-out infinite; }
+      @keyframes cardFloat {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+    }
+    .chat-head {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      padding: 0.9rem 1.15rem;
+      border-bottom: 1px solid var(--line-soft);
+      color: var(--ink);
+      font-size: 0.88rem;
+      font-weight: 500;
+      line-height: 1.3;
+    }
+    .chat-head .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      flex-shrink: 0;
+    }
+    .chat-head small { display: block; font-size: 0.68rem; font-weight: 400; color: var(--ink-50); }
+    .chat-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+      padding: 1.25rem 1rem 1.4rem;
+    }
+    .chat-bubble {
+      font-size: 0.88rem;
+      line-height: 1.45;
+      padding: 0.6rem 0.9rem;
+      border-radius: 12px;
+      max-width: 88%;
+    }
+    .chat-bubble.out {
+      background: rgba(201, 169, 97, 0.16);
+      border: 1px solid rgba(201, 169, 97, 0.3);
+      color: var(--ink);
+      border-bottom-right-radius: 3px;
+      align-self: flex-end;
+    }
+    .chat-bubble.in {
+      background: rgba(242, 234, 216, 0.07);
+      border: 1px solid var(--line);
+      color: var(--ink-70);
+      border-bottom-left-radius: 3px;
+      align-self: flex-start;
+    }
+    .chat-time {
+      font-size: 0.64rem;
+      color: var(--ink-50);
+      align-self: center;
+    }
+
+    /* ============================================================
+       S5 — KENNZAHLEN (ehrlich, ohne erfundene Metriken)
+       ============================================================ */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: clamp(2rem, 4vw, 3rem);
+      text-align: center;
+    }
+    @media (max-width: 820px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat .value {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      line-height: 1;
+      color: var(--gold);
+    }
+    .stat .label {
+      display: block;
+      margin-top: 0.7rem;
+      font-size: 0.82rem;
+      color: var(--ink-50);
+    }
+
+    /* ============================================================
+       S6 — ABLAUF
+       ============================================================ */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: clamp(2rem, 4vw, 4rem);
+      margin-top: clamp(3rem, 6vw, 5rem);
+    }
+    @media (max-width: 820px) {
+      .steps { grid-template-columns: 1fr; max-width: 26rem; margin-inline: auto; }
+    }
+    .step { position: relative; padding-top: 1.5rem; }
+    .step::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: var(--line);
+    }
+    .step .no {
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.4rem;
+      color: var(--gold);
+    }
+    .step h3 { font-size: 1.4rem; margin: 0.6rem 0 0.5rem; }
+    .step p { font-size: 0.95rem; }
+
+    /* ============================================================
+       ÜBER MICH (kompakt)
+       ============================================================ */
+    .about {
+      text-align: center;
+    }
+    .about .monogram {
+      width: 5.5rem;
+      height: 5.5rem;
+      margin: 0 auto 1.75rem;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 2.2rem;
+      color: var(--gold);
+    }
+    .about h2 { font-size: clamp(1.9rem, 3.5vw, 2.8rem); }
+    .about h2 em { color: var(--gold); }
+    .about p {
+      max-width: 52ch;
+      margin: 1.25rem auto 0;
+    }
+    .about .signature {
+      margin-top: 1.5rem;
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: var(--ink-50);
+    }
+
+    /* ============================================================
+       S7 — FAQ (Accordion)
+       ============================================================ */
+    .faq-list {
+      max-width: 46rem;
+      margin-inline: auto;
+      border-top: 1px solid var(--line);
+      margin-top: clamp(2.5rem, 5vw, 4rem);
+    }
+    .faq-item { border-bottom: 1px solid var(--line); }
+    .faq-item summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding-block: 1.5rem;
+      font-family: var(--serif);
+      font-size: 1.25rem;
+      color: var(--ink);
+      list-style: none;
+      cursor: pointer;
+      transition: color 200ms ease;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { color: var(--gold); }
+    .faq-icon {
+      position: relative;
+      width: 0.9rem;
+      height: 0.9rem;
+      flex-shrink: 0;
+      transition: rotate 300ms var(--ease);
+    }
+    .faq-icon::before,
+    .faq-icon::after {
+      content: "";
+      position: absolute;
+      inset: 50% auto auto 0;
+      width: 100%;
+      height: 1.5px;
+      background: var(--gold);
+    }
+    .faq-icon::after { rotate: 90deg; }
+    .faq-item[open] .faq-icon { rotate: 45deg; }
+    .faq-answer {
+      padding-bottom: 1.5rem;
+      max-width: 58ch;
+      font-size: 0.95rem;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      .faq-item[open] .faq-answer { animation: answerIn 350ms var(--ease); }
+      @keyframes answerIn {
+        from { opacity: 0; transform: translateY(-6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+    /* ============================================================
+       S8 — FINALER CTA
+       ============================================================ */
+    .final-cta {
+      position: relative;
+      text-align: center;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      translate: -50% -50%;
+      width: min(58rem, 100%);
+      aspect-ratio: 1.6;
+      background: radial-gradient(closest-side, rgba(201, 169, 97, 0.07), transparent 70%);
+      pointer-events: none;
+    }
+    .final-cta > .container { position: relative; }
+    .final-cta h2 {
+      font-size: clamp(2.6rem, 6vw, 4.8rem);
+      max-width: 15ch;
+      margin: 1.25rem auto 1.5rem;
+    }
+    .final-cta h2 em { color: var(--gold); }
+    .final-cta .sub {
+      max-width: 42ch;
+      margin: 0 auto 2.25rem;
+    }
+    .final-cta .hero-trust { margin-top: 1.4rem; }
+
+    /* ============================================================
+       S9 — FOOTER (dunkelster Bereich)
+       ============================================================ */
+    .site-footer {
+      background: var(--bg-deep);
+      border-top: 1px solid var(--line-soft);
+      padding-block: clamp(3rem, 6vw, 4.5rem) 1.75rem;
+    }
+    .footer-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2.5rem;
+    }
+    .footer-brand .wordmark { font-size: 1.3rem; }
+    .footer-brand p {
+      max-width: 30ch;
+      margin-top: 0.8rem;
+      font-size: 0.85rem;
+      color: var(--ink-50);
+    }
+    .footer-col h3 {
+      font-family: var(--sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--ink-50);
+      margin-bottom: 0.9rem;
+    }
+    .footer-col ul { list-style: none; display: grid; gap: 0.55rem; }
+    .footer-col a {
+      font-size: 0.88rem;
+      color: var(--ink-70);
+      transition: color 200ms ease;
+    }
+    .footer-col a:hover { color: var(--gold); }
+    .footer-bottom {
+      margin-top: clamp(2.5rem, 5vw, 4rem);
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--line-soft);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.75rem;
+      color: var(--ink-50);
+    }
+
+    /* ============================================================
+       RECHTLICHE DIALOGE
+       ============================================================ */
+    dialog.legal {
+      width: min(92vw, 44rem);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      background: var(--surface);
+      color: var(--ink-70);
+      padding: 0;
+      margin: auto;
+    }
+    dialog.legal::backdrop {
+      background: rgba(8, 23, 16, 0.75);
+      -webkit-backdrop-filter: blur(4px);
+      backdrop-filter: blur(4px);
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      dialog.legal[open] { animation: dialogIn 300ms var(--ease); }
+      @keyframes dialogIn {
+        from { opacity: 0; transform: translateY(14px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+    }
+    .legal-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      padding: 1.5rem 2rem 0.75rem;
+    }
+    .legal-head h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+    .legal-close {
+      width: 2.5rem;
+      height: 2.5rem;
+      display: grid;
+      place-items: center;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--ink);
+      font-size: 0.9rem;
+      transition: background-color 200ms ease, color 200ms ease, border-color 200ms ease;
+    }
+    .legal-close:hover { background: var(--gold); color: var(--bg); border-color: var(--gold); }
+    .legal-body {
+      padding: 0 2rem 2rem;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      max-height: calc(84dvh - 6.5rem);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+    body.dialog-open { overflow: hidden; }
+    .legal-body h3 {
+      font-size: 1.15rem;
+      margin: 1.5rem 0 0.4rem;
+    }
+    .legal-body p { margin: 0.45rem 0; }
+    .legal-body a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
+    @media (max-width: 640px) {
+      .legal-head { padding: 1.25rem 1.25rem 0.5rem; }
+      .legal-body { padding: 0 1.25rem 1.5rem; }
+    }
+
+    /* ============================================================
+       SCROLL-REVEAL (läuft nur einmal)
+       ============================================================ */
+    @media (prefers-reduced-motion: no-preference) {
+      .reveal {
+        opacity: 0;
+        transform: translateY(26px);
+        transition: opacity 700ms ease-out, transform 700ms ease-out;
+        transition-delay: var(--d, 0ms);
+      }
+      .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <!-- ============ S0 — NAVIGATION ============ -->
+  <header class="site-nav" id="siteNav">
+    <div class="container nav-inner">
+      <a class="wordmark" href="#top">HeimatWeb</a>
+      <a class="btn-ghost" href="#kontakt">Anfragen</a>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ============ S1 — HERO ============ -->
+    <section class="hero" id="top">
+      <span class="eyebrow" data-hero="1">Webagentur aus Kärnten · Für ganz Österreich</span>
+      <h1 data-hero="2">Ihre Website. Rundum <em>betreut.</em></h1>
+      <p class="hero-sub" data-hero="3">
+        Ich gestalte, betreibe und pflege den Auftritt Ihres Betriebs –
+        im Abo, ohne Aufwand für Sie. Änderungen schicken Sie mir einfach per WhatsApp.
+      </p>
+      <div data-hero="4">
+        <a class="btn-gold" href="https://wa.me/436764062518" target="_blank" rel="noopener">Auf WhatsApp anfragen</a>
+      </div>
+      <p class="hero-trust" data-hero="5">89&nbsp;€ im Monat &nbsp;·&nbsp; Keine Einrichtungsgebühr &nbsp;·&nbsp; Unverbindliche Erstberatung</p>
+      <span class="scroll-hint" aria-hidden="true">Scroll</span>
+    </section>
+
+    <!-- ============ S2 — BRANCHEN-TICKER ============ -->
+    <div class="ticker" aria-label="Branchen, für die HeimatWeb Websites baut">
+      <div class="ticker-track">
+        <span class="ticker-item">Gasthaus</span><span class="ticker-item">Café</span><span class="ticker-item">Tischlerei</span><span class="ticker-item">Friseur</span><span class="ticker-item">Pension</span><span class="ticker-item">Blumenladen</span><span class="ticker-item">Ordination</span><span class="ticker-item">Bäckerei</span><span class="ticker-item">Kfz-Werkstatt</span><span class="ticker-item">Hofladen</span>
+        <span class="ticker-item" aria-hidden="true">Gasthaus</span><span class="ticker-item" aria-hidden="true">Café</span><span class="ticker-item" aria-hidden="true">Tischlerei</span><span class="ticker-item" aria-hidden="true">Friseur</span><span class="ticker-item" aria-hidden="true">Pension</span><span class="ticker-item" aria-hidden="true">Blumenladen</span><span class="ticker-item" aria-hidden="true">Ordination</span><span class="ticker-item" aria-hidden="true">Bäckerei</span><span class="ticker-item" aria-hidden="true">Kfz-Werkstatt</span><span class="ticker-item" aria-hidden="true">Hofladen</span>
+      </div>
+    </div>
+
+    <!-- ============ S3 — WERTVERSPRECHEN ============ -->
+    <section class="section">
+      <div class="container">
+        <h2 class="statement reveal">Für Betriebe, die sich lieber um ihre Gäste kümmern <em>als um Technik.</em></h2>
+
+        <div class="pillars">
+          <div class="pillar reveal" style="--d: 0ms">
+            <span class="no">I.</span>
+            <h3>Gestaltung &amp; Umsetzung</h3>
+            <p>Ein eigenes Erscheinungsbild statt Baukasten-Vorlage. Ihre Website wird gestaltet, gebaut und getestet – für jedes Gerät.</p>
+          </div>
+          <div class="pillar reveal" style="--d: 100ms">
+            <span class="no">II.</span>
+            <h3>Betrieb &amp; Sicherheit</h3>
+            <p>Ihre Seite läuft auf meiner Technik – verschlüsselt, gewartet, immer aktuell. Sie müssen sich um nichts kümmern.</p>
+          </div>
+          <div class="pillar reveal" style="--d: 200ms">
+            <span class="no">III.</span>
+            <h3>Änderungen per WhatsApp</h3>
+            <p>Neue Öffnungszeiten oder Preise? Eine Nachricht genügt, ich erledige den Rest – meist noch am selben Tag.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-line">
+
+    <!-- ============ S4 — SHOWCASE ============ -->
+    <section class="section">
+      <div class="container showcase-grid">
+        <div class="showcase-copy reveal">
+          <span class="eyebrow">So einfach geht's</span>
+          <h2>Änderung nötig? <em>Eine Nachricht genügt.</em></h2>
+          <p>
+            Sie schreiben mir kurz auf WhatsApp – ich kümmere mich darum,
+            dass Ihre Website immer auf dem neuesten Stand ist.
+          </p>
+          <ul class="checklist">
+            <li>Ein fester Ansprechpartner – direkt zu mir, kein Callcenter</li>
+            <li>Klare Sprache statt Fachchinesisch</li>
+            <li>Änderungswünsche bequem per Nachricht</li>
+            <li>Daheim in Kärnten, im Einsatz für ganz Österreich</li>
+          </ul>
+        </div>
+
+        <!-- Beispielhafter Chat-Verlauf aus Kundensicht -->
+        <div class="chat-card reveal" style="--d: 150ms" role="img" aria-label="Beispielhafter WhatsApp-Verlauf: Ein Kunde bittet um eine Änderung, HeimatWeb erledigt sie noch am selben Tag.">
+          <div class="chat-head">
+            <span class="dot"></span>
+            <span>Johann · HeimatWeb<small>erreichbar für Sie</small></span>
+          </div>
+          <div class="chat-body" aria-hidden="true">
+            <span class="chat-time num">Heute, 09:41</span>
+            <span class="chat-bubble out">Hallo Johann! Könnten Sie auf der Website unsere neuen Öffnungszeiten eintragen?</span>
+            <span class="chat-bubble in">Gerne, mache ich sofort.</span>
+            <span class="chat-bubble in">Erledigt – die Änderung ist online!</span>
+            <span class="chat-bubble out">Perfekt, vielen Dank!</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-line">
+
+    <!-- ============ S5 — KENNZAHLEN ============ -->
+    <section class="section">
+      <div class="container stats">
+        <div class="stat reveal" style="--d: 0ms">
+          <span class="value num"><span data-count="89">0</span>&nbsp;€</span>
+          <span class="label">pro Monat, alles inklusive</span>
+        </div>
+        <div class="stat reveal" style="--d: 100ms">
+          <span class="value num" data-count="3">0</span>
+          <span class="label">Änderungen monatlich inklusive</span>
+        </div>
+        <div class="stat reveal" style="--d: 200ms">
+          <span class="value num" data-count="1">0</span>
+          <span class="label">Ansprechpartner – vom ersten Gespräch an</span>
+        </div>
+        <div class="stat reveal" style="--d: 300ms">
+          <span class="value num"><span data-count="0">0</span>&nbsp;€</span>
+          <span class="label">Einrichtungsgebühr</span>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-line">
+
+    <!-- ============ S6 — ABLAUF ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="narrow" style="text-align: center;">
+          <span class="eyebrow reveal">Ablauf</span>
+          <h2 class="statement reveal" style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem;">In drei Schritten <em>online.</em></h2>
+        </div>
+        <div class="steps">
+          <div class="step reveal" style="--d: 0ms">
+            <span class="no num">01</span>
+            <h3>Kennenlernen</h3>
+            <p>Wir besprechen Ihr Vorhaben – per Telefon, WhatsApp oder bei einem Kaffee. Unverbindlich und ohne Fachchinesisch.</p>
+          </div>
+          <div class="step reveal" style="--d: 120ms">
+            <span class="no num">02</span>
+            <h3>Umsetzung</h3>
+            <p>Sie liefern Texte, Fotos und Wünsche – ich gestalte und baue. Sie schauen drüber, ich verfeinere, bis alles passt.</p>
+          </div>
+          <div class="step reveal" style="--d: 240ms">
+            <span class="no num">03</span>
+            <h3>Rundum betreut</h3>
+            <p>Ihre Website geht online und bleibt in guten Händen: Ich betreibe sie, halte sie aktuell und setze Ihre Wünsche um.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="section-line">
+
+    <!-- ============ ÜBER MICH ============ -->
+    <section class="section about">
+      <div class="container narrow reveal">
+        <div class="monogram" aria-hidden="true">J.</div>
+        <h2>Servus, ich bin <em>Johann.</em></h2>
+        <p>
+          HeimatWeb gibt es, weil viele Betriebe in Österreich nur die Wahl zwischen
+          teurer Agentur und anonymem Baukasten haben. Ich mache es anders: eine
+          gepflegte Website zum fairen Monatsbetrag – und Sie reden immer direkt
+          mit dem, der sie baut und betreut.
+        </p>
+        <p class="signature">„Sie schreiben mir, ich kümmere mich."</p>
+      </div>
+    </section>
+
+    <hr class="section-line">
+
+    <!-- ============ S7 — FAQ ============ -->
+    <section class="section">
+      <div class="container">
+        <div class="narrow" style="text-align: center;">
+          <span class="eyebrow reveal">Häufige Fragen</span>
+          <h2 class="statement reveal" style="font-size: clamp(2rem, 4vw, 3rem); margin-top: 1rem;">Gut zu <em>wissen.</em></h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <details class="faq-item">
+            <summary>Was ist im Abo um 89&nbsp;€ pro Monat enthalten?<span class="faq-icon" aria-hidden="true"></span></summary>
+            <p class="faq-answer">Alles, was Ihre Website braucht: Gestaltung, Umsetzung, Betrieb auf meiner Technik, laufende Wartung – und drei Änderungen pro Monat, die Sie mir bequem per WhatsApp schicken. Eine Einrichtungsgebühr gibt es nicht.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Ich kenne mich mit Technik nicht aus. Ist das ein Problem?<span class="faq-icon" aria-hidden="true"></span></summary>
+            <p class="faq-answer">Überhaupt nicht – genau dafür gibt es HeimatWeb. Sie müssen nichts installieren, nichts verwalten und nichts lernen. Alles Technische übernehme ich.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Wie funktionieren Änderungswünsche?<span class="faq-icon" aria-hidden="true"></span></summary>
+            <p class="faq-answer">Sie schreiben mir einfach auf WhatsApp – zum Beispiel neue Öffnungszeiten, eine neue Speisekarte oder aktuelle Fotos. Ich setze die Änderung zeitnah um, in der Regel noch am selben Tag. Drei Anpassungen sind jeden Monat inklusive.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Funktioniert die Website auch am Handy?<span class="faq-icon" aria-hidden="true"></span></summary>
+            <p class="faq-answer">Selbstverständlich. Jede Website von HeimatWeb wird von Anfang an für Handy, Tablet und Computer gestaltet und geprüft.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Wie schnell ist meine Website fertig?<span class="faq-icon" aria-hidden="true"></span></summary>
+            <p class="faq-answer">Das hängt vom Umfang ab – typische Projekte sind innerhalb weniger Wochen online. Den genauen Zeitplan besprechen wir gemeinsam im Erstgespräch.</p>
+          </details>
+          <details class="faq-item">
+            <summary>Was passiert, wenn ich das Abo beenden möchte?<span class="faq-icon" aria-hidden="true"></span></summary>
+            <p class="faq-answer">Sprechen Sie mich einfach an – wir finden gemeinsam eine faire Lösung. Die Details zu Laufzeit und Kündigung klären wir offen und verständlich im Erstgespräch.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ S8 — FINALER CTA ============ -->
+    <section class="section final-cta" id="kontakt">
+      <div class="container">
+        <span class="eyebrow reveal">Kontakt</span>
+        <h2 class="reveal">Reden wir über <em>Ihre Website.</em></h2>
+        <p class="sub reveal" style="--d: 100ms">
+          Unverbindlich und unkompliziert – ich melde mich in der Regel noch am selben Tag.
+        </p>
+        <div class="reveal" style="--d: 200ms">
+          <a class="btn-gold" href="https://wa.me/436764062518" target="_blank" rel="noopener">Auf WhatsApp schreiben</a>
+        </div>
+        <p class="hero-trust reveal" style="--d: 300ms">Kostenlose Erstberatung &nbsp;·&nbsp; Antwort meist am selben Tag</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ S9 — FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="wordmark" href="#top">HeimatWeb</a>
+          <p>Websites im Abo für Betriebe in ganz Österreich – gestaltet, betrieben und betreut aus Kärnten.</p>
+        </div>
+        <nav class="footer-col" aria-label="Rechtliches">
+          <h3>Rechtliches</h3>
+          <ul>
+            <li><a href="#impressum" data-dialog="impressum">Impressum</a></li>
+            <li><a href="#datenschutz" data-dialog="datenschutz">Datenschutz</a></li>
+          </ul>
+        </nav>
+        <nav class="footer-col" aria-label="Kontakt">
+          <h3>Kontakt</h3>
+          <ul>
+            <li><a href="https://wa.me/436764062518" target="_blank" rel="noopener">WhatsApp</a></li>
+            <li><a href="tel:+436764062518" class="num">+43 676 406 25 18</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span id="year" class="num">2026</span> HeimatWeb · Kärnten, Österreich</span>
+        <span>[Platzhalter für Hinweis-/Disclaimer-Zeile]</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============ IMPRESSUM ============ -->
+  <!-- Platzhalter in [eckigen Klammern] vor dem Livegang mit echten Daten befüllen -->
+  <dialog class="legal" id="impressum" aria-labelledby="impressum-title">
+    <div class="legal-head">
+      <h2 id="impressum-title">Impressum</h2>
+      <button class="legal-close" data-close aria-label="Impressum schließen">✕</button>
+    </div>
+    <div class="legal-body">
+      <p>Informationspflicht laut § 5 E-Commerce-Gesetz, § 14 Unternehmensgesetzbuch bzw. § 63 Gewerbeordnung und Offenlegungspflicht laut § 25 Mediengesetz.</p>
+      <h3>Medieninhaber &amp; Herausgeber</h3>
+      <p>
+        <strong>[Vor- und Nachname]</strong><br>
+        Einzelunternehmer<br>
+        Unternehmensgegenstand: Webdesign – Gestaltung, Erstellung und laufende Betreuung von Websites<br>
+        [Straße und Hausnummer]<br>
+        [PLZ] [Ort], Kärnten<br>
+        Österreich
+      </p>
+      <p>
+        Telefon/WhatsApp: <a href="tel:+436764062518">+43 676 406 25 18</a><br>
+        E-Mail: [E-Mail-Adresse]
+      </p>
+      <h3>Gewerbliche Angaben</h3>
+      <p>
+        Mitglied der Wirtschaftskammer Kärnten<br>
+        Berufsrecht: Gewerbeordnung, abrufbar unter <a href="https://www.ris.bka.gv.at" target="_blank" rel="noopener">www.ris.bka.gv.at</a><br>
+        Gewerbebehörde: [Bezirkshauptmannschaft bzw. Magistrat des Wohnorts]<br>
+        [UID-Nummer: ATU… – nur falls vorhanden, sonst Zeile löschen]
+      </p>
+      <h3>Streitbeilegung</h3>
+      <p>
+        Verbraucher haben die Möglichkeit, Beschwerden an die Online-Streitbeilegungsplattform
+        der EU zu richten: <a href="https://ec.europa.eu/odr" target="_blank" rel="noopener">ec.europa.eu/odr</a>.
+        Wir sind nicht verpflichtet und nicht bereit, an Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle teilzunehmen.
+      </p>
+      <h3>Haftung für Inhalte und Links</h3>
+      <p>
+        Die Inhalte dieser Website wurden mit größtmöglicher Sorgfalt erstellt. Für die
+        Richtigkeit, Vollständigkeit und Aktualität wird keine Gewähr übernommen.
+        Für Inhalte externer Links wird keine Haftung übernommen; für den Inhalt der
+        verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.
+      </p>
+      <h3>Urheberrecht</h3>
+      <p>Alle Inhalte dieser Website (Texte, Gestaltung, Grafiken) unterliegen dem Urheberrecht.</p>
+    </div>
+  </dialog>
+
+  <!-- ============ DATENSCHUTZ ============ -->
+  <dialog class="legal" id="datenschutz" aria-labelledby="datenschutz-title">
+    <div class="legal-head">
+      <h2 id="datenschutz-title">Datenschutzerklärung</h2>
+      <button class="legal-close" data-close aria-label="Datenschutzerklärung schließen">✕</button>
+    </div>
+    <div class="legal-body">
+      <p>
+        Der Schutz Ihrer persönlichen Daten ist uns ein wichtiges Anliegen. Wir verarbeiten
+        Ihre Daten ausschließlich auf Grundlage der gesetzlichen Bestimmungen
+        (DSGVO, TKG 2021).
+      </p>
+      <h3>Verantwortlicher</h3>
+      <p>
+        [Vor- und Nachname]<br>
+        [Straße und Hausnummer], [PLZ] [Ort], Österreich<br>
+        Telefon/WhatsApp: +43 676 406 25 18<br>
+        E-Mail: [E-Mail-Adresse]
+      </p>
+      <h3>Keine Cookies, kein Tracking</h3>
+      <p>Diese Website verwendet keine Cookies, keine Analyse-Tools und keine Werbe- oder Tracking-Dienste.</p>
+      <h3>Server-Logfiles</h3>
+      <p>
+        Beim Aufruf dieser Website erhebt der Hosting-Anbieter automatisch technische
+        Zugriffsdaten (z. B. IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browsertyp).
+        Diese Daten sind für den sicheren Betrieb der Website technisch erforderlich
+        (Art. 6 Abs. 1 lit. f DSGVO) und werden nach kurzer Zeit automatisch gelöscht.
+      </p>
+      <h3>Kontaktaufnahme per WhatsApp, Telefon oder E-Mail</h3>
+      <p>
+        Wenn Sie uns kontaktieren, verarbeiten wir die von Ihnen übermittelten Daten
+        (Name, Telefonnummer, Nachrichteninhalt) zur Bearbeitung Ihrer Anfrage
+        (Art. 6 Abs. 1 lit. b DSGVO). Bei Kontaktaufnahme über WhatsApp werden Ihre Daten
+        auch von WhatsApp Ireland Ltd. bzw. dem Meta-Konzern verarbeitet; dabei kann es zu
+        einer Datenübermittlung in Drittländer (insbesondere USA) kommen. Näheres in der
+        <a href="https://www.whatsapp.com/legal/privacy-policy-eea" target="_blank" rel="noopener">Datenschutzrichtlinie von WhatsApp</a>.
+        Wenn Sie das nicht möchten, kontaktieren Sie uns bitte telefonisch.
+      </p>
+      <h3>Webschriften (Google Fonts)</h3>
+      <p>
+        Diese Website nutzt Schriftarten von Google Fonts (Google Ireland Limited). Beim
+        Aufruf lädt Ihr Browser die Schriften von Google-Servern; dabei wird Ihre IP-Adresse
+        an Google übermittelt (Art. 6 Abs. 1 lit. f DSGVO). Näheres in der
+        <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Datenschutzerklärung von Google</a>.
+      </p>
+      <h3>Ihre Rechte</h3>
+      <p>
+        Ihnen stehen die Rechte auf Auskunft, Berichtigung, Löschung, Einschränkung der
+        Verarbeitung, Datenübertragbarkeit und Widerspruch zu. Beschwerden richten Sie an
+        uns ([E-Mail-Adresse]) oder an die Österreichische Datenschutzbehörde,
+        Barichgasse 40–42, 1030 Wien, <a href="https://www.dsb.gv.at" target="_blank" rel="noopener">www.dsb.gv.at</a>.
+      </p>
+      <p>Stand: Juli 2026</p>
+    </div>
+  </dialog>
+
+  <script>
+    (function () {
+      "use strict";
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* Navigation: Blur + Abdunkeln beim Scrollen */
+      var nav = document.getElementById("siteNav");
+      var navTicking = false;
+      function updateNav() {
+        nav.classList.toggle("is-scrolled", window.scrollY > 24);
+        navTicking = false;
+      }
+      window.addEventListener("scroll", function () {
+        if (!navTicking) {
+          window.requestAnimationFrame(updateNav);
+          navTicking = true;
+        }
+      }, { passive: true });
+      updateNav();
+
+      /* Scroll-Reveal – jede Animation läuft nur einmal */
+      var revealEls = document.querySelectorAll(".reveal");
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+      } else {
+        var revealObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+        revealEls.forEach(function (el) { revealObserver.observe(el); });
+      }
+
+      /* Kennzahlen zählen beim ersten Sichtbarwerden hoch (~1,5 s, ease-out) */
+      var counters = document.querySelectorAll("[data-count]");
+      function animateCount(el) {
+        var target = parseInt(el.getAttribute("data-count"), 10);
+        if (reduceMotion || target === 0) {
+          el.textContent = String(target);
+          return;
+        }
+        var start = null;
+        function tick(ts) {
+          if (start === null) start = ts;
+          var t = Math.min((ts - start) / 1500, 1);
+          var eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = String(Math.round(target * eased));
+          if (t < 1) window.requestAnimationFrame(tick);
+        }
+        window.requestAnimationFrame(tick);
+      }
+      if ("IntersectionObserver" in window) {
+        var countObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              animateCount(entry.target);
+              countObserver.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.6 });
+        counters.forEach(function (el) { countObserver.observe(el); });
+      } else {
+        counters.forEach(function (el) { el.textContent = el.getAttribute("data-count"); });
+      }
+
+      /* Rechtliche Dialoge */
+      document.querySelectorAll("[data-dialog]").forEach(function (trigger) {
+        trigger.addEventListener("click", function (e) {
+          e.preventDefault();
+          document.getElementById(trigger.getAttribute("data-dialog")).showModal();
+          document.body.classList.add("dialog-open");
+        });
+      });
+      document.querySelectorAll("dialog.legal").forEach(function (dlg) {
+        dlg.querySelector("[data-close]").addEventListener("click", function () {
+          dlg.close();
+        });
+        dlg.addEventListener("click", function (e) {
+          if (e.target === dlg) dlg.close();
+        });
+        dlg.addEventListener("close", function () {
+          document.body.classList.remove("dialog-open");
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
