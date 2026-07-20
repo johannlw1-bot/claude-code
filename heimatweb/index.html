@@ -606,19 +606,6 @@
     .site-b .s-pill { background: var(--c-700); color: #F4EFE6; }
     .site-b .s-pill.ghost { background: transparent; color: #3A4038; border: 1px solid rgba(58, 64, 56, 0.35); }
 
-    /* Dezenter HeimatWeb-Hinweis in den Beispielseiten */
-    .s-credit {
-      position: absolute;
-      right: 3cqw;
-      bottom: 2.2cqw;
-      z-index: 1;
-      font-size: 2.1cqw;
-      letter-spacing: 0.04em;
-      opacity: 0.6;
-    }
-    .site-a .s-credit { color: #EFEDE6; }
-    .site-b .s-credit { color: #3A4038; }
-
     .project .tag {
       position: absolute;
       bottom: 0.9rem;
@@ -653,83 +640,6 @@
       text-transform: uppercase;
       color: var(--c-500);
       white-space: nowrap;
-    }
-
-    /* ============================================================
-       HÄUFIGE FRAGEN — zentrierte Karte mit Akkordeon
-       ============================================================ */
-    .faq { padding-bottom: clamp(6rem, 12vw, 10rem); }
-    .faq-head { text-align: center; margin-bottom: clamp(2rem, 4vw, 3rem); }
-    .faq-head h2 {
-      font-size: clamp(2rem, 4.5vw, 3.2rem);
-      color: var(--c-900);
-      margin-top: 0.9rem;
-    }
-    .faq-head h2 em { color: var(--c-500); }
-
-    .faq-card {
-      max-width: 40rem;
-      margin-inline: auto;
-      background: #F0EEE6;
-      border: 1px solid var(--c-300);
-      border-radius: 20px;
-      padding: 0.4rem 2rem;
-    }
-    @media (max-width: 640px) {
-      .faq-card { padding-inline: 1.25rem; }
-    }
-    .faq-item + .faq-item { border-top: 1px dashed var(--c-300); }
-    .faq-q {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      padding: 1.2rem 0;
-      background: none;
-      border: none;
-      text-align: left;
-      font-family: var(--sans);
-      font-size: 0.98rem;
-      font-weight: 600;
-      color: var(--c-900);
-      transition: color 200ms ease;
-    }
-    .faq-q:hover { color: var(--c-500); }
-    .faq-q svg {
-      width: 1rem;
-      height: 1rem;
-      flex-shrink: 0;
-      opacity: 0.6;
-      transition: transform 250ms var(--ease);
-    }
-    .faq-q[aria-expanded="true"] svg { transform: rotate(180deg); }
-    .faq-a {
-      display: grid;
-      grid-template-rows: 0fr;
-      transition: grid-template-rows 300ms var(--ease);
-    }
-    .faq-a > div { overflow: hidden; }
-    .faq-a p {
-      padding-bottom: 1.2rem;
-      font-size: 0.93rem;
-      color: var(--c-700);
-      max-width: 56ch;
-    }
-    .faq-item.open .faq-a { grid-template-rows: 1fr; }
-    @media (prefers-reduced-motion: reduce) {
-      .faq-a, .faq-q svg { transition: none; }
-    }
-    .faq-more {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.9rem;
-      color: var(--c-700);
-    }
-    .faq-more a {
-      color: var(--c-500);
-      border-bottom: 1px solid currentColor;
-      padding-bottom: 1px;
     }
 
     /* ============================================================
@@ -1082,7 +992,6 @@
                 <div class="s-visual">
                   <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=640&q=75" alt="" width="640" height="480" loading="lazy">
                 </div>
-                <span class="s-credit">Website von HeimatWeb</span>
               </div>
             </div>
             <div class="meta">
@@ -1112,7 +1021,6 @@
                 <div class="s-visual">
                   <img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=640&q=75" alt="" width="640" height="480" loading="lazy">
                 </div>
-                <span class="s-credit">Website von HeimatWeb</span>
               </div>
             </div>
             <div class="meta">
@@ -1166,56 +1074,6 @@
           <li>Keine Einrichtungsgebühr</li>
         </ul>
         <a class="btn btn-light" href="#kontakt">Unverbindlich anfragen <span class="arrow">→</span></a>
-      </div>
-    </section>
-
-    <!-- ============ HÄUFIGE FRAGEN ============ -->
-    <section class="faq" id="fragen">
-      <div class="container">
-        <div class="faq-head reveal">
-          <span class="kicker">Häufige Fragen</span>
-          <h2>Gut zu <em>wissen.</em></h2>
-        </div>
-
-        <div class="faq-card reveal" style="--d: 120ms">
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a1">
-              Was ist im Website-Abo enthalten?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a" id="faq-a1"><div><p>Alles, was Ihre Website braucht: eigene Gestaltung, komplette Umsetzung, Betrieb auf meiner Technik inklusive Verschlüsselung und Wartung – und drei Änderungen pro Monat, die Sie mir per WhatsApp schicken. Eine Einrichtungsgebühr gibt es nicht.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a2">
-              Ich kenne mich mit Technik nicht aus – ist das ein Problem?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a" id="faq-a2"><div><p>Überhaupt nicht – genau dafür gibt es HeimatWeb. Sie müssen nichts installieren, nichts verwalten und nichts lernen. Alles Technische übernehme ich.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a3">
-              Wie funktionieren Änderungswünsche?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a" id="faq-a3"><div><p>Sie schreiben mir einfach auf WhatsApp – zum Beispiel neue Öffnungszeiten, eine neue Speisekarte oder aktuelle Fotos. Ich setze die Änderung zeitnah um, in der Regel noch am selben Tag. Drei Anpassungen sind jeden Monat inklusive.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a4">
-              Wie schnell ist meine Website fertig?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a" id="faq-a4"><div><p>Das hängt vom Umfang ab – typische Projekte sind innerhalb weniger Wochen online. Den genauen Zeitplan besprechen wir gemeinsam im Erstgespräch.</p></div></div>
-          </div>
-          <div class="faq-item">
-            <button class="faq-q" aria-expanded="false" aria-controls="faq-a5">
-              Wie lange bin ich gebunden – und was passiert danach?
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
-            </button>
-            <div class="faq-a" id="faq-a5"><div><p>Das Website-Abo hat eine Mindestlaufzeit von 12 Monaten – so kann ich Erstellung und Betreuung zum fairen Monatspreis anbieten. Wie es danach weitergeht, besprechen wir offen und ohne Kleingedrucktes im Erstgespräch.</p></div></div>
-          </div>
-        </div>
-
-        <p class="faq-more reveal" style="--d: 200ms">Ihre Frage war nicht dabei? <a href="https://wa.me/436764062518" target="_blank" rel="noopener">Schreiben Sie mir einfach auf WhatsApp.</a></p>
       </div>
     </section>
 
@@ -1406,23 +1264,6 @@
         // Feuert auch bei ESC – Seite dahinter wieder freigeben
         dlg.addEventListener("close", function () {
           document.body.classList.remove("dialog-open");
-        });
-      });
-
-      /* FAQ-Akkordeon: immer nur eine Frage offen */
-      var faqItems = document.querySelectorAll(".faq-item");
-      faqItems.forEach(function (item) {
-        var btn = item.querySelector(".faq-q");
-        btn.addEventListener("click", function () {
-          var wasOpen = item.classList.contains("open");
-          faqItems.forEach(function (other) {
-            other.classList.remove("open");
-            other.querySelector(".faq-q").setAttribute("aria-expanded", "false");
-          });
-          if (!wasOpen) {
-            item.classList.add("open");
-            btn.setAttribute("aria-expanded", "true");
-          }
         });
       });
 
