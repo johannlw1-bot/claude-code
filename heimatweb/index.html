@@ -1066,7 +1066,7 @@
       <div class="pricing-panel reveal">
         <span class="kicker">Preis</span>
         <h2>Ein Paket. <em>Alles drin.</em></h2>
-        <p class="price-figure"><span data-count="89">0</span>&nbsp;€<span class="per">/ Monat</span></p>
+        <p class="price-figure"><span data-count="89" data-count-from="199">199</span>&nbsp;€<span class="per">/ Monat</span></p>
         <ul class="price-includes">
           <li>Gestaltung &amp; komplette Umsetzung</li>
           <li>Betrieb, Wartung &amp; Sicherheit</li>
@@ -1267,17 +1267,18 @@
         });
       });
 
-      /* Preis zählt beim ersten Sichtbarwerden hoch (~1,5 s, ease-out) */
+      /* Preis zählt beim ersten Sichtbarwerden herunter (~1,5 s, ease-out) */
       var counters = document.querySelectorAll("[data-count]");
       var motionOk = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       function animateCount(el) {
         var target = parseInt(el.getAttribute("data-count"), 10);
+        var from = parseInt(el.getAttribute("data-count-from") || "0", 10);
         var start = null;
         function tick(ts) {
           if (start === null) start = ts;
           var t = Math.min((ts - start) / 1500, 1);
           var eased = 1 - Math.pow(1 - t, 3);
-          el.textContent = String(Math.round(target * eased));
+          el.textContent = String(Math.round(from + (target - from) * eased));
           if (t < 1) window.requestAnimationFrame(tick);
         }
         window.requestAnimationFrame(tick);
