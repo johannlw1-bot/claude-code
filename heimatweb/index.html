@@ -203,6 +203,11 @@
       z-index: 2;
       margin-top: clamp(-7.5rem, -11vw, -5.5rem);
       overflow: hidden;
+      max-width: min(64rem, 100%);
+      margin-inline: auto;
+      /* Weich auslaufende Ränder statt harter Kanten */
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
     }
     .branch-track {
       display: flex;
@@ -245,7 +250,6 @@
     }
     @media (prefers-reduced-motion: no-preference) {
       .branch-track { animation: branchMove 55s linear infinite; }
-      .branch-marquee:hover .branch-track { animation-play-state: paused; }
       @keyframes branchMove {
         to { transform: translateX(-50%); }
       }
