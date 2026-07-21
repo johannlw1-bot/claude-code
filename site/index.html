@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Hans Lassnig-Walder – Dirigent, Komponist, Pianist</title>
+  <meta name="description" content="Hans Lassnig-Walder ist Dirigent, Komponist und Pianist aus Kärnten. Musikalischer Leiter der kelagBIGband, ausgebildet u. a. an der New School in New York.">
+  <meta property="og:title" content="Hans Lassnig-Walder – Dirigent, Komponist, Pianist">
+  <meta property="og:description" content="Dirigent, Komponist und Pianist aus Kärnten. Musikalischer Leiter der kelagBIGband.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_AT">
+  <meta property="og:image" content="https://d2ol7oe51mr4n9.cloudfront.net/user_3Go3Iyf2T7uSSDWygF3MVNhzhe8/f62b0fab-b144-486f-8fb2-e0a8f3d65313.jpg">
+  <meta name="theme-color" content="#0b0a08">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0a08'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='16' fill='%23c9a35c' text-anchor='middle'%3EHL%3C/text%3E%3C/svg%3E">
+  <style>
+    /* ================= Design-Token ================= */
+    :root {
+      --bg: #0b0a08;            /* fast schwarz, warm */
+      --bg-soft: #141210;
+      --brass: #c9a35c;         /* Messing */
+      --brass-bright: #e8c98a;  /* helles Gold fuer Akzente */
+      --brass-deep: #8a6a33;
+      --ink: #ece6da;           /* warmes Off-White */
+      --ink-dim: #a89f8f;
+      --serif: "Cormorant Garamond", Georgia, serif;
+      --sans: "Jost", "Helvetica Neue", sans-serif;
+      /* Wie viel vom unteren Bildrand des Hero-Fotos beschnitten wird
+         (Wunsch: weniger Koerper, keine Fuesse sichtbar) */
+      --hero-crop: 24%;
+      /* Zoomziel: Position der Schalltrichter-Oeffnung im Hero-Bild */
+      --bell-x: 22%;
+      --bell-y: 72%;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 { font-family: var(--serif); font-weight: 500; line-height: 1.1; }
+    a { color: var(--brass); text-decoration: none; }
+    a:hover { color: var(--brass-bright); }
+    img { max-width: 100%; }
+
+    .eyebrow {
+      font-family: var(--sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--brass);
+    }
+    .rule {
+      width: 64px; height: 1px;
+      background: linear-gradient(90deg, var(--brass), transparent);
+      margin: 1.4rem 0;
+    }
+
+    /* ================= Hero + Zoom-Film ================= */
+    #film { position: relative; }
+    .hero {
+      position: relative;
+      height: 100dvh; height: 100vh;
+      display: flex; align-items: flex-end; justify-content: center;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 90% at 50% 108%, rgba(201,163,92,0.16), transparent 55%),
+        radial-gradient(80% 60% at 50% 0%, rgba(201,163,92,0.05), transparent 60%),
+        var(--bg);
+    }
+    .hero-stage {
+      position: absolute; inset: 0;
+      display: flex; align-items: flex-end; justify-content: center;
+      transform-origin: var(--bell-x) calc(var(--bell-y) * (100% / (100% - var(--hero-crop))));
+      will-change: transform;
+    }
+    .hero-figure {
+      position: relative;
+      height: calc(100% + var(--hero-crop));  /* unten ueber den Rand schieben = Crop */
+      aspect-ratio: 2294 / 4096;
+      transform-origin: var(--bell-x) var(--bell-y);
+      filter: drop-shadow(0 30px 80px rgba(0,0,0,0.65));
+    }
+    .hero-figure img {
+      height: 100%; width: 100%;
+      object-fit: cover; object-position: top center;
+      user-select: none; -webkit-user-drag: none;
+    }
+    .hero-title {
+      position: absolute; left: 0; right: 0; top: 12vh;
+      text-align: center; z-index: 2;
+      pointer-events: none;
+    }
+    .hero-title h1 {
+      font-size: clamp(2.2rem, 7vw, 5.4rem);
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      text-shadow: 0 2px 40px rgba(0,0,0,0.8);
+    }
+    .hero-title h1 .von { color: var(--brass-bright); }
+    .hero-roles {
+      margin-top: 0.9rem;
+      font-size: clamp(0.85rem, 2vw, 1.05rem);
+      letter-spacing: 0.42em;
+      text-transform: uppercase;
+      color: var(--brass);
+    }
+    .scroll-hint {
+      position: absolute; bottom: 4vh; left: 50%;
+      transform: translateX(-50%);
+      z-index: 3; text-align: center;
+      color: var(--ink-dim); font-size: 0.72rem;
+      letter-spacing: 0.3em; text-transform: uppercase;
+    }
+    .scroll-hint::after {
+      content: "";
+      display: block; margin: 0.7rem auto 0;
+      width: 1px; height: 44px;
+      background: linear-gradient(180deg, var(--brass), transparent);
+      animation: hint 2.4s ease-in-out infinite;
+    }
+    @keyframes hint { 0%,100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+    /* Der goldene Tunnel am Ende des Zooms */
+    .tunnel {
+      position: absolute; inset: 0; z-index: 4;
+      opacity: 0; pointer-events: none;
+      background:
+        radial-gradient(60% 60% at var(--bell-x) var(--bell-y),
+          #060504 0%, #0d0a06 34%, rgba(120,88,38,0.55) 62%,
+          rgba(201,163,92,0.25) 78%, transparent 100%);
+    }
+
+    /* ================= Sektionen ================= */
+    section.chapter {
+      position: relative;
+      padding: min(16vh, 9rem) 6vw;
+      max-width: 1150px; margin: 0 auto;
+    }
+    .chapter-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(2rem, 6vw, 5rem); align-items: center;
+    }
+    .chapter h2 {
+      font-size: clamp(2rem, 4.6vw, 3.4rem);
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+    .chapter h2 em { color: var(--brass-bright); font-style: italic; }
+    .chapter p { color: var(--ink-dim); max-width: 58ch; font-size: 1.02rem; }
+    .chapter p strong { color: var(--ink); font-weight: 400; }
+
+    /* Bildpanels: zeigen Foto, solange keins da ist eine elegante Notenflaeche */
+    .panel {
+      position: relative; overflow: hidden;
+      border: 1px solid rgba(201,163,92,0.22);
+      background:
+        radial-gradient(100% 120% at 20% 0%, rgba(201,163,92,0.10), transparent 60%),
+        var(--bg-soft);
+      aspect-ratio: 4 / 5;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .panel img { width: 100%; height: 100%; object-fit: cover; }
+    .panel .placeholder {
+      text-align: center; padding: 2rem;
+      color: var(--brass-deep);
+    }
+    .panel .placeholder svg { width: 72px; height: 72px; opacity: 0.85; }
+    .panel .placeholder span {
+      display: block; margin-top: 1rem;
+      font-size: 0.72rem; letter-spacing: 0.3em; text-transform: uppercase;
+    }
+    .panel::after {
+      content: ""; position: absolute; inset: 0;
+      box-shadow: inset 0 0 120px rgba(0,0,0,0.55);
+      pointer-events: none;
+    }
+
+    /* Schwebende Instrument-Silhouetten beim Instrumentenwechsel */
+    .drift {
+      position: absolute; z-index: -1;
+      color: rgba(201,163,92,0.10);
+      pointer-events: none;
+    }
+    .drift svg { width: clamp(90px, 14vw, 190px); height: auto; }
+
+    /* ================= Musik ================= */
+    .music-cards {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: clamp(1.5rem, 4vw, 3rem);
+      margin-top: 3rem;
+    }
+    .music-card {
+      border: 1px solid rgba(201,163,92,0.22);
+      background: var(--bg-soft);
+      padding: 1.6rem;
+    }
+    .music-card h3 {
+      font-size: 1.5rem; color: var(--ink);
+      margin-bottom: 0.35rem;
+    }
+    .music-card .meta {
+      font-size: 0.75rem; letter-spacing: 0.25em;
+      text-transform: uppercase; color: var(--brass);
+      margin-bottom: 1.2rem;
+    }
+    .music-card iframe { border: 0; width: 100%; border-radius: 12px; }
+    .spotify-more {
+      display: inline-block; margin-top: 2.2rem;
+      font-size: 0.8rem; letter-spacing: 0.28em; text-transform: uppercase;
+      border-bottom: 1px solid var(--brass-deep);
+      padding-bottom: 0.3rem;
+    }
+
+    /* ================= Kontakt ================= */
+    #kontakt { text-align: center; }
+    #kontakt p { margin-inline: auto; }
+    #kontakt h2 { font-size: clamp(2rem, 5vw, 3.6rem); }
+    .mail-btn {
+      display: inline-block; margin: 2.4rem 0 1.4rem;
+      padding: 1rem 2.6rem;
+      font-family: var(--sans); font-size: 0.85rem;
+      letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--bg); background: linear-gradient(120deg, var(--brass), var(--brass-bright));
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .mail-btn:hover {
+      color: var(--bg);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(201,163,92,0.25);
+    }
+    .mail-btn:active { transform: translateY(0) scale(0.98); }
+    .phone { color: var(--ink-dim); font-size: 1rem; letter-spacing: 0.08em; }
+    .phone a { color: var(--ink); }
+    .socials { margin-top: 2.2rem; display: flex; gap: 1.6rem; justify-content: center; }
+    .socials a {
+      display: inline-flex; width: 46px; height: 46px;
+      align-items: center; justify-content: center;
+      border: 1px solid rgba(201,163,92,0.4); border-radius: 50%;
+      color: var(--brass);
+      transition: border-color 0.25s, color 0.25s, transform 0.25s;
+    }
+    .socials a:hover { color: var(--brass-bright); border-color: var(--brass-bright); transform: translateY(-2px); }
+    .socials svg { width: 20px; height: 20px; fill: currentColor; }
+
+    /* ================= Footer / Impressum ================= */
+    footer {
+      border-top: 1px solid rgba(201,163,92,0.15);
+      padding: 2.2rem 6vw 3rem;
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      justify-content: space-between; align-items: center;
+      color: var(--ink-dim); font-size: 0.8rem; letter-spacing: 0.08em;
+    }
+    #impressum {
+      max-width: 720px; margin: 0 auto;
+      padding: 4rem 6vw;
+      color: var(--ink-dim); font-size: 0.9rem;
+    }
+    #impressum h2 { font-size: 1.6rem; margin-bottom: 1rem; color: var(--ink); }
+
+    /* ================= Reveal-Grundzustand (JS-frei sichtbar) ================= */
+    .reveal { opacity: 1; transform: none; }
+
+    /* ================= Responsiv ================= */
+    @media (max-width: 800px) {
+      .chapter-grid { grid-template-columns: 1fr; }
+      .music-cards { grid-template-columns: 1fr; }
+      .hero-title { top: 9vh; }
+      :root { --hero-crop: 18%; }
+    }
+
+    /* ================= Reduced Motion ================= */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .scroll-hint::after { animation: none; }
+      .hero { height: auto; min-height: 100vh; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============ AKT 1: HERO + ZOOM IN DEN TRICHTER ============ -->
+  <div id="film">
+    <div class="hero" id="hero">
+      <div class="hero-title" id="heroTitle">
+        <p class="eyebrow">Kärnten · Österreich</p>
+        <h1>HANS <span class="von">LASSNIG-WALDER</span></h1>
+        <p class="hero-roles">Dirigent · Komponist · Pianist</p>
+      </div>
+      <div class="hero-stage" id="heroStage">
+        <div class="hero-figure">
+          <img id="heroImg"
+               src="https://d8j0ntlcm91z4.cloudfront.net/user_3Go3Iyf2T7uSSDWygF3MVNhzhe8/hf_20260721_093923_e99c73d6-7de7-40a4-97e7-130df47b9494_min.webp"
+               srcset="https://d8j0ntlcm91z4.cloudfront.net/user_3Go3Iyf2T7uSSDWygF3MVNhzhe8/hf_20260721_093923_e99c73d6-7de7-40a4-97e7-130df47b9494_min.webp 1x,
+                       https://d8j0ntlcm91z4.cloudfront.net/user_3Go3Iyf2T7uSSDWygF3MVNhzhe8/hf_20260721_093923_e99c73d6-7de7-40a4-97e7-130df47b9494.png 2x"
+               alt="Hans Lassnig-Walder mit Blechblasinstrument" fetchpriority="high">
+        </div>
+      </div>
+      <div class="tunnel" id="tunnel"></div>
+      <div class="scroll-hint" id="scrollHint">Scrollen</div>
+    </div>
+  </div>
+
+  <!-- ============ AKT 2: DER DIRIGENT ============ -->
+  <section class="chapter" id="dirigent">
+    <div class="chapter-grid">
+      <div class="panel" data-slot="dirigent">
+        <!-- Bild folgt: Hansi als Dirigent (Higgsfield) -->
+        <div class="placeholder">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M14 50 L44 14" stroke-linecap="round"/>
+            <path d="M44 14 l6 -6" stroke-linecap="round"/>
+            <circle cx="12" cy="52" r="3"/>
+          </svg>
+          <span>Der Taktstock</span>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="eyebrow">Aus dem Dunkel · I</p>
+        <h2>Der <em>Dirigent</em></h2>
+        <div class="rule"></div>
+        <p>Als musikalischer Leiter der <strong>kelagBIGband</strong> prägt Hans Lassnig-Walder seit Jahren die österreichische Jazz- und Bigband-Szene. Seine internationale Ausbildung führte ihn unter anderem an die renommierte <strong>New School in New York</strong>, wo er sein Jazz-Studium vertiefte.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AKT 3: KOMPONIST & PIANIST ============ -->
+  <section class="chapter" id="komponist">
+    <span class="drift" style="top:6%; left:4%;" aria-hidden="true">
+      <svg viewBox="0 0 100 100" fill="currentColor"><path d="M62 10v52a14 14 0 1 1-6-11.5V22l-24 6v40a14 14 0 1 1-6-11.5V18z"/></svg>
+    </span>
+    <span class="drift" style="bottom:10%; right:5%;" aria-hidden="true">
+      <svg viewBox="0 0 100 100" fill="currentColor"><path d="M30 78c-8 0-14-6-14-13 0-9 8-14 16-13V22h36v8H40v35c0 7-4 13-10 13z"/></svg>
+    </span>
+    <div class="chapter-grid">
+      <div class="reveal">
+        <p class="eyebrow">Aus dem Dunkel · II</p>
+        <h2>Komponist <em>&amp;</em> Pianist</h2>
+        <div class="rule"></div>
+        <p>Als Komponist schreibt er Werke für <strong>Bigband, Streicher, Chor und Solisten</strong>, darunter die mehrsprachige Suite „Newspaper" nach Texten von Gustav Januš. Als Multiinstrumentalist bewegt er sich mühelos zwischen Blechblasinstrumenten und dem Piano: vom filmischen Bühnenlicht am Flügel bis zur Partitur am Schreibtisch.</p>
+      </div>
+      <div class="panel" data-slot="piano">
+        <!-- Bild folgt: Hansi am Fluegel (Higgsfield) -->
+        <div class="placeholder">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M8 44 V20 h40 c6 0 8 6 8 10 v14" stroke-linecap="round"/>
+            <path d="M8 44 h48" stroke-linecap="round"/>
+            <path d="M14 44 v6 M50 44 v6" stroke-linecap="round"/>
+          </svg>
+          <span>Der Flügel</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AKT 4: MUSIK ============ -->
+  <section class="chapter" id="musik">
+    <p class="eyebrow">Aus dem Dunkel · III</p>
+    <h2>Die <em>Musik</em></h2>
+    <div class="rule"></div>
+    <p>Zwei Einblicke in sein Schaffen, direkt aus dem Künstlerprofil.</p>
+    <div class="music-cards">
+      <div class="music-card">
+        <h3>The Newspaper</h3>
+        <p class="meta">feat. Patrizia Ferrara &amp; Robert Unterköfler</p>
+        <iframe title="Spotify: The Newspaper"
+                src="https://open.spotify.com/embed/track/0ojizyv1Br1YfLFyUHmF5H?theme=0"
+                height="152" loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+      <div class="music-card">
+        <h3>Časopis</h3>
+        <p class="meta">feat. Nikita Mataln &amp; Vid Jamnik</p>
+        <!-- TODO(Časopis): Sobald der direkte Track-Link vorliegt, src durch
+             https://open.spotify.com/embed/track/<ID>?theme=0 ersetzen.
+             Bis dahin: Künstlerprofil-Player (enthält die Top-Tracks). -->
+        <iframe title="Spotify: Hans Lassnig-Walder"
+                src="https://open.spotify.com/embed/artist/29eWkK39DnWqFttIdEP3pH?theme=0"
+                height="152" loading="lazy"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+      </div>
+    </div>
+    <a class="spotify-more" href="https://open.spotify.com/intl-de/artist/29eWkK39DnWqFttIdEP3pH" target="_blank" rel="noopener">Mehr auf Spotify</a>
+  </section>
+
+  <!-- ============ AKT 5: KONTAKT ============ -->
+  <section class="chapter" id="kontakt">
+    <p class="eyebrow">Aus dem Dunkel · IV</p>
+    <h2><em>Kontakt</em></h2>
+    <a class="mail-btn" href="mailto:kontakt@hans-lassnig.at">E-Mail schreiben</a>
+    <p class="phone">Mobil: <a href="tel:+436769319318">0676 9319318</a></p>
+    <div class="socials">
+      <a href="https://www.instagram.com/hanslassnigwalder" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s0 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-3.26-.15-4.77-1.7-4.92-4.92C2.1 15.62 2.1 15.24 2.1 12s0-3.58.08-4.85C2.33 3.92 3.84 2.38 7.1 2.23 8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.15 0-3.52 0-4.76.07-2.42.11-3.55 1.26-3.66 3.66-.07 1.24-.07 1.6-.07 4.75s0 3.51.07 4.75c.11 2.4 1.24 3.55 3.66 3.66 1.24.07 1.6.07 4.76.07s3.52 0 4.76-.07c2.42-.11 3.55-1.26 3.66-3.66.07-1.24.07-1.6.07-4.75s0-3.51-.07-4.75c-.11-2.4-1.24-3.55-3.66-3.66-1.24-.07-1.6-.07-4.76-.07zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-2.9a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3z"/></svg>
+      </a>
+      <a href="https://www.facebook.com/100012255155929/" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5h1.65V3.6c-.3-.04-1.3-.12-2.44-.12-2.4 0-4.05 1.46-4.05 4.16v2.26H7.5V13h2.7v8z"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ============ IMPRESSUM ============ -->
+  <section id="impressum">
+    <h2>Impressum</h2>
+    <p>Hans Lassnig-Walder<br>
+    Dirigent, Komponist, Pianist<br>
+    Kärnten, Österreich<br>
+    E-Mail: <a href="mailto:kontakt@hans-lassnig.at">kontakt@hans-lassnig.at</a><br>
+    Mobil: <a href="tel:+436769319318">0676 9319318</a></p>
+  </section>
+
+  <footer>
+    <span>© <span id="year">2026</span> Hans Lassnig-Walder</span>
+    <a href="#impressum">Impressum</a>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    window.addEventListener("load", function () {
+      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* Fallback: ohne GSAP oder mit reduced motion bleibt die Seite
+         vollstaendig statisch nutzbar, nur mit sanften CSS-Fades. */
+      if (reduced || typeof gsap === "undefined") {
+        document.querySelectorAll(".reveal, .panel, .music-card").forEach(function (el) {
+          el.style.transition = "opacity 0.8s ease";
+        });
+        return;
+      }
+
+      gsap.registerPlugin(ScrollTrigger);
+
+      /* ---- Der Zoom in den Schalltrichter ---- */
+      var zoomTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: "#film",
+          start: "top top",
+          end: "+=220%",
+          scrub: 0.6,
+          pin: "#hero",
+          pinSpacing: true,
+          anticipatePin: 1
+        }
+      });
+      zoomTl
+        .to("#heroTitle", { autoAlpha: 0, y: -60, duration: 0.18 }, 0)
+        .to("#scrollHint", { autoAlpha: 0, duration: 0.1 }, 0)
+        .to("#heroStage", {
+          scale: 16,
+          xPercent: 0,
+          ease: "power2.in",
+          duration: 1
+        }, 0.05)
+        .to("#tunnel", { opacity: 1, duration: 0.45, ease: "power1.in" }, 0.55)
+        .to("#hero", { backgroundColor: "#060504", duration: 0.3 }, 0.7);
+
+      /* ---- Enthuellungen: Kapitel blenden aus dem Dunkel auf ---- */
+      gsap.utils.toArray("section.chapter").forEach(function (sec) {
+        gsap.from(sec.querySelectorAll("h2, .eyebrow, .rule, p, .panel, .music-card, .mail-btn, .socials"), {
+          scrollTrigger: {
+            trigger: sec,
+            start: "top 72%",
+            end: "top 30%",
+            scrub: 0.8
+          },
+          y: 60,
+          scale: 0.98,
+          stagger: 0.06,
+          ease: "none"
+        });
+      });
+
+      /* ---- Schwebende Instrumente im Instrumentenwechsel ---- */
+      gsap.utils.toArray(".drift").forEach(function (el, i) {
+        gsap.to(el, {
+          scrollTrigger: { trigger: "#komponist", start: "top bottom", end: "bottom top", scrub: 1 },
+          y: i % 2 === 0 ? -120 : 120,
+          rotation: i % 2 === 0 ? -8 : 8,
+          ease: "none"
+        });
+      });
+    });
+  </script>
+</body>
+</html>
