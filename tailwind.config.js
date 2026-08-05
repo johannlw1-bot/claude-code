@@ -4,11 +4,20 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        heading: ['"Instrument Serif"', 'ui-serif', 'Georgia', 'Times New Roman', 'serif'],
-        body: ['Barlow', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'sans-serif'],
+        display: ['"Bricolage Grotesque"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        body: ['"Instrument Sans"', 'ui-sans-serif', 'system-ui', '-apple-system', 'sans-serif'],
+        schrift: ['Yellowtail', 'ui-serif', 'cursive'],
       },
       colors: {
-        void: '#02040A',
+        // Aus dem Ort abgeleitet: Sonnenschirm, See, Nachmittagssonne, Baumschatten.
+        sand: '#F4EDE0',
+        sandhell: '#FBF6EC',
+        tief: '#0B3B3C',
+        see: '#1B8A86',
+        seehell: '#63B0AE',
+        sonne: '#E8B04B',
+        rot: '#C8452F',
+        schatten: '#2F4A34',
       },
     },
   },
